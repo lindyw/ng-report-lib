@@ -55,9 +55,7 @@
             "tsConfig": "projects/ng-report-showcase/tsconfig.app.json",
             "assets": [
               "projects/ng-report-showcase/src/favicon.ico",
-              "projects/ng-report-showcase/src/assets",
-              "projects/ng-oct-report/assets"
-            ],
+              "projects/ng-report-showcase/src/assets"            ],
             "styles": ["projects/ng-report-showcase/src/styles.scss"],
             "scripts": []
           },

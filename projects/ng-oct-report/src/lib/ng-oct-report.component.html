@@ -1,11 +1,18 @@
-<div>
-    <img class="logo" src="https://d240a8wsng3pag.cloudfront.net/assets/img/logo/octiga-icon-192x192.png">
-</div>
-<div style="width:70%; margin-bottom: 1rem;">
-    <h2 class="title">Octiga Office 365 Security Posture Report</h2>
-    <span>{{(header$ | async)?.date?.start}} - {{(header$ | async)?.date?.start}} </span>
-</div>
-<div>
-    <h2>Client</h2>
-    <span style="min-width: 290px; min-height: 45px;">{{(header$ | async)?.tenant}} </span>
+<div class="A4">
+    <section class="sheet">
+        <div class="header flex-row">
+            <div>
+                <img class="logo" src="https://d240a8wsng3pag.cloudfront.net/assets/img/logo/octiga-icon-192x192.png">
+            </div>
+            <div style="width:70%; margin-bottom: 1rem;">
+                <h2 class="title">Octiga Office 365 Security Posture Report</h2>
+                <span *ngIf="header !== null">{{header!.date!.start!}} - {{header!.date!.end}} </span>
+            </div>
+            <div>
+                <h2>Client</h2>
+                <span style="min-width: 290px; min-height: 45px;">{{header?.tenant}} </span>
+            </div>
+        </div>
+
+    </section>
 </div>

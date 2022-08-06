@@ -1,11 +1,27 @@
-:host {
+.A4 {
+    font-family: "Nunito Sans", sans-serif;
+    width: 210mm;
+    height: 296mm;
+}
+.A4 .sheet {
+    width: inherit;
+    height: inherit;
+    padding: 5mm;
+}
+
+.flex-row {
+    display: flex;
+    flex-direction: row;
+}
+
+.header {
     width: 100%;
     height: 4cm;
     align-items: center;
     justify-content: center;
     border: 1px solid #c3cfd9;
 }
-div {
+.header div {
     margin-right: 1cm;
 }
 
