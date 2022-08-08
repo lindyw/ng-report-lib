@@ -2,6 +2,11 @@ import { Component, OnInit } from '@angular/core';
 import { BehaviorSubject } from 'rxjs';
 import { Header, TopAlert } from './ng-oct-report.interface';
 import { NgOctReportService } from './ng-oct-report.service';
+import * as moment from 'moment';
+
+function dateFormat(a: string) {
+    return moment(a).format('ddd, MMM Do YYYY');
+}
 
 @Component({
     selector: 'ng-oct-report',
@@ -16,7 +21,22 @@ export class NgOctReportComponent implements OnInit {
     constructor(private reportService: NgOctReportService) { }
 
     ngOnInit(): void {
-        this.reportService.header$.subscribe(header => this.header$.next(header));
+        this.loadHeader();
+    }
+
+    loadHeader() {
+        this.reportService.header$.subscribe(header => {
+            if (header != null) {
+                header = {
+                    ...header, date: {
+                        start: dateFormat(header?.date.start),
+                        end: dateFormat(header?.date.end)
+                    }
+                }
+            }
+            header
+            this.header$.next(header);
+        });
     }
 
 }
