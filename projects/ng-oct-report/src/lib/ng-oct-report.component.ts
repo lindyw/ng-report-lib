@@ -1,5 +1,5 @@
-import { Component, Input, OnInit } from '@angular/core';
-import { merge, Observable, Subject } from 'rxjs';
+import { Component, OnInit } from '@angular/core';
+import { BehaviorSubject } from 'rxjs';
 import { Header, TopAlert } from './ng-oct-report.interface';
 import { NgOctReportService } from './ng-oct-report.service';
 
@@ -10,11 +10,8 @@ import { NgOctReportService } from './ng-oct-report.service';
 })
 export class NgOctReportComponent implements OnInit {
 
-    @Input() header: Header | null = null;
-    @Input() topAlerts: TopAlert[] | null = null;
-
-    header$ = new Subject<Header>();
-    topAlerts$ = new Subject<TopAlert[]>();
+    header$ = new BehaviorSubject<Header | null>(null);
+    topAlerts$ = new BehaviorSubject<TopAlert[] | null>(null);
 
     constructor(private reportService: NgOctReportService) { }
 

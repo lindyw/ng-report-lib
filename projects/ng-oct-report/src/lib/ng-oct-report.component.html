@@ -6,11 +6,11 @@
             </div>
             <div style="width:70%; margin-bottom: 1rem;">
                 <h2 class="title">Octiga Office 365 Security Posture Report</h2>
-                <span *ngIf="header !== null">{{header!.date!.start!}} - {{header!.date!.end}} </span>
+                <span *ngIf="(header$ | async) !== null">{{(header$ | async)!.date!.start!}} - {{(header$ | async)!.date!.end}} </span>
             </div>
             <div>
                 <h2>Client</h2>
-                <span style="min-width: 290px; min-height: 45px;">{{header?.tenant}} </span>
+                <span style="min-width: 290px; min-height: 45px;">{{(header$ | async)?.tenant}} </span>
             </div>
         </div>
 
