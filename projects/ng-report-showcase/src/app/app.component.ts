@@ -20,7 +20,9 @@ export class AppComponent implements OnInit {
 
     topAlerts: TopAlert[] =
         [
-            { severity: 'critical', timestamp: '2022-08-02T22:28:999Z', user: 'bob.husky@octiga.com', 'description': 'Login from Country not in Allowed List' }
+            { severity: 'critical', timestamp: '2022-08-02T22:28:999Z', actor: 'bob.husky@octiga.com', 'description': 'Login from Country not in Allowed List' },
+            { severity: 'danger', timestamp: '2022-08-02T22:28:999Z', actor: 'rob.husky@octiga.com', 'description': 'Login from Country not in Allowed List' },
+            { severity: 'danger', timestamp: '2022-08-02T22:28:999Z', actor: 'rob.husky@octiga.com', 'description': 'Login from Country not in Allowed List' }
         ]
 
 
@@ -30,6 +32,7 @@ export class AppComponent implements OnInit {
 
     ngOnInit(): void {
         this.reportService.createHeader(this.header);
+        this.reportService.createTopAlerts(this.topAlerts);
     }
 
 

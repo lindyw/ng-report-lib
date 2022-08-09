@@ -2,8 +2,13 @@
   "name": "ng-oct-report",
   "version": "0.0.1",
   "peerDependencies": {
+    "@angular/animations": "^14.1.1",
     "@angular/common": "^14.1.0",
-    "@angular/core": "^14.1.0"
+    "@angular/core": "^14.1.0",
+    "@angular/material": "~14.1.0",
+    "@angular/platform-browser": "~14.1.0",
+    "@angular/platform-browser-dynamic": "~14.1.0",
+    "@angular/platform-server": "~14.1.0"
   },
   "dependencies": {
     "tslib": "^2.3.0"

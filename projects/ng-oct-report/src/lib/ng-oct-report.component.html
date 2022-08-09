@@ -1,5 +1,19 @@
 <div class="A4">
     <section class="sheet">
         <lib-header class="flex-row" [data]="(header$ | async)"></lib-header>
+
+        <div class="section-wrapper">
+            <div class="section">
+                <lib-top-threats [title]="'Top 5 Threats'" [alerts]="alerts$ | async"></lib-top-threats>
+            </div>
+        </div>
+
+        <!-- <div class="section-wrapper">
+            <div class="section">
+                <lib-top-threats [title]="'Top 5 Users under Threats'"></lib-top-threats>
+            </div>
+        </div> -->
+
     </section>
+   
 </div>

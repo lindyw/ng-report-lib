@@ -8,8 +8,8 @@ export interface Header {
 
 export interface TopAlert {
     severity: Severity
-    timestamp?: string
-    user?: string
+    timestamp: string
+    actor: string
     description: string
 
 }

@@ -20,20 +20,21 @@
     align-items: center;
     justify-content: center;
     border: 1px solid #c3cfd9;
-    
+
     div:last-child {
         justify-content: flex-end;
         text-align: right;
     }
-    
-}
-.header div {
-    margin-right: 1cm;
 }
 
-.logo {
-    width: 5rem;
-    height: 5rem;
-    margin: 1rem;
+.section-wrapper {
+    margin-top: 1rem;
+    border: 1px solid #c3cfd9;
+    .section {
+        margin-left: 1rem;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex-direction: column;
+    }
 }
-

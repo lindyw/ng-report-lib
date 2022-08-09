@@ -16,12 +16,13 @@ function dateFormat(a: string) {
 export class NgOctReportComponent implements OnInit {
 
     header$ = new BehaviorSubject<Header | null>(null);
-    topAlerts$ = new BehaviorSubject<TopAlert[] | null>(null);
+    alerts$ = new BehaviorSubject<TopAlert[] | null>(null);
 
     constructor(private reportService: NgOctReportService) { }
 
     ngOnInit(): void {
         this.loadHeader();
+        this.loadTopAlerts();
     }
 
     loadHeader() {
@@ -34,9 +35,13 @@ export class NgOctReportComponent implements OnInit {
                     }
                 }
             }
-            header
             this.header$.next(header);
         });
+    }
+
+    loadTopAlerts() {
+        this.reportService.topAlerts$
+            .subscribe(alerts => this.alerts$.next(alerts));
     }
 
 }

@@ -48,6 +48,7 @@
         "build": {
           "builder": "@angular-devkit/build-angular:browser",
           "options": {
+            "preserveSymlinks": true,
             "outputPath": "dist/ng-report-showcase",
             "index": "projects/ng-report-showcase/src/index.html",
             "main": "projects/ng-report-showcase/src/main.ts",
