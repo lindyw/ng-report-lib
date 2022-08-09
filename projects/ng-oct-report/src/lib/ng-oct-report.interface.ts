@@ -11,7 +11,13 @@ export interface TopAlert {
     timestamp: string
     actor: string
     description: string
-
 }
+
+export interface TopBaseline {
+    severity: Severity
+    timestamp: string
+    catagory: string
+    name: string
+}  
 
 type Severity = 'critical' | 'danger' | 'warning';

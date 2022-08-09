@@ -8,7 +8,8 @@
     "@angular/material": "~14.1.0",
     "@angular/platform-browser": "~14.1.0",
     "@angular/platform-browser-dynamic": "~14.1.0",
-    "@angular/platform-server": "~14.1.0"
+    "@angular/platform-server": "~14.1.0",
+    "moment": "^2.29.4"
   },
   "dependencies": {
     "tslib": "^2.3.0"

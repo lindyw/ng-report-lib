@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { BehaviorSubject } from 'rxjs';
-import { Header, TopAlert } from './ng-oct-report.interface';
+import { Header, TopAlert, TopBaseline } from './ng-oct-report.interface';
 import { NgOctReportService } from './ng-oct-report.service';
 import * as moment from 'moment';
 
@@ -17,12 +17,14 @@ export class NgOctReportComponent implements OnInit {
 
     header$ = new BehaviorSubject<Header | null>(null);
     alerts$ = new BehaviorSubject<TopAlert[] | null>(null);
+    baselines$ = new BehaviorSubject<TopBaseline[] | null>(null);
 
     constructor(private reportService: NgOctReportService) { }
 
     ngOnInit(): void {
         this.loadHeader();
         this.loadTopAlerts();
+        this.loadTopBaselines();
     }
 
     loadHeader() {
@@ -42,6 +44,11 @@ export class NgOctReportComponent implements OnInit {
     loadTopAlerts() {
         this.reportService.topAlerts$
             .subscribe(alerts => this.alerts$.next(alerts));
+    }
+
+    loadTopBaselines() {
+        this.reportService.topBaselines$
+            .subscribe(baselines => this.baselines$.next(baselines))
     }
 
 }

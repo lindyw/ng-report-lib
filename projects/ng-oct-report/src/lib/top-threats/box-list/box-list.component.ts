@@ -17,9 +17,14 @@ export class BoxListComponent implements OnInit {
     constructor() { }
 
     ngOnInit(): void {
+      this.summarizeBySeverity();
+    }
+
+    summarizeBySeverity() {
         let severities = [... new Set(this.arrayList.map(x => x.severity))];
+        console.log('severities', severities)
         for (var severity of severities) {
-            this.groupedArrayListBySeverity[severity] = this.arrayList.filter(a => a.severity);
+            this.groupedArrayListBySeverity[severity] = this.arrayList.filter(a => a.severity === severity);
         }
     }
 

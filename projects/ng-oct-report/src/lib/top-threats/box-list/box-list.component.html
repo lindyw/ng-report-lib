@@ -3,31 +3,30 @@
         <span><b>{{title}}</b></span>
     </div>
     <mat-list>
-        <mat-list-item *ngFor="let item of groupedArrayListBySeverity | keyvalue">
-            <div class="icon" [ngSwitch]="item.key">
-                <mat-icon *ngSwitchCase="'critical'" class="critical" mat-list-icon>error</mat-icon>
-                <mat-icon *ngSwitchCase="'danger'" class="danger" mat-list-icon>warning</mat-icon>
-                <mat-icon *ngSwitchCase="'warning'" class="warning" mat-list-icon>warning_outlined</mat-icon>
-                <mat-icon *ngSwitchCase="'info'" class="info" mat-list-icon>check_circle_outlined</mat-icon>
-                <span>
-                    <strong>
-                        {{item.value.length}} new {{item.key}} {{item.value.length > 1? type + 's' : type}}
-                    </strong>
+        <div *ngFor="let item of groupedArrayListBySeverity | keyvalue">
+            <div class="summary">
+                <span class="icon" [ngSwitch]="item.key">
+                    <mat-icon *ngSwitchCase="'critical'" class="critical" mat-list-icon>error</mat-icon>
+                    <mat-icon *ngSwitchCase="'danger'" class="danger" mat-list-icon>warning</mat-icon>
+                    <mat-icon *ngSwitchCase="'warning'" class="warning" mat-list-icon>warning_outlined</mat-icon>
+                    {{item.value.length}} new {{title === 'Baselines' ? '' : item.key}} {{item.value.length > 1? type +
+                    's' : type}}
                 </span>
+                <div>
+                    <mat-list>
+                        <mat-list-item *ngFor="let a of item.value">
+                            <div class="row-item">
+                                <!-- <span>{{a[keys[0]]}} |</span> -->
+                                <span>{{a[keys[1]]}}</span>
+                                <span>|</span>
+                                <span>{{a[keys[2]]}}</span>
+                            </div>
+                        </mat-list-item>
+                    </mat-list>
+                </div>
             </div>
-        </mat-list-item>
+
+        </div>
     </mat-list>
-    <!-- <mat-list>
-        <mat-list-item *ngFor="let a of arrayList">
-            <div class="icon" [ngSwitch]="a.severity">
-                <mat-icon *ngSwitchCase="'critical'" class="critical" mat-list-icon>error</mat-icon>
-                <mat-icon *ngSwitchCase="'danger'" class="danger" mat-list-icon>warning</mat-icon>
-                <mat-icon *ngSwitchCase="'warning'" class="warning" mat-list-icon>warning_outlined</mat-icon>
-                <mat-icon *ngSwitchCase="'info'" class="info" mat-list-icon>check_circle_outlined</mat-icon>
-            </div>
-            <div>{{a[keys[0]]}}</div>
-            <div>{{a[keys[1]]}}</div>
-            <div>{{a[keys[2]]}}</div>
-        </mat-list-item>
-    </mat-list> -->
+
 </div>

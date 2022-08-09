@@ -7,6 +7,7 @@ import { TopThreatsComponent } from './top-threats/top-threats.component';
 
 import { MatIconModule } from '@angular/material/icon';
 import { MatListModule } from '@angular/material/list';
+import {MatTableModule} from '@angular/material/table';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { BoxListComponent } from './top-threats/box-list/box-list.component';
 
@@ -24,7 +25,7 @@ import { BoxListComponent } from './top-threats/box-list/box-list.component';
     BrowserModule,
     MatIconModule,
     MatListModule,
- 
+    MatTableModule
   ],
   exports: [
     NgOctReportComponent
