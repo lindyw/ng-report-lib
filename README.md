@@ -12,6 +12,11 @@ NgOctReportService
   createTopAlerts(this.topAlerts);
   createTopBaselines(this.topBaselines);
 
+npm run build
+cd dist/ng-oct-report
+npm publish --access public
+
+
 ## Development server
 
 Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The application will automatically reload if you change any of the source files.

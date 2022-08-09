@@ -6,6 +6,7 @@
     "start": "ng serve",
     "build": "npm run build:lib",
     "build:lib": "npm run copy:readme && ng build ng-oct-report",
+    "copy:readme": "copyfiles ./README.md ./dist/ng-oct-report",
     "watch": "ng build --watch --configuration development",
     "test": "ng test"
   },
