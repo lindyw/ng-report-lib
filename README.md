@@ -1,6 +1,16 @@
 # NgOctReport
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 14.1.0.
+This library was generated with [Angular CLI](https://github.com/angular/angular-cli) version 14.1.0.
+
+HTML:
+<ng-oct-report></ng-oct-report>
+
+TS:
+NgOctReportService
+
+- createHeader(this.header);
+  createTopAlerts(this.topAlerts);
+  createTopBaselines(this.topBaselines);
 
 ## Development server
 
