@@ -2,6 +2,15 @@
   "$schema": "./node_modules/@angular/cli/lib/config/schema.json",
   "version": 1,
   "newProjectRoot": "projects",
+  "schematics": {
+    "@nrwl/schematics:component": {
+      "styleext": "scss",
+      "spec": true,
+      "flat": true,
+      "changeDetection": "OnPush",
+      "prefix": "ng-oct-"
+    }
+  },
   "projects": {
     "ng-oct-report": {
       "projectType": "library",

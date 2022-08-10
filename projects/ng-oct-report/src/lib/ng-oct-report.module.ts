@@ -8,6 +8,7 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatListModule } from '@angular/material/list';
 import {MatTableModule} from '@angular/material/table';
 import { BoxListComponent } from './top-threats/box-list/box-list.component';
+import { TimelineComponent } from './timeline/timeline.component';
 
 
 @NgModule({
@@ -15,7 +16,8 @@ import { BoxListComponent } from './top-threats/box-list/box-list.component';
     NgOctReportComponent,
     HeaderComponent,
     TopThreatsComponent,
-    BoxListComponent
+    BoxListComponent,
+    TimelineComponent
   ],
   imports: [
     CommonModule,
@@ -24,7 +26,8 @@ import { BoxListComponent } from './top-threats/box-list/box-list.component';
     MatTableModule
   ],
   exports: [
-    NgOctReportComponent
+    NgOctReportComponent,
+    TimelineComponent
   ]
 })
 export class NgOctReportModule { }

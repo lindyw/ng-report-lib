@@ -21,3 +21,8 @@ export interface TopBaseline {
 }  
 
 type Severity = 'critical' | 'danger' | 'warning';
+
+export interface TimelineElement {
+    status:'created' | 'deviation' | 'remediated'
+    date: Date
+}
