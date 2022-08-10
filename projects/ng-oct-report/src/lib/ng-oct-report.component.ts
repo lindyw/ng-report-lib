@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { BehaviorSubject } from 'rxjs';
 import { Header, TopAlert, TopBaseline } from './ng-oct-report.interface';
 import { NgOctReportService } from './ng-oct-report.service';
-import * as moment from 'moment';
+import moment from 'moment';
 
 function dateFormat(a: string) {
     return moment(a).format('ddd, MMM Do YYYY');

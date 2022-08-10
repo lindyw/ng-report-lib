@@ -8,7 +8,9 @@
     "@angular/material": ">=11.0.0",
     "@angular/platform-browser": ">=11.0.0",
     "@angular/platform-browser-dynamic": ">=11.0.0",
-    "@angular/platform-server": ">=11.0.0",
-    "moment": ">=2.18.1 <=2.29.4"
+    "@angular/platform-server": ">=11.0.0"
+  },
+  "dependencies": {
+    "moment": "~2.18.1"
   }
 }
