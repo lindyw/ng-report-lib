@@ -35,17 +35,19 @@ export class TimelineComponent implements AfterViewInit {
     }
 
     private _timelineElements: TimelineElement[] = [
-        {  date: new Date(2014, 1, 16), status: 'created' },
-        { date: new Date(2014, 2, 28), status: 'deviation' },
-        { date: new Date(2014, 3, 20), status: 'remediated' },
-        { date: new Date(2014, 5, 20), status: 'deviation' },
-        {  date: new Date(2014, 7, 9), status: 'deviation' },
-        {  date: new Date(2014, 8, 30), status: 'deviation' },
-        {  date: new Date(2014, 9, 15), status: 'remediated' },
-        {  date: new Date(2014, 11, 1), status: 'deviation' },
-        {  date: new Date(2014, 12, 10), status: 'remediated' },
-        {  date: new Date(2015, 1, 19), status: 'deviation' },
-        {  date: new Date(2015, 3, 3), status: 'remediated' },
+        { date: new Date('2022-08-01T09:35:31.820Z'), status: 'created' },
+        { date: new Date('2022-08-02T09:01:31.820Z'), status: 'deviation' },
+        { date: new Date('2022-08-06T20:23:31.820Z'), status: 'remediated' },
+        // { date: new Date(2014, 5, 20), status: 'deviation' },
+        // {  date: new Date(2014, 7, 9), status: 'deviation' },
+        // {  date: new Date(2014, 8, 30), status: 'deviation' },
+        // {  date: new Date(2014, 9, 15), status: 'remediated' },
+        // {  date: new Date(2014, 11, 1), status: 'deviation' },
+        // {  date: new Date(2014, 12, 10), status: 'remediated' },
+        // {  date: new Date(2015, 1, 19), status: 'deviation' },
+        // {  date: new Date(2015, 3, 3), status: 'remediated' },
+        // {  date: new Date(2016, 9, 15), status: 'remediated' },
+
     ];
 
     get timelineElements(): TimelineElement[] {

@@ -66,7 +66,7 @@
             "assets": [
               "projects/ng-report-showcase/src/favicon.ico",
               "projects/ng-report-showcase/src/assets"            ],
-            "styles": ["projects/ng-report-showcase/src/styles.scss"],
+            "styles": ["projects/ng-report-showcase/src/styles.scss", "projects/ng-report-showcase/src/assets/core.scss"],
             "scripts": []
           },
           "configurations": {

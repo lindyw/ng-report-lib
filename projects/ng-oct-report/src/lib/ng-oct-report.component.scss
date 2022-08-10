@@ -33,11 +33,34 @@
     .section {
         margin-left: 1rem;
         display: flex;
-        align-items: center;
-        justify-content: center;
-        flex-direction: column;
+        .baseline-container {
+            display: flex;
+            width: 100%;
+            justify-content: flex-start;
+            align-items: flex-start;
+        }
     }
     lib-top-threats {
-        width:100%;
+        width: 100%;
     }
+    ng-oct-timeline {
+        width: 60%;
+    }
+}
+
+.info {
+    color: #0077b8 !important;
+}
+.warning {
+    color: #ffcc00 !important;
+}
+.danger {
+    color: #ff6600 !important;
+}
+.critical,
+.red {
+    color: red;
+}
+.safe {
+    color: limegreen;
 }

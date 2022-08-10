@@ -1,6 +1,6 @@
 <div class="timeline">
     <div class="events-wrapper">
-        <div class="events" #eventsWrapper [style.width.px]="eventsWrapperWidth">
+        <div class="events" #eventsWrapper [style.width.px]="eventsWrapperWidth" [style.minWidth.px]="500">
             <ol>
                 <li *ngFor="let item of timelineElements; let index = index">
                     <a #timelineEvents href="#" [ngClass]="{
