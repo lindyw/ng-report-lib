@@ -1,0 +1,31 @@
+:host {
+    width: 100%;
+    .box {
+        background: #f7f9fa;
+        border: 1px solid #c3cfd9;
+        margin: 1rem 0;
+        width: 90%;
+        padding: 1rem;
+        .summary {
+            background: #dfe6ed;
+            border: 1px solid #c3cfd9;
+            margin: 3mm 0;
+            padding: 0 3mm;
+            display: flex;
+            flex-direction: row;
+            font-size: small;
+        }
+        mat-icon {
+            vertical-align: sub;
+            margin-right: 2mm;
+        }
+        .baseline-container {
+            margin-left: 8mm;
+        }
+    }
+}
+
+ng-oct-timeline {
+    width: 60%;
+    transform: scale(0.9);
+}

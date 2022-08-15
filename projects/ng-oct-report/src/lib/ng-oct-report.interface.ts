@@ -16,13 +16,24 @@ export interface TopAlert {
 export interface TopBaseline {
     severity: Severity
     timestamp: string
-    catagory: string
+    category: string
     name: string
-}  
+}
+
+export interface TopUser {
+
+}
+
+export interface Baseline {
+    category: string
+    name: string
+    timelineElements: TimelineElement[]
+
+}
 
 type Severity = 'critical' | 'danger' | 'warning';
 
 export interface TimelineElement {
-    status:'created' | 'deviation' | 'remediated'
+    status: 'created' | 'deviation' | 'remediated'
     date: Date
 }

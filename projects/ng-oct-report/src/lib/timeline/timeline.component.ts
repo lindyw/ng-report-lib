@@ -1,13 +1,16 @@
 import { AfterViewInit, ChangeDetectorRef, Component, ElementRef, Input, OnInit, QueryList, ViewChild, ViewChildren } from '@angular/core';
 import { TimelineElement } from '../ng-oct-report.interface';
 
+function scaleBetween(unscaledNum: number, minAllowed: number, maxAllowed: number, min: number, max: number) {
+    return (maxAllowed - minAllowed) * (unscaledNum - min) / (max - min) + minAllowed;
+}
+
 @Component({
     selector: 'ng-oct-timeline',
     templateUrl: './timeline.component.html',
     styleUrls: ['./timeline.component.scss']
 })
 export class TimelineComponent implements AfterViewInit {
-
 
     @ViewChild('eventsWrapper')
     eventsWrapper!: ElementRef;
@@ -20,7 +23,7 @@ export class TimelineComponent implements AfterViewInit {
     eventsWrapperWidth: number = 0;
     private _viewInitialized = false;
 
-    private _timelineWrapperWidth = 800;//720;
+    private _timelineWrapperWidth = 380;//720;
 
     @Input() set timelineWrapperWidth(value: number) {
         this._timelineWrapperWidth = value;
@@ -35,9 +38,15 @@ export class TimelineComponent implements AfterViewInit {
     }
 
     private _timelineElements: TimelineElement[] = [
-        { date: new Date('2022-08-01T09:35:31.820Z'), status: 'created' },
+        { date: new Date('2022-06-01T09:35:31.820Z'), status: 'created' },
+        { date: new Date('2022-08-01T09:36:31.820Z'), status: 'deviation' },
         { date: new Date('2022-08-02T09:01:31.820Z'), status: 'deviation' },
         { date: new Date('2022-08-06T20:23:31.820Z'), status: 'remediated' },
+        { date: new Date('2022-12-06T20:23:31.820Z'), status: 'remediated' },
+           { date: new Date('2022-12-06T20:24:31.820Z'), status: 'remediated' },
+           { date: new Date('2022-12-06T20:25:31.820Z'), status: 'remediated' },
+           { date: new Date('2022-12-06T20:25:51.820Z'), status: 'remediated' },
+           { date: new Date('2022-12-06T2:25:51.820Z'), status: 'remediated' },
         // { date: new Date(2014, 5, 20), status: 'deviation' },
         // {  date: new Date(2014, 7, 9), status: 'deviation' },
         // {  date: new Date(2014, 8, 30), status: 'deviation' },
@@ -106,7 +115,7 @@ export class TimelineComponent implements AfterViewInit {
         }
         let timeSpanNorm = timeSpan / eventsMinLapse;
         timeSpanNorm = Math.round(timeSpanNorm) + 4;
-        this.eventsWrapperWidth = timeSpanNorm * width;
+        this.eventsWrapperWidth = this._timelineWrapperWidth;//timeSpanNorm * width;
         // let aHref = this.eventsWrapper.nativeElement.querySelectorAll('a.selected')[0];
         // this.updateTimelinePosition(aHref);
         return this.eventsWrapperWidth;
@@ -137,21 +146,38 @@ export class TimelineComponent implements AfterViewInit {
         this.setDatePosition(timeLines, this._eventsMinDistance, eventsMinLapse);
         // assign a width to the timeline
         this.setTimelineWidth(timeLines, this._eventsMinDistance, eventsMinLapse);
-        // the timeline has been initialize - show it
-        // this.loaded = true;
     }
 
     private setDatePosition(elements: TimelineElement[], min: number, eventsMinLapse: number) {
         let timelineEventsArray = this.timelineEvents.toArray();
+        let unscaledNums = elements.map(e => {
+            let distance = TimelineComponent.dayDiff(elements[0].date, e.date);
+            let distanceNorm = Math.round(distance / eventsMinLapse);
+            let unscaledNum = distanceNorm * min;
+            return unscaledNum;
+        })
+        let prev_left = null;
+        let maxRange = Math.max.apply(Math, unscaledNums);
+        let minRange = Math.min.apply(Math, unscaledNums);
         let i: number = 0;
         for (let component of elements) {
             let distance = TimelineComponent.dayDiff(elements[0].date, component.date);
             let distanceNorm = Math.round(distance / eventsMinLapse);
-            timelineEventsArray[i].nativeElement.style.left = distanceNorm * min + 'px';
+            let raw_left = distanceNorm * min;
+            var scaled = scaleBetween(raw_left, 0, this._timelineWrapperWidth - min, minRange, maxRange);
+            let left = raw_left > this._timelineWrapperWidth ? scaled : raw_left;
+
+            if (!!prev_left) {
+                console.log(prev_left > left);
+                left = prev_left > left ? prev_left + 15 : (left - prev_left) < 20 ? left + 15 : left;
+            }
+            timelineEventsArray[i].nativeElement.style.left = left + 'px';
+            prev_left = left;
             // span
             let span: HTMLSpanElement = <HTMLSpanElement>timelineEventsArray[i].nativeElement.parentElement.children[1];
             let spanWidth = TimelineComponent.getElementWidth(span);
-            span.style.left = distanceNorm * min + spanWidth / 2 + 'px';
+            let span_left = left + spanWidth / 2 + 'px';
+            span.style.left = span_left;
             i++;
         }
     }

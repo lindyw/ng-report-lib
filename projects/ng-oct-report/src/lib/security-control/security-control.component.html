@@ -1,0 +1,36 @@
+<div class="box">
+    <mat-icon class="info" svgIcon="info-square"></mat-icon>
+    <b>{{category}}</b>
+
+    <mat-list class="baseline-container">
+        <div *ngFor="let baseline of baselines">
+            <div *ngIf="hasDeviation(baseline); else safe">
+                <span class="icon">
+                    <mat-icon class="critical" svgIcon="info-square"></mat-icon>
+                    {{ baseline.name }}
+                </span>
+                <div class="summary">
+                    <div>
+                        <mat-list *ngFor="let timelineElement of baseline.timelineElements">
+                            <mat-list-item [ngSwitch]="timelineElement.status">
+                                <mat-icon class="safe" *ngSwitchCase="'created'">add_circle_outline</mat-icon>
+                                <mat-icon class="red" *ngSwitchCase="'deviation'">error_circle_outline</mat-icon>
+                                <mat-icon class="safe" *ngSwitchCase="'remediated'">task_alt</mat-icon>
+                                <span>{{timelineElement.date.toISOString()}}<br> {{timelineElement.status | titlecase }}</span>
+                            </mat-list-item>
+                        </mat-list>
+                    </div>
+                    <ng-oct-timeline [timelineElements]="baseline.timelineElements"></ng-oct-timeline>
+                </div>
+            </div>
+            <ng-template #safe>
+                <div>
+                    <span class="icon">
+                        <mat-icon class="safe">done</mat-icon>
+                        {{ baseline.name }}
+                    </span>
+                </div>
+            </ng-template>
+        </div>
+    </mat-list>
+</div>

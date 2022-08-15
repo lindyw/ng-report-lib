@@ -4,40 +4,32 @@
 
         <div class="section-wrapper">
             <div class="section">
-                <lib-top-threats [title]="'Top 5 Threats'" [alerts]="alerts$ | async" [baselines]="baselines$ | async">
+                <lib-top-threats [title]="'Top 5 Threats'" [alerts]="alerts$ | async"
+                    [baselines]="topBaselines$ | async">
                 </lib-top-threats>
             </div>
         </div>
 
         <div class="section-wrapper">
             <div class="section">
-                <div class="baseline-container">
-                    <mat-list>
-                        <mat-list-item>
-                            <mat-icon class="safe">add_circle_outline</mat-icon>
-                            <span>2020/08/01 08:04:11 Created</span>
-                        </mat-list-item>
-                        <mat-list-item>
-                            <mat-icon  class="red">error_circle_outline</mat-icon>
-                            <span>2021/08/02 10:01:11 Deviation</span>
-                        </mat-list-item>
-                        <mat-list-item>
-                            <mat-icon  class="safe">check_circle</mat-icon>
-                            <span>2021/08/06 19:23:11 Remediated</span>
-                        </mat-list-item>
-                    </mat-list>
-                    <ng-oct-timeline></ng-oct-timeline>
-                </div>
+                <lib-top-threats [title]="'Top 5 Users under Threats'"></lib-top-threats>
             </div>
         </div>
 
+        <!-- TODO: Posture Deviation Summary -->
 
-        <!-- <div class="section-wrapper">
+    </section>
+
+    <section class="sheet" *ngFor="let c of catagories;let i = index;">
+        <div class="section-wrapper">
             <div class="section">
-                <lib-top-threats [title]="'Top 5 Users under Threats'"></lib-top-threats>
+                <h1>Security Controls (Baselines)</h1>
+                <div class="baseline-container" >
+                    <lib-security-control [category]="c" [baselines]="baselinesByCategory(c)"></lib-security-control>
+                </div>
+                <p style="page-break-after: always;">&nbsp;</p>
             </div>
-        </div> -->
-
+        </div>
     </section>
 
 </div>

@@ -1,7 +1,7 @@
 .A4 {
     font-family: "Nunito Sans", sans-serif;
     width: 210mm;
-    height: 296mm;
+    height: 296mm; 
 }
 .A4 .sheet {
     width: inherit;
@@ -28,11 +28,19 @@
 }
 
 .section-wrapper {
+    background: white;
+    margin: 5mm auto;
     margin-top: 1rem;
     border: 1px solid #c3cfd9;
     .section {
         margin-left: 1rem;
         display: flex;
+        flex-direction: column;
+        h1 {
+            margin: 1rem 0;
+            padding-right: 1cm;
+            width: 90%;
+        }
         .baseline-container {
             display: flex;
             width: 100%;
@@ -43,9 +51,7 @@
     lib-top-threats {
         width: 100%;
     }
-    ng-oct-timeline {
-        width: 60%;
-    }
+   
 }
 
 .info {
