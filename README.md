@@ -11,6 +11,7 @@ NgOctReportService
 - createHeader(this.header);
   createTopAlerts(this.topAlerts);
   createTopBaselines(this.topBaselines);
+  createBaselines(this.baselines);
 
 npm run build
 cd dist/ng-oct-report
