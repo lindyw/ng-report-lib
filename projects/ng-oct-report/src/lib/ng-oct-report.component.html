@@ -1,35 +1,30 @@
 <div class="A4">
-    <section class="sheet">
-        <lib-header class="flex-row" [data]="(header$ | async)"></lib-header>
+    <lib-header class="flex-row" [data]="(header$ | async)"></lib-header>
 
-        <div class="section-wrapper">
-            <div class="section">
-                <lib-top-threats [title]="'Top 5 Threats'" [alerts]="alerts$ | async"
-                    [baselines]="topBaselines$ | async">
-                </lib-top-threats>
-            </div>
+    <div class="section-wrapper">
+        <div class="section">
+            <lib-top-threats [title]="'Top 5 Threats'" [alerts]="alerts$ | async" [baselines]="topBaselines$ | async">
+            </lib-top-threats>
         </div>
+    </div>
 
-        <div class="section-wrapper">
-            <div class="section">
-                <lib-top-threats [title]="'Top 5 Users under Threats'"></lib-top-threats>
-            </div>
+    <div class="section-wrapper">
+        <div class="section">
+            <lib-top-threats [title]="'Top 5 Users under Threats'"></lib-top-threats>
         </div>
+    </div>
 
-        <!-- TODO: Posture Deviation Summary -->
-
-    </section>
-
-    <section class="sheet" *ngFor="let c of catagories;let i = index;">
-        <div class="section-wrapper">
-            <div class="section">
-                <h1>Security Controls (Baselines)</h1>
-                <div class="baseline-container" >
-                    <lib-security-control [category]="c" [baselines]="baselinesByCategory(c)"></lib-security-control>
-                </div>
-                <p style="page-break-after: always;">&nbsp;</p>
+    <!-- TODO: Posture Deviation Summary -->
+    <!-- <p style="page-break-after: always;">&nbsp;</p> -->
+ 
+    <div class="section-wrapper">
+        <div class="section">
+            <h1>Security Controls (Baselines)</h1>
+            <div class="baseline-container" *ngFor="let c of catagories;let i = index;">
+                <lib-security-control [category]="c" [baselines]="baselinesByCategory(c)"></lib-security-control>
             </div>
+          
         </div>
-    </section>
+    </div>
 
 </div>

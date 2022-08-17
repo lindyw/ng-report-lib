@@ -13,9 +13,9 @@ export class AppComponent implements OnInit {
     header = {
         date: {
             start: '2022-08-01',
-            end: '2022-08-06'
+            end: '2022-08-16'
         },
-        tenant: 'Octiga Software Ltd.'
+        tenant: 'Contoso'
     }
 
     topAlerts: TopAlert[] =

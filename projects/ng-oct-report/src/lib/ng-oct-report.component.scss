@@ -1,13 +1,19 @@
-.A4 {
-    font-family: "Nunito Sans", sans-serif;
-    width: 210mm;
-    height: 296mm; 
-}
-.A4 .sheet {
-    width: inherit;
-    height: inherit;
-    padding: 5mm;
-}
+// .A4 {
+//     font-family: "Nunito Sans", sans-serif;
+//     width: 210mm;
+//     height: 296mm;
+// }
+// .A4 .sheet {
+//     width: inherit;
+//     height: inherit;
+//     padding: 5mm;
+// }
+
+@page {
+    size: A4;
+    margin: 10mm;
+  }
+
 
 .flex-row {
     display: flex;
@@ -30,7 +36,6 @@
 .section-wrapper {
     background: white;
     margin: 5mm auto;
-    margin-top: 1rem;
     border: 1px solid #c3cfd9;
     .section {
         margin-left: 1rem;
@@ -51,7 +56,6 @@
     lib-top-threats {
         width: 100%;
     }
-   
 }
 
 .info {
