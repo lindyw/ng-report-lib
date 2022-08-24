@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
-import { BehaviorSubject, Subject } from 'rxjs';
-import { Baseline, Header, TopAlert, TopBaseline } from './ng-oct-report.interface';
+import { BehaviorSubject } from 'rxjs';
+import { Baseline, Category, Header, TopAlert, TopBaseline } from './ng-oct-report.interface';
 
 @Injectable({
     providedIn: 'root'
@@ -12,6 +12,7 @@ export class NgOctReportService {
     public topBaselines$ = new BehaviorSubject<TopBaseline[] | null>(null);
     // Security Control
     public Baselines$ = new BehaviorSubject<Baseline[] | null>(null);
+    public Categories$ = new BehaviorSubject<Category[] | null>(null);
 
     public createHeader(header: Header): void {
         this.header$.next(header);
@@ -27,6 +28,10 @@ export class NgOctReportService {
 
     public createBaselines(baselines: Baseline[]) {
         this.Baselines$.next(baselines);
+    }
+
+    public allCategories(categories: Category[]) {
+        this.Categories$.next(categories);
     }
 
     constructor() { }

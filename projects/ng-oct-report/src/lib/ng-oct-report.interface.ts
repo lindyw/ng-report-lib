@@ -28,7 +28,11 @@ export interface Baseline {
     category: string
     name: string
     timelineElements: TimelineElement[]
+}
 
+export interface Category {
+    category: string
+    name: string
 }
 
 type Severity = 'critical' | 'danger' | 'warning';

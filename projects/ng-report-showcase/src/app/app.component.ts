@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Baseline, TopAlert, TopBaseline } from 'projects/ng-oct-report/src/lib/ng-oct-report.interface';
+import { Baseline, Category, TopAlert, TopBaseline } from 'projects/ng-oct-report/src/lib/ng-oct-report.interface';
 import { NgOctReportService } from 'projects/ng-oct-report/src/public-api';
 
 @Component({
@@ -61,6 +61,58 @@ export class AppComponent implements OnInit {
 
         ]
 
+    categories: Category[] =
+        [
+            { "category": "Email Security", "name": "Preset EOP Policy (Strict)" },
+            { "category": "Email Security", "name": "Preset EOP Policy (Standard)" },
+            {
+                "category": "Email Security",
+                "name": "Malware Internal Sender Filter Notification Policy"
+            },
+            {
+                "category": "Email Security",
+                "name": "Malware File Types Filter Policy"
+            },
+            {
+                "category": "Email Security",
+                "name": "Standard Default Anti Phishing Policy"
+            },
+            {
+                "category": "Email Security",
+                "name": "Default Hosted Outbound Spam Filter Policy"
+            },
+            { "category": "Email Security", "name": "DKIM Signing for Default Domain" },
+            { "category": "Email Security", "name": "Mail Auto Forwarding" },
+            { "category": "Audit", "name": "Mailbox Audit Log" },
+            { "category": "Audit", "name": "Unified Audit Log" },
+            {
+                "category": "Authentication & Authorisation",
+                "name": "Legacy Auth Conditional Access Policy"
+            },
+            {
+                "category": "Authentication & Authorisation",
+                "name": "MFA Conditional Access Policy"
+            },
+            {
+                "category": "Authentication & Authorisation",
+                "name": "SharePoint Modern Auth"
+            },
+            { "category": "Authentication & Authorisation", "name": "Password Policy" },
+            {
+                "category": "Authentication & Authorisation",
+                "name": "Customer Lockbox"
+            },
+            { "category": "Sharing", "name": "Anonymous Links Expiry" },
+            { "category": "Sharing", "name": "External Users Resharing" },
+            {
+                "category": "Mobile Access",
+                "name": "Default Mobile Device Mailbox Policy"
+            },
+            { "category": "General", "name": "Security Defaults Policy" },
+            { "category": "Remote Access", "name": "Modern Authentication" },
+            { "category": "Remote Access", "name": "SMTP Access" }
+        ]
+
 
     constructor(private reportService: NgOctReportService) {
 
@@ -71,6 +123,7 @@ export class AppComponent implements OnInit {
         this.reportService.createTopAlerts(this.topAlerts);
         this.reportService.createTopBaselines(this.topBaselines);
         this.reportService.createBaselines(this.baselines);
+        this.reportService.allCategories(this.categories);
     }
 
 
