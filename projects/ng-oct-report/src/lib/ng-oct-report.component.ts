@@ -70,6 +70,7 @@ export class NgOctReportComponent implements OnInit {
             .subscribe(categories => {
                 this.categories$.next(categories!);
                 const categories_set = [... new Set(categories?.map(c => c.category))];
+                categories_set.push('Others');
                 this.catagories = categories_set;
             })
     }
@@ -80,7 +81,7 @@ export class NgOctReportComponent implements OnInit {
             return [];
         }
         else {
-            let found_baselines = baselines.filter(b => b.category === category);
+            let found_baselines = category === 'Others'?  baselines.filter(b => b.category === 'Others') : baselines.filter(b => b.category === category);
             let categories = this.categories$.getValue();
             let category_with_baseline_names = categories.filter(c => c.category === category);
             let empty_baselines_by_category = category_with_baseline_names.filter(function (c) {
