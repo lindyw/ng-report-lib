@@ -15,11 +15,14 @@
                 <div>
                     <mat-list>
                         <mat-list-item *ngFor="let a of item.value">
-                            <div class="row-item">
-                                <!-- <span>{{a[keys[0]]}} |</span> -->
-                                <span>{{a[keys[1]]}}</span>
-                                <span>|</span>
-                                <span>{{a[keys[2]]}}</span>
+                            <div class="flex-col">
+                                <div class="row-item">
+                                    <span>{{a[keys[0]]}} |</span>
+                                    <span>{{a[keys[1]]}}</span>
+                                </div>
+                                <div class="row-item">
+                                    <span>{{a[keys[2]]}}</span>
+                                </div>
                             </div>
                         </mat-list-item>
                     </mat-list>
