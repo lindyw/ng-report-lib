@@ -28,7 +28,7 @@ mat-list-item {
             border: 1px solid #c3cfd9;
         }
         mat-list-item:nth-child(even) {
-            margin-top: 1rem;
+            margin-block: 1rem;
         }
 
         .row-item {
