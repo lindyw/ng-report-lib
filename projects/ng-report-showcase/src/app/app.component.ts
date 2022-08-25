@@ -20,16 +20,16 @@ export class AppComponent implements OnInit {
 
     topAlerts: TopAlert[] =
         [
-            { severity: 'critical', timestamp: '2022-08-02T22:28:999Z', actor: 'bob.husky@octiga.com', 'description': 'Login from Country not in Allowed List' },
-            { severity: 'danger', timestamp: '2022-08-02T22:28:999Z', actor: 'rob.husky@octiga.com', 'description': 'Login from Country not in Allowed List' },
-            { severity: 'danger', timestamp: '2022-08-02T22:28:999Z', actor: 'rob.husky@octiga.com', 'description': 'Login from Country not in Allowed List' }
+            { severity: 'critical', timestamp: '2022-08-02T22:28:35.999Z', actor: 'bob.husky@octiga.com', 'description': 'Login from Country not in Allowed List' },
+            { severity: 'danger', timestamp: '2022-08-02T22:28:59.999Z', actor: 'rob.husky@octiga.com', 'description': 'Login from Country not in Allowed List' },
+            { severity: 'danger', timestamp: '2022-08-02T22:28:59.999Z', actor: 'rob.husky@octiga.com', 'description': 'Login from Country not in Allowed List' }
         ]
 
     topBaselines: TopBaseline[] =
         [
-            { severity: 'warning', timestamp: '2022-08-02T22:28:999Z', category: 'Sharing Settings', 'name': 'Common Attachments Filter' },
-            { severity: 'warning', timestamp: '2022-08-02T22:28:999Z', category: 'Admin Settings', 'name': 'Admin Audit Log' },
-            { severity: 'warning', timestamp: '2022-08-02T22:28:999Z', category: 'Remote Access Settings', 'name': 'SMTP' },
+            { severity: 'warning', timestamp: '2022-08-02T22:28:59.999Z', category: 'Sharing Settings', 'name': 'Common Attachments Filter' },
+            { severity: 'warning', timestamp: '2022-08-02T22:28:35.999Z', category: 'Admin Settings', 'name': 'Admin Audit Log' },
+            { severity: 'warning', timestamp: '2022-08-02T22:28:14.999Z', category: 'Remote Access Settings', 'name': 'SMTP' },
         ]
 
     baselines: Baseline[] =

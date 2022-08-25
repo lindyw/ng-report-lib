@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import moment from 'moment';
-import { BehaviorSubject, empty } from 'rxjs';
+import { BehaviorSubject, empty, map, timestamp } from 'rxjs';
 import { Baseline, Category, Header, TopAlert, TopBaseline } from './ng-oct-report.interface';
 import { NgOctReportService } from './ng-oct-report.service';
 
@@ -50,12 +50,23 @@ export class NgOctReportComponent implements OnInit {
 
     loadTopAlerts() {
         this.reportService.topAlerts$
-            .subscribe(alerts => this.alerts$.next(alerts));
+            .subscribe(alerts => {
+                if (!!alerts) {
+                    alerts = alerts.map(a => ({ ...a, timestamp: new Date(a.timestamp).toString() }))
+                }
+                this.alerts$.next(alerts)
+            })
+
     }
 
     loadTopBaselines() {
         this.reportService.topBaselines$
-            .subscribe(baselines => { this.topBaselines$.next(baselines) })
+            .subscribe(baselines => {
+                if (!!baselines) {
+                    baselines = baselines.map(b => ({ ...b, timestamp: new Date(b.timestamp).toString() }))
+                }
+                this.topBaselines$.next(baselines)
+            })
     }
 
     loadBaselines() {
@@ -81,7 +92,7 @@ export class NgOctReportComponent implements OnInit {
             return [];
         }
         else {
-            let found_baselines = category === 'Others'?  baselines.filter(b => b.category === null) : baselines.filter(b => b.category === category);
+            let found_baselines = category === 'Others' ? baselines.filter(b => b.category === null) : baselines.filter(b => b.category === category);
             let categories = this.categories$.getValue();
             let category_with_baseline_names = categories.filter(c => c.category === category);
             let empty_baselines_by_category = category_with_baseline_names.filter(function (c) {
