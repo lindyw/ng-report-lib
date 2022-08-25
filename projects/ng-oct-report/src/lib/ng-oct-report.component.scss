@@ -12,8 +12,7 @@
 @page {
     size: A4;
     margin: 10mm;
-  }
-
+}
 
 .flex-row {
     display: flex;
@@ -58,19 +57,23 @@
     }
 }
 
-.info {
-    color: #0077b8 !important;
+.icon {
+    vertical-align: middle;
 }
-.warning {
-    color: #ffcc00 !important;
-}
-.danger {
-    color: #ff6600 !important;
-}
-.critical,
-.red {
-    color: red;
-}
-.safe {
-    color: limegreen;
-}
+
+// .info {
+//     color: #0077b8 !important;
+// }
+// .warning {
+//     color: #ffcc00 !important;
+// }
+// .danger {
+//     color: #ff6600 !important;
+// }
+// .critical,
+// .red {
+//     color: red;
+// }
+// .safe {
+//     color: limegreen;
+// }

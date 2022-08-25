@@ -16,14 +16,19 @@
 
     <!-- TODO: Posture Deviation Summary -->
     <!-- <p style="page-break-after: always;">&nbsp;</p> -->
- 
+
     <div class="section-wrapper">
         <div class="section">
             <h1>Security Controls (Baselines)</h1>
+            <div>
+                <mat-icon class="safe icon">add_circle_outline</mat-icon> Created
+                <mat-icon class="red icon">error_circle_outline</mat-icon> Deviation
+                <mat-icon class="safe icon">task_alt</mat-icon> Remediated
+            </div>
             <div class="baseline-container" *ngFor="let c of catagories;let i = index;">
                 <lib-security-control [category]="c" [baselines]="baselinesByCategory(c)"></lib-security-control>
             </div>
-          
+
         </div>
     </div>
 
