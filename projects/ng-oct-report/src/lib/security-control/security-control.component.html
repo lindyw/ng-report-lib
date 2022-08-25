@@ -15,10 +15,10 @@
                     <div>
                         <mat-list *ngFor="let timelineElement of baseline.timelineElements">
                             <mat-list-item [ngSwitch]="timelineElement.status">
-                                <mat-icon class="safe" *ngSwitchCase="'created'">add_circle_outline</mat-icon>
-                                <mat-icon class="red" *ngSwitchCase="'deviation'">error_circle_outline</mat-icon>
-                                <mat-icon class="safe" *ngSwitchCase="'remediated'">task_alt</mat-icon>
-                                <span>{{timelineElement.date.toISOString()}}</span>
+                                <mat-icon class="icon safe" *ngSwitchCase="'created'">add_circle_outline</mat-icon>
+                                <mat-icon class="icon red" *ngSwitchCase="'deviation'">error_circle_outline</mat-icon>
+                                <mat-icon class="icon safe" *ngSwitchCase="'remediated'">task_alt</mat-icon>
+                                <span class="date">{{timelineElement.date.toISOString()}}</span>
                                 <!-- <br> {{timelineElement.status | titlecase }} -->
                             </mat-list-item>
                         </mat-list>

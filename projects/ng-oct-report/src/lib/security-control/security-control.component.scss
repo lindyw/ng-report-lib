@@ -15,6 +15,17 @@
             flex-direction: row;
             align-items: flex-start;
             font-size: small;
+            .mat-list-base .mat-list-item {
+                height: 1.5rem !important;
+            }
+            .date {
+                font-size: x-small;
+            }
+            .icon {
+                font-size: 16px;
+                height: 16px;
+                width: 16px;
+            }
         }
         mat-icon {
             vertical-align: sub;
