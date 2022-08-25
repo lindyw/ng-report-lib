@@ -1,6 +1,6 @@
 {
   "name": "ng-oct-report",
-  "version": "0.0.9",
+  "version": "0.0.13",
   "peerDependencies": {
     "@angular/animations": ">=11.0.0",
     "@angular/common": ">=11.0.0",
