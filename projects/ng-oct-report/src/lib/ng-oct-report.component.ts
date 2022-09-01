@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import moment from 'moment';
+import * as moment from 'moment';
 import { BehaviorSubject, empty, map, timestamp } from 'rxjs';
 import { Baseline, Category, Header, TopAlert, TopBaseline } from './ng-oct-report.interface';
 import { NgOctReportService } from './ng-oct-report.service';

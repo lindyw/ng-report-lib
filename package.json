@@ -1,6 +1,6 @@
 {
   "name": "ng-oct-report",
-  "version": "0.0.13",
+  "version": "0.0.31",
   "scripts": {
     "ng": "ng",
     "start": "ng serve",
@@ -29,31 +29,30 @@
   "commit-msg": "commitlint -E HUSKY_GIT_PARAMS",
   "private": true,
   "dependencies": {
-    "@angular/animations": "^14.1.0",
-    "@angular/common": "^14.1.0",
-    "@angular/compiler": "^14.1.0",
-    "@angular/core": "^14.1.0",
-    "@angular/forms": "^14.1.0",
-    "@angular/material": "~14.1.0",
-    "@angular/platform-browser": "^14.1.0",
-    "@angular/platform-browser-dynamic": "^14.1.0",
-    "@angular/router": "^14.1.0",
+    "@angular/animations": "~13.1.0",
+    "@angular/cli": "^13.3.9",
+    "@angular/common": "~13.1.0",
+    "@angular/compiler": "~13.1.0",
+    "@angular/core": "~13.1.0",
+    "@angular/forms": "~13.1.0",
+    "@angular/material": "^13.3.9",
+    "@angular/platform-browser": "~13.1.0",
+    "@angular/platform-browser-dynamic": "~13.1.0",
+    "@angular/router": "~13.1.0",
     "moment": "^2.29.4",
     "rxjs": "~7.5.0",
     "tslib": "^2.3.0",
     "zone.js": "~0.11.4"
   },
   "devDependencies": {
-    "@angular-devkit/build-angular": "^14.1.1",
-    "@angular/cli": "~14.1.0",
-    "@angular/compiler-cli": "^14.1.0",
+    "@angular-devkit/build-angular": "^13.3.9",
+    "@angular/compiler-cli": "~13.1.0",
     "@commitlint/cli": "^17.0.3",
     "@commitlint/config-conventional": "^17.0.3",
     "@commitlint/prompt": "^17.0.3",
     "@types/jasmine": "~4.0.0",
     "@types/moment": "^2.13.0",
     "copyfiles": "^2.4.1",
-    "husky": "^8.0.1",
     "jasmine-core": "~4.2.0",
     "karma": "~6.4.0",
     "karma-chrome-launcher": "~3.1.0",
@@ -61,8 +60,8 @@
     "karma-jasmine": "~5.1.0",
     "karma-jasmine-html-reporter": "~2.0.0",
     "lint-staged": "^13.0.3",
-    "ng-packagr": "^14.1.0",
+    "ng-packagr": "^13.1.0",
     "prettier": "^2.7.1",
-    "typescript": "~4.7.2"
+    "typescript": "~4.5.2"
   }
 }
