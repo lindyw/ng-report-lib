@@ -1,11 +1,11 @@
 import { Component, OnInit } from '@angular/core';
-import * as moment from 'moment';
 import { BehaviorSubject, empty, map, timestamp } from 'rxjs';
 import { Baseline, Category, Header, TopAlert, TopBaseline } from './ng-oct-report.interface';
 import { NgOctReportService } from './ng-oct-report.service';
+import { DateTime } from 'luxon';
 
 function dateFormat(a: string) {
-    return moment(a).format('ddd, MMM Do YYYY');
+    return DateTime.fromISO(a).toFormat('ccc, LLL dd yyyy');
 }
 
 @Component({

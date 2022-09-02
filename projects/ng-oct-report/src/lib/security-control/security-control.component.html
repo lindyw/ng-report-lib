@@ -16,7 +16,7 @@
                         <mat-list *ngFor="let timelineElement of baseline.timelineElements">
                             <mat-list-item [ngSwitch]="timelineElement.status">
                                 <mat-icon class="icon safe" *ngSwitchCase="'created'">add_circle_outline</mat-icon>
-                                <mat-icon class="icon red" *ngSwitchCase="'deviation'">error_circle_outline</mat-icon>
+                                <mat-icon class="icon red" *ngSwitchCase="'deviation'">error</mat-icon>
                                 <mat-icon class="icon safe" *ngSwitchCase="'remediated'">task_alt</mat-icon>
                                 <span class="date">{{timelineElement.date.toString() |date:	'd/MM/y, h:mm:ss a z'}}</span>
                                 <!-- <br> {{timelineElement.status | titlecase }} -->
