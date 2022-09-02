@@ -168,7 +168,6 @@ export class TimelineComponent implements AfterViewInit {
             let left = raw_left > this._timelineWrapperWidth ? scaled : raw_left;
 
             if (!!prev_left) {
-                console.log(prev_left > left);
                 left = prev_left > left ? prev_left + 15 : (left - prev_left) < 20 ? left + 15 : left;
             }
             timelineEventsArray[i].nativeElement.style.left = left + 'px';

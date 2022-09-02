@@ -3,14 +3,14 @@
 
     <div class="section-wrapper">
         <div class="section">
-            <lib-top-threats [title]="'Top 5 Threats'" [alerts]="alerts$ | async" [baselines]="topBaselines$ | async">
+            <lib-top-threats [title]="'Threats Summary'" [alerts]="alerts$ | async" [baselines]="topBaselines$ | async">
             </lib-top-threats>
         </div>
     </div>
 
     <div class="section-wrapper">
         <div class="section">
-            <lib-top-threats [title]="'Top 5 Users under Threats'"></lib-top-threats>
+            <lib-top-threats [title]="'Top 5 Users under Threats'" [alertsByUsers]="alertsByUsers$ | async"></lib-top-threats>
         </div>
     </div>
 

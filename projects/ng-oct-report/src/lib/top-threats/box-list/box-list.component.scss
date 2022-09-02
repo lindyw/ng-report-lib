@@ -17,8 +17,15 @@ mat-list-item {
         margin-block: 0.5rem;
     }
 
+    mat-list {
+        display: flex;
+    }
     .summary {
         margin-block-end: 1rem;
+        margin-right: 1rem;
+        mat-icon {
+            vertical-align: bottom;
+        }
         .flex-col {
             width: 100%;
             display: flex;

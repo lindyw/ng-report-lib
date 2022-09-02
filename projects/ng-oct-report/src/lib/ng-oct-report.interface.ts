@@ -9,7 +9,7 @@ export interface Header {
 export interface TopAlert {
     severity: Severity
     timestamp: string
-    actor: string
+    actor: string | null
     description: string
 }
 
@@ -18,6 +18,12 @@ export interface TopBaseline {
     timestamp: string
     category: string
     name: string
+}
+
+export interface TopUser {
+    [actor: string]: {
+        alerts: TopAlert[]
+    }
 }
 
 export interface TopUser {

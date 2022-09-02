@@ -22,7 +22,6 @@ export class BoxListComponent implements OnInit {
 
     summarizeBySeverity() {
         let severities = [... new Set(this.arrayList.map(x => x.severity))];
-        console.log('severities', severities)
         for (var severity of severities) {
             this.groupedArrayListBySeverity[severity] = this.arrayList.filter(a => a.severity === severity);
         }

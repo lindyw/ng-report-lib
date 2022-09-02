@@ -1,11 +1,22 @@
 import { Component, OnInit } from '@angular/core';
 import { BehaviorSubject, empty, map, timestamp } from 'rxjs';
-import { Baseline, Category, Header, TopAlert, TopBaseline } from './ng-oct-report.interface';
+import { Baseline, Category, Header, TopAlert, TopBaseline, TopUser } from './ng-oct-report.interface';
 import { NgOctReportService } from './ng-oct-report.service';
 import { DateTime } from 'luxon';
 
 function dateFormat(a: string) {
     return DateTime.fromISO(a).toFormat('ccc, LLL dd yyyy');
+}
+
+function groupBy(arr: Array<any>, key: string) {
+    return arr.reduce((acc, obj) => {
+        const _key = obj[key];
+        if (!acc[_key]) {
+            acc[_key] = [];
+        }
+        acc[_key].push(obj);
+        return acc;
+    }, {});
 }
 
 @Component({
@@ -17,6 +28,7 @@ export class NgOctReportComponent implements OnInit {
 
     header$ = new BehaviorSubject<Header | null>(null);
     alerts$ = new BehaviorSubject<TopAlert[] | null>(null);
+    alertsByUsers$ = new BehaviorSubject<TopUser[] | null>(null);
     topBaselines$ = new BehaviorSubject<TopBaseline[] | null>(null);
     baselines$ = new BehaviorSubject<Baseline[] | null>(null);
     categories$ = new BehaviorSubject<Category[]>([]);
@@ -51,10 +63,13 @@ export class NgOctReportComponent implements OnInit {
     loadTopAlerts() {
         this.reportService.topAlerts$
             .subscribe(alerts => {
+                let alertsByUsers = [];
                 if (!!alerts) {
                     alerts = alerts.map(a => ({ ...a, timestamp: new Date(a.timestamp).toString() }))
+                    alertsByUsers = groupBy(alerts.filter(a => !!a.actor), 'actor');
                 }
-                this.alerts$.next(alerts)
+                this.alerts$.next(alerts);
+                this.alertsByUsers$.next(alertsByUsers);
             })
 
     }

@@ -4,7 +4,7 @@
     </div>
     <mat-list>
         <div *ngFor="let item of groupedArrayListBySeverity | keyvalue">
-            <div class="summary">
+            <div class="summary" *ngIf="type !== 'baseline deviation'; else baseline">
                 <span class="icon" [ngSwitch]="item.key">
                     <mat-icon *ngSwitchCase="'critical'" class="critical" mat-list-icon>error</mat-icon>
                     <mat-icon *ngSwitchCase="'danger'" class="danger" mat-list-icon>warning</mat-icon>
@@ -12,7 +12,7 @@
                     {{item.value.length}} new {{title === 'Baselines' ? '' : item.key}} {{item.value.length > 1? type +
                     's' : type}}
                 </span>
-                <div>
+                <!-- <div>
                     <mat-list>
                         <mat-list-item *ngFor="let a of item.value">
                             <div class="flex-col">
@@ -26,8 +26,18 @@
                             </div>
                         </mat-list-item>
                     </mat-list>
-                </div>
+                </div> -->
             </div>
+            <ng-template #baseline>
+                <div class="summary">
+                    <span class="icon">
+                        <mat-icon class="critical" mat-list-icon>error</mat-icon>
+                        {{item.value.length}} new {{title === 'Baselines' ? '' : item.key}} {{item.value.length > 1?
+                        type +
+                        's' : type}}
+                    </span>
+                </div>
+            </ng-template>
 
         </div>
     </mat-list>

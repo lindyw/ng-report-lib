@@ -15,7 +15,9 @@ NgOctReportService
 
 Release package CMDs:
 1. npm run build
-2. npm run pack
+2. npm run pack OR npm pack --pack-destination C:\workspace\angular-libs\build (for local test)
+
+Publish:
 3. npm publish ng-oct-report-{{version}}.tgz
 
 Detailed breakdown CMDs:
