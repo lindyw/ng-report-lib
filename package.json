@@ -1,10 +1,11 @@
 {
   "name": "ng-oct-report",
-  "version": "0.0.31",
+  "version": "0.0.37",
   "scripts": {
     "ng": "ng",
     "start": "ng serve",
     "build": "npm run build:lib",
+    "pack": "cd dist/ng-oct-report&& npm pack",
     "build:lib": "ng-packagr -p projects/ng-oct-report/ng-package.json",
     "copy:readme": "copyfiles ./README.md ./dist/ng-oct-report",
     "watch": "ng build --watch --configuration development",

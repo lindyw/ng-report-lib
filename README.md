@@ -13,9 +13,16 @@ NgOctReportService
   createTopBaselines(this.topBaselines);
   createBaselines(this.baselines);
 
-npm run build
-cd dist/ng-oct-report
-npm publish --access public
+Release package CMDs:
+1. npm run build
+2. npm run pack
+3. npm publish ng-oct-report-{{version}}.tgz
+
+Detailed breakdown CMDs:
+1. ng-packagr -p projects/ng-oct-report/ng-package.json
+2. cd dist/ng-oct-report
+3. npm pack <-- important to run npm pack cmd before and publish the tgz file instead of dist file (avoid missing imported modules on npmjs)
+4. npm publish ng-oct-report-{{version}}.tgz
 
 
 ## Development server
