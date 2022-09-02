@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { BehaviorSubject, empty, map, timestamp } from 'rxjs';
+import { BehaviorSubject, empty, filter, map, timestamp } from 'rxjs';
 import { Baseline, Category, Header, TopAlert, TopBaseline, TopUser } from './ng-oct-report.interface';
 import { NgOctReportService } from './ng-oct-report.service';
 import { DateTime } from 'luxon';
@@ -93,6 +93,9 @@ export class NgOctReportComponent implements OnInit {
 
     loadCategories() {
         this.reportService.Categories$
+        .pipe(
+            filter(categories => !!categories)
+        )
             .subscribe(categories => {
                 this.categories$.next(categories!);
                 const categories_set = [... new Set(categories?.map(c => c.category))];
