@@ -6,8 +6,8 @@
     [keys]="['timestamp', 'category','name']" [type]="'baseline deviation'">
 </lib-box-list>
 <div *ngIf="alertsByUsers !== null">
-    <div *ngFor="let user of alertsByUsers | keyvalue">
-        <lib-box-list [title]="user.key" [arrayList]="userAlerts(user.value)"
+    <div *ngFor="let user of alertsByUsers">
+        <lib-box-list [title]="user.actor" [arrayList]="userAlerts(user.alerts)"
             [keys]="['timestamp', 'actor', 'description']" [type]="'event'">
         </lib-box-list>
     </div>

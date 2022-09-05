@@ -21,13 +21,14 @@ export interface TopBaseline {
 }
 
 export interface TopUser {
-    [actor: string]: {
-        alerts: TopAlert[]
+    actor: string,
+    alerts: TopAlert[]
+    counts?: {
+        critical: number
+        danger: number
+        warning: number
+        info: number
     }
-}
-
-export interface TopUser {
-
 }
 
 export interface Baseline {

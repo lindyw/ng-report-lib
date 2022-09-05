@@ -9,7 +9,7 @@
                     <mat-icon *ngSwitchCase="'critical'" class="critical" mat-list-icon>error</mat-icon>
                     <mat-icon *ngSwitchCase="'danger'" class="danger" mat-list-icon>warning</mat-icon>
                     <mat-icon *ngSwitchCase="'warning'" class="warning" mat-list-icon>warning_outlined</mat-icon>
-                    {{item.value.length}} new {{title === 'Baselines' ? '' : item.key}} {{item.value.length > 1? type +
+                    {{item.value.length}} {{title === 'Baselines' ? '' : item.key}} {{item.value.length > 1? type +
                     's' : type}}
                 </span>
                 <!-- <div>
@@ -32,7 +32,7 @@
                 <div class="summary">
                     <span class="icon">
                         <mat-icon class="critical" mat-list-icon>error</mat-icon>
-                        {{item.value.length}} new {{title === 'Baselines' ? '' : item.key}} {{item.value.length > 1?
+                        {{item.value.length}} {{title === 'Baselines' ? '' : item.key}} {{item.value.length > 1?
                         type +
                         's' : type}}
                     </span>

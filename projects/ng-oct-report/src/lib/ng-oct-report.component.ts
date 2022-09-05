@@ -63,10 +63,29 @@ export class NgOctReportComponent implements OnInit {
     loadTopAlerts() {
         this.reportService.topAlerts$
             .subscribe(alerts => {
-                let alertsByUsers = [];
+                let alertsByUsers: any[] | null = [];
                 if (!!alerts) {
                     alerts = alerts.map(a => ({ ...a, timestamp: new Date(a.timestamp).toString() }))
-                    alertsByUsers = groupBy(alerts.filter(a => !!a.actor), 'actor');
+                    const groupedObjByUser = groupBy(alerts.filter(a => !!a.actor), 'actor');
+                    alertsByUsers = Object.keys(groupedObjByUser)
+                        .map(k => ({
+                            actor: k, alerts: groupedObjByUser[k], counts: {
+                                critical: groupedObjByUser[k].filter((a: TopAlert) => a.severity === 'critical').length,
+                                danger: groupedObjByUser[k].filter((a: TopAlert) => a.severity === 'danger').length,
+                                warning: groupedObjByUser[k].filter((a: TopAlert) => a.severity === 'warning').length
+                            }
+                        }))
+                        .sort((a, b) =>(a.counts.critical > b.counts.critical) ?
+                        -1 : (a.counts.critical === b.counts.critical) ?
+                            ((a.counts.danger > b.counts.danger) ?
+                                -1 : (a.counts.danger === b.counts.danger) ?
+                                    ((a.counts.warning > b.counts.warning) ?
+                                        -1 : (a.counts.warning === b.counts.warning) ?
+                                            -1 : 1)
+                                    : 1) : 1)
+                        .splice(0, 5)
+                    console.log('alertsByUsers', alertsByUsers);
+
                 }
                 this.alerts$.next(alerts);
                 this.alertsByUsers$.next(alertsByUsers);
@@ -93,9 +112,9 @@ export class NgOctReportComponent implements OnInit {
 
     loadCategories() {
         this.reportService.Categories$
-        .pipe(
-            filter(categories => !!categories)
-        )
+            .pipe(
+                filter(categories => !!categories)
+            )
             .subscribe(categories => {
                 this.categories$.next(categories!);
                 const categories_set = [... new Set(categories?.map(c => c.category))];
