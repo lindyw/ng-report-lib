@@ -33,6 +33,13 @@
         }
         .baseline-container {
             margin-left: 8mm;
+            .baseline-content {
+                display: flex;
+                flex-direction: column;
+                .group, .user {
+                    margin-block-start: 1rem;
+                }
+            }
         }
     }
 }

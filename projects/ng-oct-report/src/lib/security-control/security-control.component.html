@@ -4,13 +4,15 @@
 
     <mat-list class="baseline-container">
         <div *ngFor="let baseline of baselines">
-            <div *ngIf="hasDeviation(baseline); else safe">
+            <div *ngIf="hasDeviation(baseline); else safe" class="baseline-content">
                 <span class="icon">
                     <mat-icon
                         [ngClass]="baseline.timelineElements[baseline.timelineElements.length-1].status === 'deviation'? 'critical' : 'warning'"
                         svgIcon="info-square"></mat-icon>
                     {{ baseline.name }}
                 </span>
+                <span class="group" *ngIf="baseline.group_name">Group: {{ baseline.group_name}}</span>
+                <span class="user" *ngIf="baseline.user_name">User: {{ baseline.user_name}}</span>
                 <div class="summary">
                     <div>
                         <mat-list *ngFor="let timelineElement of baseline.timelineElements">
@@ -18,7 +20,8 @@
                                 <mat-icon class="icon safe" *ngSwitchCase="'created'">add_circle_outline</mat-icon>
                                 <mat-icon class="icon red" *ngSwitchCase="'deviation'">error</mat-icon>
                                 <mat-icon class="icon safe" *ngSwitchCase="'remediated'">task_alt</mat-icon>
-                                <span class="date">{{timelineElement.date.toString() |date:	'd/MM/y, h:mm:ss a z'}}</span>
+                                <span class="date">{{timelineElement.date.toString() |date: 'd/MM/y, h:mm:ss a
+                                    z'}}</span>
                                 <!-- <br> {{timelineElement.status | titlecase }} -->
                             </mat-list-item>
                         </mat-list>

@@ -3,20 +3,10 @@ import { BehaviorSubject, empty, filter, map, timestamp } from 'rxjs';
 import { Baseline, Category, Header, TopAlert, TopBaseline, TopUser } from './ng-oct-report.interface';
 import { NgOctReportService } from './ng-oct-report.service';
 import { DateTime } from 'luxon';
+import { groupBy } from './utils';
 
 function dateFormat(a: string) {
     return DateTime.fromISO(a).toFormat('ccc, LLL dd yyyy');
-}
-
-function groupBy(arr: Array<any>, key: string) {
-    return arr.reduce((acc, obj) => {
-        const _key = obj[key];
-        if (!acc[_key]) {
-            acc[_key] = [];
-        }
-        acc[_key].push(obj);
-        return acc;
-    }, {});
 }
 
 @Component({
@@ -140,7 +130,7 @@ export class NgOctReportComponent implements OnInit {
             for (var b of empty_baselines_by_category) {
                 baselinesByCategory.push({
                     ...b,
-                    timelineElements: []
+                    timelineElements: [],
                 })
             }
             return baselinesByCategory

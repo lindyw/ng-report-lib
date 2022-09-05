@@ -34,6 +34,10 @@ export interface TopUser {
 export interface Baseline {
     category: string | null
     name: string
+    baseline_id?: string
+    group_name?: string,
+    user_id?: string,
+    user_name?: string,
     timelineElements: TimelineElement[]
 }
 

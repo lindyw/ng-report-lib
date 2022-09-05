@@ -1,5 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { Baseline } from '../ng-oct-report.interface';
+import { groupBy } from '../utils';
 
 @Component({
     selector: 'lib-security-control',
@@ -15,6 +16,14 @@ export class SecurityControlComponent implements OnInit {
     constructor() { }
 
     ngOnInit(): void {
+        if (this.category === 'Group Baselines') {
+            console.log('group baselines', this.baselines);
+        
+            if (this.baselines.length > 0){ 
+                console.log('grouped By Name', groupBy(this.baselines, 'name'));
+            }
+        }
+       
     }
 
     public hasDeviation(baseline: Baseline) {
