@@ -32,7 +32,7 @@ export interface TopUser {
 }
 
 export interface Baseline {
-    category: string
+    category: string | null
     name: string
     timelineElements: TimelineElement[]
 }
