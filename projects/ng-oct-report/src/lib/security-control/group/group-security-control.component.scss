@@ -31,12 +31,20 @@
             vertical-align: sub;
             margin-right: 2mm;
         }
+
+        .baseline {
+            margin-block-end: 1rem;
+        }
         .baseline-container {
-            margin-left: 8mm;
             .baseline-content {
                 display: flex;
                 flex-direction: column;
-                .group, .user {
+                .user-container {
+                    border: 1px dashed darkslategray;
+                }
+                .group,
+                .user {
+                    margin-left: 8mm;
                     margin-block-start: 1rem;
                 }
             }

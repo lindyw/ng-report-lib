@@ -25,8 +25,17 @@
                 <mat-icon class="red icon">error</mat-icon> Deviation
                 <mat-icon class="safe icon">task_alt</mat-icon> Remediated
             </div>
-            <div class="baseline-container" *ngFor="let c of catagories;let i = index;">
-                <lib-security-control [category]="c" [baselines]="baselinesByCategory(c)"></lib-security-control>
+            <div>
+                <h2>Tenant Baseline(s)</h2>
+            </div>
+            <div class="baseline-container" *ngFor="let c of tenant_catagories;let i = index;">
+                <lib-tenant-security-control [category]="c" [baselines]="baselinesByCategory(c)"></lib-tenant-security-control>
+            </div>
+            <div>
+                <h2>Group Baseline(s)</h2>
+            </div>
+            <div class="baseline-container" *ngFor="let c of group_categories;let i = index;">
+                <lib-group-security-control [category]="c" [baselines]="baselinesByCategory(c)"></lib-group-security-control>
             </div>
 
         </div>

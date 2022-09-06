@@ -9,9 +9,10 @@ import { MatListModule } from '@angular/material/list';
 import { MatTableModule } from '@angular/material/table';
 import { BoxListComponent } from './top-threats/box-list/box-list.component';
 import { TimelineComponent } from './timeline/timeline.component';
-import { SecurityControlComponent } from './security-control/security-control.component';
 import { DomSanitizer } from '@angular/platform-browser';
 import { HttpClientModule } from '@angular/common/http';
+import { TenantSecurityControlComponent } from './security-control/tenant/tenant-security-control.component';
+import { GroupSecurityControlComponent } from './security-control/group/group-security-control.component';
 
 
 @NgModule({
@@ -21,7 +22,8 @@ import { HttpClientModule } from '@angular/common/http';
         TopThreatsComponent,
         BoxListComponent,
         TimelineComponent,
-        SecurityControlComponent
+        TenantSecurityControlComponent,
+        GroupSecurityControlComponent
     ],
     imports: [
         CommonModule,

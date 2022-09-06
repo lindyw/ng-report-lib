@@ -1,0 +1,29 @@
+import { Component, Input, OnInit } from '@angular/core';
+import { Baseline } from '../../ng-oct-report.interface';
+
+@Component({
+    selector: 'lib-group-security-control',
+    templateUrl: './group-security-control.component.html',
+    styleUrls: ['./group-security-control.component.scss']
+})
+export class GroupSecurityControlComponent {
+
+    @Input() category = '';
+    @Input() timelineElements = [];
+
+    @Input() baselines: {
+        [b_name: string]: {
+            [g_name: string]: {
+                [user_name: string]: Baseline[]
+            }
+        }
+    } = {}
+
+    constructor() {
+    }
+
+    public hasDeviation(value: any) {
+        return Object.values(value).length > 0;
+    }
+
+}
