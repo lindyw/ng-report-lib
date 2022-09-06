@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import { BehaviorSubject, empty, filter, map, timestamp } from 'rxjs';
+import { DateTime } from 'luxon';
+import { BehaviorSubject, filter, distinct } from 'rxjs';
 import { Baseline, Category, Header, TopAlert, TopBaseline, TopUser } from './ng-oct-report.interface';
 import { NgOctReportService } from './ng-oct-report.service';
-import { DateTime } from 'luxon';
 import { groupBy } from './utils';
 
 function dateFormat(a: string) {
@@ -53,6 +53,9 @@ export class NgOctReportComponent implements OnInit {
 
     loadTopAlerts() {
         this.reportService.topAlerts$
+            .pipe(
+                distinct()
+            )
             .subscribe(alerts => {
                 let alertsByUsers: any[] | null = [];
                 if (!!alerts) {
@@ -85,6 +88,9 @@ export class NgOctReportComponent implements OnInit {
 
     loadTopBaselines() {
         this.reportService.topBaselines$
+            .pipe(
+                distinct()
+            )
             .subscribe(baselines => {
                 if (!!baselines) {
                     baselines = baselines.map(b => ({ ...b, timestamp: new Date(b.timestamp).toString() }))
@@ -95,6 +101,9 @@ export class NgOctReportComponent implements OnInit {
 
     loadBaselines() {
         this.reportService.Baselines$
+            .pipe(
+                distinct()
+            )
             .subscribe(baselines => {
                 this.baselines$.next(baselines);
             })
@@ -103,6 +112,7 @@ export class NgOctReportComponent implements OnInit {
     loadCategories() {
         this.reportService.Categories$
             .pipe(
+                distinct(),
                 filter(categories => !!categories)
             )
             .subscribe(categories => {
