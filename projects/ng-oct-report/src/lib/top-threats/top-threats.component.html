@@ -1,14 +1,26 @@
 <h1>{{title}}</h1>
+
 <lib-box-list *ngIf="alerts !== null" [title]="'Alerts'" [arrayList]="alerts"
     [keys]="['timestamp', 'actor', 'description']" [type]="'event'">
 </lib-box-list>
+
 <lib-box-list *ngIf="baselines !== null" [title]="'Baselines'" [arrayList]="baselines"
     [keys]="['timestamp', 'category','name']" [type]="'baseline deviation'">
 </lib-box-list>
+
 <div *ngIf="alertsByUsers !== null">
-    <div *ngFor="let user of alertsByUsers">
-        <lib-box-list [title]="user.actor" [arrayList]="userAlerts(user.alerts)"
-            [keys]="['timestamp', 'actor', 'description']" [type]="'event'">
-        </lib-box-list>
-    </div>
+    <ng-container *ngIf="alertsByUsers.length >0; else empty">
+        <div *ngFor="let user of alertsByUsers">
+            <lib-box-list [title]="user.actor" [arrayList]="userAlerts(user.alerts)"
+                [keys]="['timestamp', 'actor', 'description']" [type]="'event'">
+            </lib-box-list>
+        </div>
+    </ng-container>
 </div>
+
+<ng-template #empty>
+    <p class="empty">
+        <mat-icon class="safe" mat-list-icon>task_alt</mat-icon>
+        No users unde threats were found
+    </p>
+</ng-template>

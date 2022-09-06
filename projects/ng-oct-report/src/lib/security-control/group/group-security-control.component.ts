@@ -20,6 +20,7 @@ export class GroupSecurityControlComponent {
     } = {}
 
     constructor() {
+        console.log('group baselines', this.baselines)
     }
 
     public hasDeviation(value: any) {

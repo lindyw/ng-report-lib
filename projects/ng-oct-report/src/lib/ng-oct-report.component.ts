@@ -80,6 +80,7 @@ export class NgOctReportComponent implements OnInit {
                         .splice(0, 5)
 
                 }
+                console.log('alerts', alerts);
                 this.alerts$.next(alerts);
                 this.alertsByUsers$.next(alertsByUsers);
             })
@@ -105,6 +106,7 @@ export class NgOctReportComponent implements OnInit {
                 distinct()
             )
             .subscribe(baselines => {
+                console.log('baselines', baselines);
                 this.baselines$.next(baselines);
             })
     }
