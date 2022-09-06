@@ -13,6 +13,11 @@
                         {{item.value.length}} {{title === 'Baselines' ? '' : item.key}} {{item.value.length > 1? type +
                         's' : type}}
                     </span>
+                    <div class="row-item">
+                        <span *ngIf="title === 'Alerts'; else user">{{item.value[0][keys[1]]}} -
+                            {{item.value[0][keys[2]]}}
+                            {{item.value.length > 1? 'and more...': ''}}</span>
+                    </div>
                     <!-- <div>
                         <mat-list>
                             <mat-list-item *ngFor="let a of item.value">
@@ -37,9 +42,21 @@
                             type +
                             's' : type}}
                         </span>
+                        <div class="row-item">
+                            <ng-container *ngFor="let a of item.value;last as l">
+                                {{a[keys[1]]}} -
+                                {{a[keys[2]]}}{{!l? ',' : ''}}
+                                {{item.value.length > 3? 'and more...': ''}}
+                            </ng-container>
+
+                        </div>
                     </div>
                 </ng-template>
 
+                <ng-template #user>
+                    <span>{{item.value[0][keys[2]]}}
+                        {{item.value.length > 1? 'and more...': ''}}</span>
+                </ng-template>
             </div>
         </mat-list>
     </ng-container>
