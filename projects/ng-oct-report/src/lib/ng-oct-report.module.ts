@@ -1,21 +1,60 @@
 import { NgModule } from '@angular/core';
 import { NgOctReportComponent } from './ng-oct-report.component';
 import { CommonModule } from '@angular/common';
-import { BrowserModule } from '@angular/platform-browser';
-import { HeaderComponent } from './header/header/header.component';
+import { HeaderComponent } from './header/header.component';
+import { TopThreatsComponent } from './top-threats/top-threats.component';
+
+import { MatIconModule, MatIconRegistry } from '@angular/material/icon';
+import { MatListModule } from '@angular/material/list';
+import { MatTableModule } from '@angular/material/table';
+import { BoxListComponent } from './top-threats/box-list/box-list.component';
+import { TimelineComponent } from './timeline/timeline.component';
+import { DomSanitizer } from '@angular/platform-browser';
+import { HttpClientModule } from '@angular/common/http';
+import { TenantSecurityControlComponent } from './security-control/tenant/tenant-security-control.component';
+import { GroupSecurityControlComponent } from './security-control/group/group-security-control.component';
 
 
 @NgModule({
-  declarations: [
-    NgOctReportComponent,
-    HeaderComponent
-  ],
-  imports: [
-    CommonModule,
-    BrowserModule
-  ],
-  exports: [
-    NgOctReportComponent
-  ]
+    declarations: [
+        NgOctReportComponent,
+        HeaderComponent,
+        TopThreatsComponent,
+        BoxListComponent,
+        TimelineComponent,
+        TenantSecurityControlComponent,
+        GroupSecurityControlComponent
+    ],
+    imports: [
+        CommonModule,
+        MatIconModule,
+        MatListModule,
+        MatTableModule,
+        HttpClientModule
+    ],
+    exports: [
+        NgOctReportComponent,
+        TimelineComponent
+    ]
 })
-export class NgOctReportModule { }
+export class NgOctReportModule {
+
+    iconList = ['info-square', 'mailbox-rules'];
+
+    constructor(
+        private matIconRegistry: MatIconRegistry,
+        private domSanitizer: DomSanitizer,
+    ) {
+        this.iconsRegister(this.matIconRegistry, this.domSanitizer);
+    }
+
+    iconsRegister(iconRegistry: MatIconRegistry, sanitizer: DomSanitizer) {
+        this.iconList.forEach((iconName) => {
+            iconRegistry.addSvgIcon(
+                iconName,
+                sanitizer.bypassSecurityTrustResourceUrl('assets/img/icons/' + iconName + '.svg'));
+        });
+    }
+}
+
+

@@ -1,0 +1,104 @@
+ol,
+ul {
+    list-style: none;
+    span {
+        position: absolute;
+        transform:translate(-55%, 900%) rotate(80deg) scale(3);
+        font-size: 4px;
+        width:10%;
+        margin-top:1rem;
+    }
+}
+
+.timeline {
+    position: relative;
+    height: 200px;
+    width: 120%;
+    max-width: 800px;
+    min-width: 50%;
+    // margin: 0 auto;
+
+    .events-wrapper {
+        position: relative;
+        width:100%;
+        height: 100%;
+        margin: 0 1rem;
+        overflow: hidden;
+
+        .events {
+            /* this is the grey line/timeline */
+            position: absolute;
+            z-index: 1;
+            left: 0;
+            top: 49px;
+            height: 2px;
+            /* width will be set using JavaScript */
+            background: #b2e6c3;
+            -webkit-transition: -webkit-transform 0.4s;
+            -moz-transition: -moz-transform 0.4s;
+            transition: transform 0.4s;
+
+            a {
+                position: absolute;
+                bottom: 0;
+                z-index: 2;
+                text-align: center;
+                font-size: 12px;
+                text-decoration: none;
+                padding-bottom: 15px;
+                color: #383838;
+                /* fix bug on Safari - text flickering while timeline translates */
+                -webkit-transform: translateZ(0);
+                -moz-transform: translateZ(0);
+                -ms-transform: translateZ(0);
+                -o-transform: translateZ(0);
+                transform: translateZ(0);
+                pointer-events: none;
+            }
+            a:after {
+                /* this is used to create the event spot */
+                content: "";
+                position: absolute;
+                left: 50%;
+                right: auto;
+                bottom: -5px;
+                height: 8px;
+                width: 8px;
+                border-radius: 50%;
+                border: 2px solid #dfdfdf;
+                background-color: #0dad3f;
+                -webkit-transition: background-color 0.3s, border-color 0.3s;
+                -moz-transition: background-color 0.3s, border-color 0.3s;
+                transition: background-color 0.3s, border-color 0.3s;
+            }
+            a.deviation::after {
+                    background-color: #ff3f3f;
+                    border-color: #ff3f3f;
+            }
+        }
+
+        .filling-line {
+            /* this is used to create the green line filling the timeline */
+            position: absolute;
+            z-index: 1;
+            left: 0;
+            top: 0;
+            height: 100%;
+            width: 100%;
+            background-color: #7b9d6f;
+            -webkit-transform: scaleX(0);
+            -moz-transform: scaleX(0);
+            -ms-transform: scaleX(0);
+            -o-transform: scaleX(0);
+            transform: scaleX(0);
+            -webkit-transform-origin: left center;
+            -moz-transform-origin: left center;
+            -ms-transform-origin: left center;
+            -o-transform-origin: left center;
+            transform-origin: left center;
+            -webkit-transition: -webkit-transform 0.3s;
+            -moz-transition: -moz-transform 0.3s;
+            transition: transform 0.3s;
+        }
+    }
+}

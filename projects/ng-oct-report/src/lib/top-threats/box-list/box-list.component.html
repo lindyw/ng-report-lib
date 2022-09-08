@@ -1,0 +1,73 @@
+<div class="box">
+    <div class="title">
+        <span><b>{{title}}</b></span>
+    </div>
+    <ng-container *ngIf="arrayList.length > 0; else empty">
+        <mat-list>
+            <div *ngFor="let item of groupedArrayListBySeverity | keyvalue">
+                <div class="summary" *ngIf="type !== 'baseline deviation'; else baseline">
+                    <span class="icon" [ngSwitch]="item.key">
+                        <mat-icon *ngSwitchCase="'critical'" class="critical" mat-list-icon>error</mat-icon>
+                        <mat-icon *ngSwitchCase="'danger'" class="danger" mat-list-icon>warning</mat-icon>
+                        <mat-icon *ngSwitchCase="'warning'" class="warning" mat-list-icon>warning_outlined</mat-icon>
+                        {{item.value.length}} {{title === 'Baselines' ? '' : item.key}} {{item.value.length > 1? type +
+                        's' : type}}
+                    </span>
+                    <div class="row-item">
+                        <span *ngIf="title === 'Alerts'; else user">{{item.value[0][keys[1]]}} -
+                            {{item.value[0][keys[2]]}}
+                            {{item.value.length > 1? <br> + <b>'and more...'</b>: ''}}
+                        </span>
+                    </div>
+                    <!-- <div>
+                        <mat-list>
+                            <mat-list-item *ngFor="let a of item.value">
+                                <div class="flex-col">
+                                    <div class="row-item">
+                                        <span>{{a[keys[0]] | date:	'd/MM/y, h:mm:ss a z'}} |</span>
+                                        <span>{{a[keys[1]]}}</span>
+                                    </div>
+                                    <div class="row-item">
+                                        <span>{{a[keys[2]]}}</span>
+                                    </div>
+                                </div>
+                            </mat-list-item>
+                        </mat-list>
+                    </div> -->
+                </div>
+                <ng-template #baseline>
+                    <div class="summary">
+                        <span class="icon">
+                            <mat-icon class="critical" mat-list-icon>error</mat-icon>
+                            {{item.value.length}} {{title === 'Baselines' ? '' : item.key}} {{item.value.length > 1?
+                            type +
+                            's' : type}}
+                        </span>
+                        <div class="row-item">
+                            <ng-container *ngFor="let a of (item.value | slice:0:2);last as l">
+                                {{a[keys[1]]}} -
+                                {{a[keys[2]]}}{{!l? ',' : ''}}
+                            </ng-container>
+                            {{item.value.length > 3? 'and more...': ''}}
+
+                        </div>
+                    </div>
+                </ng-template>
+
+                <ng-template #user>
+                    <span>{{item.value[0][keys[2]]}}
+                        {{item.value.length > 1? <br> + <b> +'and more...' + </b>: ''}}
+                    </span>
+                </ng-template>
+            </div>
+        </mat-list>
+    </ng-container>
+
+</div>
+
+<ng-template #empty>
+    <p class="icon">
+        <mat-icon class="safe" mat-list-icon>task_alt</mat-icon>
+        No threats were found
+    </p>
+</ng-template>

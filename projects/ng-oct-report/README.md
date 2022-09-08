@@ -2,6 +2,21 @@
 
 This library was generated with [Angular CLI](https://github.com/angular/angular-cli) version 14.1.0.
 
+HTML:
+<ng-oct-report></ng-oct-report>
+
+TS:
+NgOctReportService
+
+- createHeader(this.header);
+  createTopAlerts(this.topAlerts);
+  createTopBaselines(this.topBaselines);
+  allCategories(this.categories);
+
+npm run build
+cd dist/ng-oct-report
+npm publish --access public
+
 ## Code scaffolding
 
 Run `ng generate component component-name --project ng-oct-report` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module --project ng-oct-report`.

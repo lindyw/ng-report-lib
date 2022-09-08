@@ -1,12 +1,16 @@
 .A4 {
-    font-family: "Nunito Sans", sans-serif;
     width: 210mm;
     height: 296mm;
 }
-.A4 .sheet {
-    width: inherit;
-    height: inherit;
-    padding: 5mm;
+// .A4 .sheet {
+//     width: inherit;
+//     height: inherit;
+//     padding: 5mm;
+// }
+
+@page {
+    size: A4;
+    margin: 10mm;
 }
 
 .flex-row {
@@ -20,20 +24,37 @@
     align-items: center;
     justify-content: center;
     border: 1px solid #c3cfd9;
-    
     div:last-child {
         justify-content: flex-end;
         text-align: right;
     }
-    
-}
-.header div {
-    margin-right: 1cm;
 }
 
-.logo {
-    width: 5rem;
-    height: 5rem;
-    margin: 1rem;
+.section-wrapper {
+    background: white;
+    margin: 5mm auto;
+    border: 1px solid #c3cfd9;
+    .section {
+        margin-left: 1rem;
+        display: flex;
+        flex-direction: column;
+        h1 {
+            margin: 1rem 0;
+            padding-right: 1cm;
+            width: 90%;
+        }
+        .baseline-container {
+            display: flex;
+            width: 100%;
+            justify-content: flex-start;
+            align-items: flex-start;
+        }
+    }
+    lib-top-threats {
+        width: 100%;
+    }
 }
 
+.icon {
+    vertical-align: middle;
+}

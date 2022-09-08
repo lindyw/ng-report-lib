@@ -2,6 +2,15 @@
   "$schema": "./node_modules/@angular/cli/lib/config/schema.json",
   "version": 1,
   "newProjectRoot": "projects",
+  "schematics": {
+    "@nrwl/schematics:component": {
+      "styleext": "scss",
+      "spec": true,
+      "flat": true,
+      "changeDetection": "OnPush",
+      "prefix": "ng-oct-"
+    }
+  },
   "projects": {
     "ng-oct-report": {
       "projectType": "library",
@@ -48,6 +57,7 @@
         "build": {
           "builder": "@angular-devkit/build-angular:browser",
           "options": {
+            "preserveSymlinks": true,
             "outputPath": "dist/ng-report-showcase",
             "index": "projects/ng-report-showcase/src/index.html",
             "main": "projects/ng-report-showcase/src/main.ts",
@@ -56,7 +66,7 @@
             "assets": [
               "projects/ng-report-showcase/src/favicon.ico",
               "projects/ng-report-showcase/src/assets"            ],
-            "styles": ["projects/ng-report-showcase/src/styles.scss"],
+            "styles": ["projects/ng-report-showcase/src/styles.scss", "projects/ng-report-showcase/src/assets/core.scss"],
             "scripts": []
           },
           "configurations": {

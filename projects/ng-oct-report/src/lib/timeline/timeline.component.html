@@ -1,0 +1,17 @@
+<div class="timeline">
+    <div class="events-wrapper">
+        <div class="events" #eventsWrapper [style.width.px]="eventsWrapperWidth" [style.minWidth.px]="400">
+            <ol>
+                <li *ngFor="let item of timelineElements; let index = index">
+                    <a #timelineEvents href="#" [ngClass]="{
+                        deviation: item.status === 'deviation',
+                        'older-event': index < selectedIndex
+                    }"> 
+                    </a>
+                    <span>{{item.date | date: 'dd/MM/yyyy hh:mm'}}</span>
+                </li>
+            </ol>
+            <span class="filling-line" aria-hidden="true" #fillingLine></span>
+        </div>
+    </div>
+</div>

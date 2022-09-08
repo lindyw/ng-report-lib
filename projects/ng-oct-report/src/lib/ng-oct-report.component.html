@@ -1,5 +1,44 @@
 <div class="A4">
-    <section class="sheet">
-        <lib-header class="flex-row" [data]="(header$ | async)"></lib-header>
-    </section>
+    <lib-header class="flex-row" [data]="(header$ | async)"></lib-header>
+
+    <div class="section-wrapper">
+        <div class="section">
+            <lib-top-threats [title]="'Threats Summary'" [alerts]="alerts$ | async" [baselines]="topBaselines$ | async">
+            </lib-top-threats>
+        </div>
+    </div>
+
+    <div class="section-wrapper">
+        <div class="section">
+            <lib-top-threats [title]="'Top 5 Users under Threats'" [alertsByUsers]="alertsByUsers$ | async"></lib-top-threats>
+        </div>
+    </div>
+
+    <!-- TODO: Posture Deviation Summary -->
+    <!-- <p style="page-break-after: always;">&nbsp;</p> -->
+
+    <div class="section-wrapper">
+        <div class="section">
+            <h1>Security Controls (Baselines)</h1>
+            <div>
+                <mat-icon class="safe icon">add_circle_outline</mat-icon> Created
+                <mat-icon class="red icon">error</mat-icon> Deviation
+                <mat-icon class="safe icon">construction</mat-icon> Remediated
+            </div>
+            <div>
+                <h2>Tenant Baseline(s)</h2>
+            </div>
+            <div class="baseline-container" *ngFor="let c of tenant_catagories;let i = index;">
+                <lib-tenant-security-control [category]="c" [baselines]="baselinesByCategory(c)"></lib-tenant-security-control>
+            </div>
+            <div style="page-break-after: always;">
+                <h2>Group Baseline(s)</h2>
+            </div>
+            <div class="baseline-container" *ngFor="let c of group_categories;let i = index;">
+                <lib-group-security-control [category]="c" [baselines]="baselinesByCategory(c)"></lib-group-security-control>
+            </div>
+
+        </div>
+    </div>
+
 </div>
