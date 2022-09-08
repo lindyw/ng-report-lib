@@ -1,9 +1,6 @@
 {
   "name": "oct-report-lib",
   "version": "v0.0.0-alpha1",
-  "files": [
-    "dist/"
-  ],
   "scripts": {
     "ng": "ng",
     "start": "ng serve",
@@ -12,7 +9,7 @@
     "pack": "cd dist/ng-oct-report&& npm pack",
     "watch": "ng build --watch --configuration development",
     "test": "ng test",
-    "copy:readme": "copyfiles ./README.md ./dist/ng-oct-report"
+    "copy:readme": "copyfiles ./README.md ./dist"
   },
   "commitlint": {
     "extends": [
