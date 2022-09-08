@@ -1,15 +1,19 @@
 {
   "name": "ng-oct-report",
   "version": "1.0.0-beta.5",
+  "files": [
+    "dist/"
+  ],
   "scripts": {
     "ng": "ng",
     "start": "ng serve",
+    "postinstall": "npm run build",
     "build": "npm run build:lib",
-    "pack": "cd dist/ng-oct-report&& npm pack",
     "build:lib": "ng-packagr -p projects/ng-oct-report/ng-package.json",
-    "copy:readme": "copyfiles ./README.md ./dist/ng-oct-report",
+    "pack": "cd dist/ng-oct-report&& npm pack",
     "watch": "ng build --watch --configuration development",
-    "test": "ng test"
+    "test": "ng test",
+    "copy:readme": "copyfiles ./README.md ./dist/ng-oct-report"
   },
   "commitlint": {
     "extends": [
