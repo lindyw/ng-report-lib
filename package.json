@@ -1,7 +1,6 @@
 {
   "name": "oct-report-lib",
   "version": "v0.0.0-alpha1",
-  "main":"projects/ng-oct-report/src/public-api.ts",
   "scripts": {
     "ng": "ng",
     "start": "ng serve",
@@ -65,5 +64,15 @@
     "ng-packagr": "13.1.0",
     "prettier": "^2.7.1",
     "typescript": "~4.5.2"
+  },
+  "ng-publish-to-git": {
+    "commitPrefix": "GLOBAL-PREFIX",
+    "packages": [
+      {
+        "name": "oct-report-lib",
+        "publish": true,
+        "repositoryUrl": "git+ssh://git@gitlab.com/octiga/oct-report-lib.git"
+      }
+    ]
   }
 }
