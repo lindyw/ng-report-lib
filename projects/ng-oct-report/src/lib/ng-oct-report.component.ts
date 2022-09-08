@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { DateTime } from 'luxon';
-import { BehaviorSubject, filter, distinct } from 'rxjs';
+import { BehaviorSubject, filter, distinct, take } from 'rxjs';
 import { Baseline, Category, Header, TopAlert, TopBaseline, TopUser } from './ng-oct-report.interface';
 import { NgOctReportService } from './ng-oct-report.service';
 import { groupBy } from './utils';

@@ -16,7 +16,8 @@
                     <div class="row-item">
                         <span *ngIf="title === 'Alerts'; else user">{{item.value[0][keys[1]]}} -
                             {{item.value[0][keys[2]]}}
-                            {{item.value.length > 1? 'and more...': ''}}</span>
+                            {{item.value.length > 1? <br> + <b>'and more...'</b>: ''}}
+                        </span>
                     </div>
                     <!-- <div>
                         <mat-list>
@@ -43,7 +44,7 @@
                             's' : type}}
                         </span>
                         <div class="row-item">
-                            <ng-container *ngFor="let a of item.value;last as l">
+                            <ng-container *ngFor="let a of (item.value | slice:0:2);last as l">
                                 {{a[keys[1]]}} -
                                 {{a[keys[2]]}}{{!l? ',' : ''}}
                             </ng-container>
@@ -55,7 +56,8 @@
 
                 <ng-template #user>
                     <span>{{item.value[0][keys[2]]}}
-                        {{item.value.length > 1? 'and more...': ''}}</span>
+                        {{item.value.length > 1? <br> + <b> +'and more...' + </b>: ''}}
+                    </span>
                 </ng-template>
             </div>
         </mat-list>
