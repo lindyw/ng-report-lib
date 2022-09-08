@@ -1,5 +1,5 @@
 {
-  "name": "ng-oct-report",
+  "name": "oct-report-lib",
   "version": "1.0.0-beta.5",
   "files": [
     "dist/"

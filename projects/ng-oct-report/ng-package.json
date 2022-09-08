@@ -1,6 +1,6 @@
 {
   "$schema": "../../node_modules/ng-packagr/ng-package.schema.json",
-  "dest": "../../dist/ng-oct-report",
+  "dest": "../../dist",
   "assets": ["./assets/**/*"],
   "lib": {
     "entryFile": "./src/public-api.ts"
