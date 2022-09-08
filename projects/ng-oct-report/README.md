@@ -14,7 +14,7 @@ NgOctReportService
 - allCategories(this.categories);
 
 Publish package (NEW):
-- RUN `ng-publish-to-git` after you committed your library to gitlab
+- RUN `ng-publish-to-git` after you committed & pushed your library to gitlab
 
 How to install and use it on your project?
 add this to your package.json `"oct-report-lib": "git+ssh://git@gitlab.com/octiga/oct-report-lib.git#[tag version]"`
