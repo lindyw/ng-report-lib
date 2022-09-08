@@ -9,13 +9,25 @@ TS:
 NgOctReportService
 
 - createHeader(this.header);
-  createTopAlerts(this.topAlerts);
-  createTopBaselines(this.topBaselines);
-  allCategories(this.categories);
+- createTopAlerts(this.topAlerts);
+- createTopBaselines(this.topBaselines);
+- allCategories(this.categories);
 
-npm run build
-cd dist/ng-oct-report
-npm publish --access public
+Publish package (NEW):
+- RUN `ng-publish-to-git` after you committed your library to gitlab
+
+How to install and use it on your project?
+add this to your package.json `"oct-report-lib": "git+ssh://git@gitlab.com/octiga/oct-report-lib.git#[tag version]"`
+RUN `npm i oct-report-lib`
+
+Troubleshooting:
+
+1. Some image/assets are missing on the report?
+- try to copy node_modules/ng-oct-report/assets/* to your assets folder in your application level
+  e.g. `"COPY -R node_modules/ng-oct-report/assets/* src/app/assets/"`
+
+2. style is missing on the report?
+- go to `angular.json`, add "src/assets/core.scss" under projects.[your project name].architect.build.options.styles
 
 ## Code scaffolding
 
