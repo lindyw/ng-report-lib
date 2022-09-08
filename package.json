@@ -1,9 +1,13 @@
 {
   "name": "oct-report-lib",
   "version": "v0.0.0-alpha1",
+  "files": [
+    "dist/"
+  ],
   "scripts": {
     "ng": "ng",
     "start": "ng serve",
+    "postinstall": "npm run build",
     "build": "npm run build:lib",
     "build:lib": "ng-packagr -p projects/ng-oct-report/ng-package.json",
     "pack": "cd dist/ng-oct-report&& npm pack",
