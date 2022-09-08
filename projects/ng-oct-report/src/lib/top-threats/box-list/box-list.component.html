@@ -16,7 +16,10 @@
                     <div class="row-item">
                         <span *ngIf="title === 'Alerts'; else user">{{item.value[0][keys[1]]}} -
                             {{item.value[0][keys[2]]}}
-                            {{item.value.length > 1? <br> + <b>'and more...'</b>: ''}}
+                            <ng-container *ngIf="item.value.length>1">
+                                <br>
+                                <b>and more...</b>
+                            </ng-container>
                         </span>
                     </div>
                     <!-- <div>
@@ -48,15 +51,20 @@
                                 {{a[keys[1]]}} -
                                 {{a[keys[2]]}}{{!l? ',' : ''}}
                             </ng-container>
-                            {{item.value.length > 3? 'and more...': ''}}
-
+                            <ng-container *ngIf="item.value.length>1">
+                                <br>
+                                <b>and more...</b>
+                            </ng-container>
                         </div>
                     </div>
                 </ng-template>
 
                 <ng-template #user>
                     <span>{{item.value[0][keys[2]]}}
-                        {{item.value.length > 1? <br> + <b> +'and more...' + </b>: ''}}
+                        <ng-container *ngIf="item.value.length>1">
+                            <br>
+                            <b>and more...</b>
+                        </ng-container>
                     </span>
                 </ng-template>
             </div>
