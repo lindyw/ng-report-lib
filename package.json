@@ -1,9 +1,6 @@
 {
   "name": "oct-report-lib",
   "version": "v0.0.0-alpha1",
-  "files": [
-    "dist/"
-  ],
   "scripts": {
     "ng": "ng",
     "start": "ng serve",
