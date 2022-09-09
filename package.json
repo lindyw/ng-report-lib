@@ -4,6 +4,7 @@
   "scripts": {
     "ng": "ng",
     "start": "ng serve",
+    "deploy": "ng-publish-to-git",
     "build": "npm run build:lib",
     "build:lib": "ng-packagr -p projects/ng-oct-report/ng-package.json",
     "pack": "cd dist/ng-oct-report&& npm pack",
