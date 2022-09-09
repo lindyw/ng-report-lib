@@ -162,7 +162,6 @@ export class NgOctReportComponent implements OnInit {
             } else {
                 let groupByBaselineName = formatGroupBaselinesObj(found_baselines);
                 console.log('groupByBaselineName', groupByBaselineName);
-                if (Object.keys(groupByBaselineName).length === 0) return null;
                 return groupByBaselineName
             }
 
