@@ -1,4 +1,4 @@
-# NgOctReport
+# Oct-report-lib
 
 This library was generated with [Angular CLI](https://github.com/angular/angular-cli) version 14.1.0.
 
@@ -11,41 +11,40 @@ NgOctReportService
 - createHeader(this.header);
   createTopAlerts(this.topAlerts);
   createTopBaselines(this.topBaselines);
-  createBaselines(this.baselines);
+  allCategories(this.categories);
 
-Release package CMDs:
-1. npm run build
-2. npm run pack OR npm pack --pack-destination C:\workspace\angular-libs\build (for local test)
+Publish package (NEW):
+- RUN `ng-publish-to-git` after you committed & pushed your library to gitlab
 
-Publish:
-3. npm publish ng-oct-report-{{version}}.tgz
+How to install and use it on your project?
+add this to your package.json `"oct-report-lib": "git+ssh://git@gitlab.com/octiga/oct-report-lib.git#[tag version]"`
+RUN `npm i oct-report-lib`
 
-Detailed breakdown CMDs:
-1. ng-packagr -p projects/ng-oct-report/ng-package.json
-2. cd dist/ng-oct-report
-3. npm pack <-- important to run npm pack cmd before and publish the tgz file instead of dist file (avoid missing imported modules on npmjs)
-4. npm publish ng-oct-report-{{version}}.tgz
+Troubleshooting:
 
+1. Some image/assets are missing on the report?
+- try to copy node_modules/ng-oct-report/assets/* to your assets folder in your application level
+  e.g. `"COPY -R node_modules/ng-oct-report/assets/* src/app/assets/"`
 
-## Development server
-
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The application will automatically reload if you change any of the source files.
+2. style is missing on the report?
+- go to `angular.json`, add "src/assets/core.scss" under projects.[your project name].architect.build.options.styles
 
 ## Code scaffolding
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+Run `ng generate component component-name --project ng-oct-report` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module --project ng-oct-report`.
+> Note: Don't forget to add `--project ng-oct-report` or else it will be added to the default project in your `angular.json` file. 
 
 ## Build
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory.
+Run `ng build ng-oct-report` to build the project. The build artifacts will be stored in the `dist/` directory.
+
+## Publishing
+
+After building your library with `ng build ng-oct-report`, go to the dist folder `cd dist/ng-oct-report` and run `npm publish`.
 
 ## Running unit tests
 
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
-
-## Running end-to-end tests
-
-Run `ng e2e` to execute the end-to-end tests via a platform of your choice. To use this command, you need to first add a package that implements end-to-end testing capabilities.
+Run `ng test ng-oct-report` to execute the unit tests via [Karma](https://karma-runner.github.io).
 
 ## Further help
 

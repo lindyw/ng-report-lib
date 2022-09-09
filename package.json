@@ -70,7 +70,7 @@
  
     "packages": [
       {
-        "name": "ng-oct-report",
+        "name": "oct-report-lib",
         "publish": true,
         "repositoryUrl": "git+ssh://git@gitlab.com/octiga/oct-report-lib.git"
       }
