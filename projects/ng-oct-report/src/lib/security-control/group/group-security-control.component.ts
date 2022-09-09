@@ -1,5 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { Baseline } from '../../ng-oct-report.interface';
+import { BaselineDeviation } from '../../ng-oct-report.interface';
 
 @Component({
     selector: 'lib-group-security-control',
@@ -14,7 +14,7 @@ export class GroupSecurityControlComponent {
     @Input() baselines: {
         [b_name: string]: {
             [g_name: string]: {
-                [user_name: string]: Baseline[]
+                [user_name: string]: BaselineDeviation[]
             }
         }
     } = {}

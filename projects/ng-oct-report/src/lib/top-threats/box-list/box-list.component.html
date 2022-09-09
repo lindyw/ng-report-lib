@@ -39,7 +39,20 @@
                     </div> -->
                 </div>
                 <ng-template #baseline>
+
+                    <div class="flex-col">
+                        <p style="text-decoration: underline dotted;text-underline-offset: 3px; 
+                        margin-block-start: 0;">Current Compliance Posture</p>
+                        <div class="row-item"><span>Baselines Passing: </span> <span style="float:right">{{!!count &&
+                                !!currentList? count - currentList.length: '-'}}</span>
+                        </div>
+                        <div class="row-item"><span>Baselines Deviating: </span> <span
+                                style="float:right">{{!!currentList? currentList.length: '-'}}</span>
+                        </div>
+                    </div>
+
                     <div class="summary">
+                        <p style="text-decoration: underline dotted;text-underline-offset: 3px;">In this period</p>
                         <span class="icon">
                             <mat-icon class="critical" mat-list-icon>error</mat-icon>
                             {{item.value.length}} {{title === 'Baselines' ? '' : item.key}} {{item.value.length > 1?

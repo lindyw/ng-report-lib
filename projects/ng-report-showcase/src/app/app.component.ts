@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Baseline, Category, TopAlert, TopBaseline } from 'projects/ng-oct-report/src/lib/ng-oct-report.interface';
+import { BaselineDeviation, Category, TopAlert, TopBaselineDeviation } from 'projects/ng-oct-report/src/lib/ng-oct-report.interface';
 import { NgOctReportService } from 'projects/ng-oct-report/src/public-api';
 
 @Component({
@@ -33,14 +33,21 @@ export class AppComponent implements OnInit {
             { severity: 'danger', timestamp: '2022-08-02T22:28:59.999Z', actor: 'test.user2@octiga.com', 'description': 'Login from Country not in Allowed List' }
         ]
 
-    topBaselines: TopBaseline[] =
+    currentBaselines: TopBaselineDeviation[] =
+        [
+            { severity: 'warning', timestamp: '2022-08-02T22:28:35.999Z', category: 'Admin Settings', 'name': 'Admin Audit Log' },
+            { severity: 'warning', timestamp: '2022-08-02T22:28:14.999Z', category: 'Remote Access Settings', 'name': 'SMTP' },
+        ]
+
+
+    topBaselines: TopBaselineDeviation[] =
         [
             { severity: 'warning', timestamp: '2022-08-02T22:28:59.999Z', category: 'Sharing Settings', 'name': 'Common Attachments Filter' },
             { severity: 'warning', timestamp: '2022-08-02T22:28:35.999Z', category: 'Admin Settings', 'name': 'Admin Audit Log' },
             { severity: 'warning', timestamp: '2022-08-02T22:28:14.999Z', category: 'Remote Access Settings', 'name': 'SMTP' },
         ]
 
-    baselines: Baseline[] =
+    baselines: BaselineDeviation[] =
         [
             {
                 baseline_id: "910214bb-d80b-4b3e-b849-7ea897e8ef33",
@@ -522,8 +529,10 @@ export class AppComponent implements OnInit {
     ngOnInit(): void {
         this.reportService.createHeader(this.header);
         this.reportService.createTopAlerts(this.topAlerts);
-        this.reportService.createTopBaselines(this.topBaselines);
-        this.reportService.createBaselines(this.baselines);
+        this.reportService.countBaselines(33);
+        this.reportService.createCurrentBaselineDeviations(this.currentBaselines);
+        this.reportService.createTopBaselineDeviations(this.topBaselines);
+        this.reportService.createBaselineDeviations(this.baselines);
         this.reportService.allCategories(this.categories);
     }
 

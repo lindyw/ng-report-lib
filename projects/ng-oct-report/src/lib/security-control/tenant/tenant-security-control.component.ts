@@ -1,5 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { Baseline } from '../../ng-oct-report.interface';
+import { BaselineDeviation } from '../../ng-oct-report.interface';
 
 @Component({
     selector: 'lib-tenant-security-control',
@@ -8,21 +8,21 @@ import { Baseline } from '../../ng-oct-report.interface';
 })
 export class TenantSecurityControlComponent {
 
-    @Input() baselines: Baseline[] = [];
+    @Input() baselines: BaselineDeviation[] = [];
     @Input() category = '';
     @Input() timelineElements = [];
 
     @Input() groupByBaselineName: {
         [b_name: string]: {
             [g_name: string]: {
-                [user_name: string]: Baseline[]
+                [user_name: string]: BaselineDeviation[]
             }
         }
     } = {}
 
     constructor() { }
 
-    public hasDeviation(baseline: Baseline) {
+    public hasDeviation(baseline: BaselineDeviation) {
         return baseline.timelineElements.some(el => el.status === 'deviation');
     }
 

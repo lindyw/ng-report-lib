@@ -3,14 +3,16 @@
 
     <div class="section-wrapper">
         <div class="section">
-            <lib-top-threats [title]="'Threats Summary'" [alerts]="alerts$ | async" [baselines]="topBaselines$ | async">
+            <lib-top-threats [title]="'Threats Summary'" [alerts]="alerts$ | async" [baselines]="topBaselines$ | async"
+                [currentBaselines]="currentBaselines$ | async" [baseline_count]="baselinesCount$ | async">
             </lib-top-threats>
         </div>
     </div>
 
     <div class="section-wrapper">
         <div class="section">
-            <lib-top-threats [title]="'Top 5 Users under Threats'" [alertsByUsers]="alertsByUsers$ | async"></lib-top-threats>
+            <lib-top-threats [title]="'Top 5 Users under Threats'" [alertsByUsers]="alertsByUsers$ | async">
+            </lib-top-threats>
         </div>
     </div>
 
@@ -29,13 +31,15 @@
                 <h2>Tenant Baseline(s)</h2>
             </div>
             <div class="baseline-container" *ngFor="let c of tenant_catagories;let i = index;">
-                <lib-tenant-security-control [category]="c" [baselines]="baselinesByCategory(c)"></lib-tenant-security-control>
+                <lib-tenant-security-control [category]="c" [baselines]="baselinesByCategory(c)">
+                </lib-tenant-security-control>
             </div>
             <div style="page-break-after: always;">
                 <h2>Group Baseline(s)</h2>
             </div>
             <div class="baseline-container" *ngFor="let c of group_categories;let i = index;">
-                <lib-group-security-control [category]="c" [baselines]="baselinesByCategory(c)"></lib-group-security-control>
+                <lib-group-security-control [category]="c" [baselines]="baselinesByCategory(c)">
+                </lib-group-security-control>
             </div>
 
         </div>

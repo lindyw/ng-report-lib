@@ -9,6 +9,8 @@ export class BoxListComponent implements OnInit {
 
     @Input() title: string = '';
     @Input() arrayList: Array<any> = [];
+    @Input() currentList: Array<any> | null = [];
+    @Input() count: number | null = 0;
     @Input() keys: string[] = ['timestamp', 'actor', 'description'];
     @Input() type: string = 'events'; // event, baseline deviation, rule
 
@@ -17,7 +19,7 @@ export class BoxListComponent implements OnInit {
     constructor() { }
 
     ngOnInit(): void {
-      this.summarizeBySeverity();
+        this.summarizeBySeverity();
     }
 
     summarizeBySeverity() {

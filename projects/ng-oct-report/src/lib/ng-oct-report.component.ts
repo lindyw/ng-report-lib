@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { DateTime } from 'luxon';
 import { BehaviorSubject, filter, distinct, take } from 'rxjs';
-import { Baseline, Category, Header, TopAlert, TopBaseline, TopUser } from './ng-oct-report.interface';
+import { BaselineDeviation, Category, Header, TopAlert, TopBaselineDeviation, TopUser } from './ng-oct-report.interface';
 import { NgOctReportService } from './ng-oct-report.service';
 import { groupBy } from './utils';
 
@@ -19,8 +19,10 @@ export class NgOctReportComponent implements OnInit {
     header$ = new BehaviorSubject<Header | null>(null);
     alerts$ = new BehaviorSubject<TopAlert[] | null>(null);
     alertsByUsers$ = new BehaviorSubject<TopUser[] | null>(null);
-    topBaselines$ = new BehaviorSubject<TopBaseline[] | null>(null);
-    baselines$ = new BehaviorSubject<Baseline[] | null>(null);
+    baselinesCount$ = new BehaviorSubject<number | null>(null);
+    currentBaselines$ = new BehaviorSubject<TopBaselineDeviation[] | null>(null);
+    topBaselines$ = new BehaviorSubject<TopBaselineDeviation[] | null>(null);
+    baselines$ = new BehaviorSubject<BaselineDeviation[] | null>(null);
     categories$ = new BehaviorSubject<Category[]>([]);
 
     tenant_catagories: string[] = [];
@@ -88,6 +90,15 @@ export class NgOctReportComponent implements OnInit {
     }
 
     loadTopBaselines() {
+        this.reportService.number_of_baselines$
+            .pipe(
+                distinct()
+            )
+            .subscribe(count => {
+                console.log(count);
+                this.baselinesCount$.next(count);
+            })
+
         this.reportService.topBaselines$
             .pipe(
                 distinct()
@@ -97,6 +108,17 @@ export class NgOctReportComponent implements OnInit {
                     baselines = baselines.map(b => ({ ...b, timestamp: new Date(b.timestamp).toString() }))
                 }
                 this.topBaselines$.next(baselines)
+            })
+
+        this.reportService.currentBaselines$
+            .pipe(
+                distinct()
+            )
+            .subscribe(baselines => {
+                if (!!baselines) {
+                    baselines = baselines.map(b => ({ ...b, timestamp: new Date(b.timestamp).toString() }))
+                }
+                this.currentBaselines$.next(baselines)
             })
     }
 
@@ -154,27 +176,27 @@ export class NgOctReportComponent implements OnInit {
 
         }
 
-        function formatGroupBaselinesObj(baselines: Baseline[]) {
+        function formatGroupBaselinesObj(baselines: BaselineDeviation[]) {
             let groupByBaselineName: {
                 [b_name: string]: {
                     [g_name: string]: {
-                        [user_name: string]: Baseline[];
+                        [user_name: string]: BaselineDeviation[];
                     };
                 };
             } = {};
-            let baseline_obj: { [b_name: string]: Baseline[]; } = groupBy(baselines, 'name');
+            let baseline_obj: { [b_name: string]: BaselineDeviation[]; } = groupBy(baselines, 'name');
 
             Object.entries(baseline_obj).forEach(([b_name, arr1]) => {
                 let grouped_by_baseline_and_group_name: {
                     [g_name: string]: {
-                        [user_name: string]: Baseline[];
+                        [user_name: string]: BaselineDeviation[];
                     };
                 } = {};
 
-                let group_obj: { [g_name: string]: Baseline[]; } = groupBy(arr1, 'group_name');
+                let group_obj: { [g_name: string]: BaselineDeviation[]; } = groupBy(arr1, 'group_name');
 
                 Object.entries(group_obj).forEach(([g_name, arr2]) => {
-                    let user_obj: { [user_name: string]: Baseline[]; } = groupBy(arr2, 'user_name');
+                    let user_obj: { [user_name: string]: BaselineDeviation[]; } = groupBy(arr2, 'user_name');
                     if (g_name !== 'undefined') {
                         grouped_by_baseline_and_group_name[g_name] = user_obj;
                     }

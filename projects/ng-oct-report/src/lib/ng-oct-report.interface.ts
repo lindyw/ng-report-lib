@@ -12,8 +12,7 @@ export interface TopAlert {
     actor: string | null
     description: string
 }
-
-export interface TopBaseline {
+export interface TopBaselineDeviation {
     severity: Severity
     timestamp: string
     category: string
@@ -31,7 +30,7 @@ export interface TopUser {
     }
 }
 
-export interface Baseline {
+export interface BaselineDeviation {
     category: string | null
     name: string
     baseline_id?: string
