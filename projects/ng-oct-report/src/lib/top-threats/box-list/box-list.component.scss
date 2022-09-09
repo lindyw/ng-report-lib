@@ -20,20 +20,23 @@ mat-list-item {
     mat-list {
         display: flex;
     }
+   
+    .flex-col {
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+        .row-item {
+            width:10rem;
+        }
+    }
+
     .summary {
         margin-block-end: 1rem;
         margin-right: 1rem;
         mat-icon {
-            vertical-align: bottom;
+            vertical-align: sub;
         }
-        .flex-col {
-            width: 100%;
-            display: flex;
-            flex-direction: column;
-            margin-left: 2rem;
-            background: #dfe6ed;
-            border: 1px solid #c3cfd9;
-        }
+       
         mat-list-item:nth-child(even) {
             margin-block: 1rem;
         }
@@ -43,6 +46,7 @@ mat-list-item {
             margin-block: 0.5rem;
             width: auto;
             span {
+                word-break: break-all;
                 margin-right: 1rem;
             }
         }
