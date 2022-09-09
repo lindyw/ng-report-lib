@@ -1,5 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { TopAlert, TopBaselineDeviation, TopUser } from '../ng-oct-report.interface';
+import { CurrentPostureCount, TopAlert, TopBaselineDeviation, TopUser } from '../ng-oct-report.interface';
 
 @Component({
   selector: 'lib-top-threats',
@@ -12,8 +12,7 @@ export class TopThreatsComponent implements OnInit {
   @Input() alerts: TopAlert[] | null = null;
   @Input() alertsByUsers: TopUser[] | null = null;
   @Input() baselines: TopBaselineDeviation[] | null = null;
-  @Input() currentBaselines: TopBaselineDeviation[] | null = null;
-  @Input() baseline_count: number | null = null;
+  @Input() all_posture_count: CurrentPostureCount | null = null;
 
   constructor() { }
 

@@ -83,7 +83,7 @@ export class TimelineComponent implements AfterViewInit {
         return Number(val.replace('px', ''));
     }
 
-    private static getElementWidth(element: Element): number {
+    private static getElementWidth(element: any): number {
         const computedStyle = window.getComputedStyle(element);
         if (!computedStyle.width) {
             return 0;

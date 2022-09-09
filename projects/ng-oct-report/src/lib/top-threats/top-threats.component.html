@@ -4,8 +4,8 @@
     [keys]="['timestamp', 'actor', 'description']" [type]="'event'">
 </lib-box-list>
 
-<lib-box-list *ngIf="baselines !== null && currentBaselines !== null && baseline_count !== null" [title]="'Baselines'"
-    [arrayList]="baselines" [count]="baseline_count" [currentList]="currentBaselines"
+<lib-box-list *ngIf="baselines !== null && all_posture_count !== null" [title]="'Baselines'"
+    [arrayList]="baselines" [has_deviated]="all_posture_count.has_deviated" [not_deviated]="all_posture_count.not_deviated"
     [keys]="['timestamp', 'category','name']" [type]="'baseline deviation'">
 </lib-box-list>
 

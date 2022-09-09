@@ -24,6 +24,7 @@ export class GroupSecurityControlComponent {
     }
 
     public hasDeviation(value: any) {
+        console.log(value);
         return Object.values(value).length > 0;
     }
 

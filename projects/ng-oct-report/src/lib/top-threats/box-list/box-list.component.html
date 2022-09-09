@@ -43,11 +43,11 @@
                     <div class="flex-col">
                         <p style="text-decoration: underline dotted;text-underline-offset: 3px; 
                         margin-block-start: 0;">Current Compliance Posture</p>
-                        <div class="row-item"><span>Baselines Passing: </span> <span style="float:right">{{!!count &&
-                                !!currentList? count - currentList.length: '-'}}</span>
+                        <div class="row-item"><span>Baselines Passing: </span> <span style="float:right">
+                                {{ !!not_deviated? not_deviated: '-'}}</span>
                         </div>
                         <div class="row-item"><span>Baselines Deviating: </span> <span
-                                style="float:right">{{!!currentList? currentList.length: '-'}}</span>
+                                style="float:right">{{!!has_deviated? has_deviated: '-'}}</span>
                         </div>
                     </div>
 

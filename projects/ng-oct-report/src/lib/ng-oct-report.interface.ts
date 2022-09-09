@@ -12,6 +12,12 @@ export interface TopAlert {
     actor: string | null
     description: string
 }
+
+export interface CurrentPostureCount {
+    not_deviated: number | null
+    has_deviated: number
+}
+
 export interface TopBaselineDeviation {
     severity: Severity
     timestamp: string

@@ -145,164 +145,164 @@ export class AppComponent implements OnInit {
                     }
                 ]
             },
-            {
-                "category": null,
-                "name": "OWA Access",
-                "baseline_id": "910214bb-d80b-4b3e-b849-7ea897e8ef33",
-                "timelineElements": [
-                    {
-                        "date": new Date("2022-07-08T13:08:14.435Z"),
-                        "status": "deviation"
-                    },
-                    {
-                        "date": new Date("2022-07-08T13:08:15.462Z"),
-                        "status": "deviation"
-                    },
-                    {
-                        "date": new Date("2022-07-08T13:08:15.579Z"),
-                        "status": "deviation"
-                    },
-                    {
-                        "date": new Date("2022-07-08T13:08:15.581Z"),
-                        "status": "deviation"
-                    },
-                    {
-                        "date": new Date("2022-07-08T13:08:15.611Z"),
-                        "status": "deviation"
-                    },
-                    {
-                        "date": new Date("2022-07-08T13:08:15.617Z"),
-                        "status": "deviation"
-                    },
-                    {
-                        "date": new Date("2022-07-08T13:08:15.619Z"),
-                        "status": "deviation"
-                    },
-                    {
-                        "date": new Date("2022-07-08T13:08:15.628Z"),
-                        "status": "deviation"
-                    },
-                    {
-                        "date": new Date("2022-07-08T13:08:15.631Z"),
-                        "status": "deviation"
-                    },
-                    {
-                        "date": new Date("2022-07-08T13:08:15.637Z"),
-                        "status": "deviation"
-                    },
-                    {
-                        "date": new Date("2022-07-08T13:08:15.641Z"),
-                        "status": "deviation"
-                    },
-                    {
-                        "date": new Date("2022-07-08T13:08:15.641Z"),
-                        "status": "deviation"
-                    },
-                    {
-                        "date": new Date("2022-07-08T13:08:15.646Z"),
-                        "status": "deviation"
-                    },
-                    {
-                        "date": new Date("2022-07-08T13:08:15.677Z"),
-                        "status": "deviation"
-                    },
-                    {
-                        "date": new Date("2022-07-08T13:08:15.749Z"),
-                        "status": "deviation"
-                    },
-                    {
-                        "date": new Date("2022-07-25T12:14:13.024Z"),
-                        "status": "deviation"
-                    },
-                    {
-                        "date": new Date("2022-07-25T12:14:13.031Z"),
-                        "status": "deviation"
-                    }
-                ],
-                "group_name": "Default",
-                "user_id": "d279bb63-cce0-4feb-9fbd-610b954f4070"
-            },
-            {
-                "category": null,
-                "name": "OWA Access",
-                "baseline_id": "0e2d3852-f7cd-41d9-81b0-943a00f6979b",
-                "timelineElements": [
-                    {
-                        "date": new Date("2022-07-19T18:43:54.043Z"),
-                        "status": "deviation"
-                    }
-                ]
-            },
-            {
-                baseline_id: "541fa8a8-1a7b-4380-8e97-9388f997640d",
-                category: null,
-                name: "POP3 Access",
-                timelineElements: [
-                    {
-                        date: new Date("2022-07-15T12:45:24.978Z"),
-                        status: "deviation"
-                    },
-                    {
-                        date: new Date("2022-07-19T18:43:55.507Z"),
-                        status: "deviation"
-                    },
-                    {
-                        date: new Date("2022-07-19T18:43:55.846Z"),
-                        status: "deviation"
-                    },
-                    {
-                        date: new Date("2022-07-19T18:43:56.186Z"),
-                        status: "deviation"
-                    },
-                    {
-                        date: new Date("2022-07-19T18:43:56.466Z"),
-                        status: "deviation"
-                    },
-                    {
-                        date: new Date("2022-07-19T18:43:56.736Z"),
-                        status: "deviation"
-                    },
-                    {
-                        date: new Date("2022-07-19T18:43:57.036Z"),
-                        status: "deviation"
-                    },
-                    {
-                        date: new Date("2022-07-19T18:43:57.287Z"),
-                        status: "deviation"
-                    },
-                    {
-                        date: new Date("2022-07-19T18:43:57.618Z"),
-                        status: "deviation"
-                    },
-                    {
-                        date: new Date("2022-07-19T18:43:57.930Z"),
-                        status: "deviation"
-                    }
-                ]
-            },
-            {
-                baseline_id: "910214bb-d80b-4b3e-b849-7ea897e8ef33",
-                category: null,
-                name: "IMAP Access",
-                timelineElements: [
-                    {
-                        date: new Date("2022-07-15T12:45:23.920Z"),
-                        status: "deviation"
-                    },
-                    {
-                        date: new Date("2022-07-15T12:45:24.637Z"),
-                        status: "deviation"
-                    },
-                    {
-                        date: new Date("2022-07-19T18:43:54.628Z"),
-                        status: "deviation"
-                    },
-                    {
-                        date: new Date("2022-07-19T18:43:55.147Z"),
-                        status: "deviation"
-                    }
-                ]
-            },
+            // {
+            //     "category": null,
+            //     "name": "OWA Access",
+            //     "baseline_id": "910214bb-d80b-4b3e-b849-7ea897e8ef33",
+            //     "timelineElements": [
+            //         {
+            //             "date": new Date("2022-07-08T13:08:14.435Z"),
+            //             "status": "deviation"
+            //         },
+            //         {
+            //             "date": new Date("2022-07-08T13:08:15.462Z"),
+            //             "status": "deviation"
+            //         },
+            //         {
+            //             "date": new Date("2022-07-08T13:08:15.579Z"),
+            //             "status": "deviation"
+            //         },
+            //         {
+            //             "date": new Date("2022-07-08T13:08:15.581Z"),
+            //             "status": "deviation"
+            //         },
+            //         {
+            //             "date": new Date("2022-07-08T13:08:15.611Z"),
+            //             "status": "deviation"
+            //         },
+            //         {
+            //             "date": new Date("2022-07-08T13:08:15.617Z"),
+            //             "status": "deviation"
+            //         },
+            //         {
+            //             "date": new Date("2022-07-08T13:08:15.619Z"),
+            //             "status": "deviation"
+            //         },
+            //         {
+            //             "date": new Date("2022-07-08T13:08:15.628Z"),
+            //             "status": "deviation"
+            //         },
+            //         {
+            //             "date": new Date("2022-07-08T13:08:15.631Z"),
+            //             "status": "deviation"
+            //         },
+            //         {
+            //             "date": new Date("2022-07-08T13:08:15.637Z"),
+            //             "status": "deviation"
+            //         },
+            //         {
+            //             "date": new Date("2022-07-08T13:08:15.641Z"),
+            //             "status": "deviation"
+            //         },
+            //         {
+            //             "date": new Date("2022-07-08T13:08:15.641Z"),
+            //             "status": "deviation"
+            //         },
+            //         {
+            //             "date": new Date("2022-07-08T13:08:15.646Z"),
+            //             "status": "deviation"
+            //         },
+            //         {
+            //             "date": new Date("2022-07-08T13:08:15.677Z"),
+            //             "status": "deviation"
+            //         },
+            //         {
+            //             "date": new Date("2022-07-08T13:08:15.749Z"),
+            //             "status": "deviation"
+            //         },
+            //         {
+            //             "date": new Date("2022-07-25T12:14:13.024Z"),
+            //             "status": "deviation"
+            //         },
+            //         {
+            //             "date": new Date("2022-07-25T12:14:13.031Z"),
+            //             "status": "deviation"
+            //         }
+            //     ],
+            //     "group_name": "Default",
+            //     "user_id": "d279bb63-cce0-4feb-9fbd-610b954f4070"
+            // },
+            // {
+            //     "category": null,
+            //     "name": "OWA Access",
+            //     "baseline_id": "0e2d3852-f7cd-41d9-81b0-943a00f6979b",
+            //     "timelineElements": [
+            //         {
+            //             "date": new Date("2022-07-19T18:43:54.043Z"),
+            //             "status": "deviation"
+            //         }
+            //     ]
+            // },
+            // {
+            //     baseline_id: "541fa8a8-1a7b-4380-8e97-9388f997640d",
+            //     category: null,
+            //     name: "POP3 Access",
+            //     timelineElements: [
+            //         {
+            //             date: new Date("2022-07-15T12:45:24.978Z"),
+            //             status: "deviation"
+            //         },
+            //         {
+            //             date: new Date("2022-07-19T18:43:55.507Z"),
+            //             status: "deviation"
+            //         },
+            //         {
+            //             date: new Date("2022-07-19T18:43:55.846Z"),
+            //             status: "deviation"
+            //         },
+            //         {
+            //             date: new Date("2022-07-19T18:43:56.186Z"),
+            //             status: "deviation"
+            //         },
+            //         {
+            //             date: new Date("2022-07-19T18:43:56.466Z"),
+            //             status: "deviation"
+            //         },
+            //         {
+            //             date: new Date("2022-07-19T18:43:56.736Z"),
+            //             status: "deviation"
+            //         },
+            //         {
+            //             date: new Date("2022-07-19T18:43:57.036Z"),
+            //             status: "deviation"
+            //         },
+            //         {
+            //             date: new Date("2022-07-19T18:43:57.287Z"),
+            //             status: "deviation"
+            //         },
+            //         {
+            //             date: new Date("2022-07-19T18:43:57.618Z"),
+            //             status: "deviation"
+            //         },
+            //         {
+            //             date: new Date("2022-07-19T18:43:57.930Z"),
+            //             status: "deviation"
+            //         }
+            //     ]
+            // },
+            // {
+            //     baseline_id: "910214bb-d80b-4b3e-b849-7ea897e8ef33",
+            //     category: null,
+            //     name: "IMAP Access",
+            //     timelineElements: [
+            //         {
+            //             date: new Date("2022-07-15T12:45:23.920Z"),
+            //             status: "deviation"
+            //         },
+            //         {
+            //             date: new Date("2022-07-15T12:45:24.637Z"),
+            //             status: "deviation"
+            //         },
+            //         {
+            //             date: new Date("2022-07-19T18:43:54.628Z"),
+            //             status: "deviation"
+            //         },
+            //         {
+            //             date: new Date("2022-07-19T18:43:55.147Z"),
+            //             status: "deviation"
+            //         }
+            //     ]
+            // },
             {
                 baseline_id: "810214bb-d80b-4b3e-b849-7ea897e8ef33",
                 category: "Authentication & Authorisation",
@@ -421,29 +421,29 @@ export class AppComponent implements OnInit {
                     }
                 ]
             },
-            {
-                baseline_id: "273c5eca-8e27-4dbf-99a9-40978dd26dbe",
-                category: null,
-                name: "SMTP Client Authentication",
-                timelineElements: [
-                    {
-                        date: new Date("2022-07-15T12:45:25.296Z"),
-                        status: "deviation"
-                    },
-                    {
-                        date: new Date("2022-07-15T12:45:25.600Z"),
-                        status: "deviation"
-                    },
-                    {
-                        date: new Date("2022-07-19T18:43:58.232Z"),
-                        status: "deviation"
-                    },
-                    {
-                        date: new Date("2022-07-19T18:43:58.610Z"),
-                        status: "deviation"
-                    }
-                ]
-            },
+            // {
+            //     baseline_id: "273c5eca-8e27-4dbf-99a9-40978dd26dbe",
+            //     category: null,
+            //     name: "SMTP Client Authentication",
+            //     timelineElements: [
+            //         {
+            //             date: new Date("2022-07-15T12:45:25.296Z"),
+            //             status: "deviation"
+            //         },
+            //         {
+            //             date: new Date("2022-07-15T12:45:25.600Z"),
+            //             status: "deviation"
+            //         },
+            //         {
+            //             date: new Date("2022-07-19T18:43:58.232Z"),
+            //             status: "deviation"
+            //         },
+            //         {
+            //             date: new Date("2022-07-19T18:43:58.610Z"),
+            //             status: "deviation"
+            //         }
+            //     ]
+            // },
             {
                 baseline_id: "373c5eca-8e27-4dbf-99a9-40978dd26dbe",
                 category: "Mobile Access",
@@ -529,8 +529,7 @@ export class AppComponent implements OnInit {
     ngOnInit(): void {
         this.reportService.createHeader(this.header);
         this.reportService.createTopAlerts(this.topAlerts);
-        this.reportService.countBaselines(33);
-        this.reportService.createCurrentBaselineDeviations(this.currentBaselines);
+        this.reportService.allBaselinePostureCount({ has_deviated: 7, not_deviated: 23 });
         this.reportService.createTopBaselineDeviations(this.topBaselines);
         this.reportService.createBaselineDeviations(this.baselines);
         this.reportService.allCategories(this.categories);

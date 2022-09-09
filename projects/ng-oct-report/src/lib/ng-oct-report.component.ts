@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { DateTime } from 'luxon';
 import { BehaviorSubject, filter, distinct, take } from 'rxjs';
-import { BaselineDeviation, Category, Header, TopAlert, TopBaselineDeviation, TopUser } from './ng-oct-report.interface';
+import { BaselineDeviation, Category, CurrentPostureCount, Header, TopAlert, TopBaselineDeviation, TopUser } from './ng-oct-report.interface';
 import { NgOctReportService } from './ng-oct-report.service';
 import { groupBy } from './utils';
 
@@ -17,10 +17,9 @@ function dateFormat(a: string) {
 export class NgOctReportComponent implements OnInit {
 
     header$ = new BehaviorSubject<Header | null>(null);
+    allBaselinesPostureCount$ = new BehaviorSubject<CurrentPostureCount| null>(null);
     alerts$ = new BehaviorSubject<TopAlert[] | null>(null);
     alertsByUsers$ = new BehaviorSubject<TopUser[] | null>(null);
-    baselinesCount$ = new BehaviorSubject<number | null>(null);
-    currentBaselines$ = new BehaviorSubject<TopBaselineDeviation[] | null>(null);
     topBaselines$ = new BehaviorSubject<TopBaselineDeviation[] | null>(null);
     baselines$ = new BehaviorSubject<BaselineDeviation[] | null>(null);
     categories$ = new BehaviorSubject<Category[]>([]);
@@ -33,6 +32,7 @@ export class NgOctReportComponent implements OnInit {
     ngOnInit(): void {
         this.loadHeader();
         this.loadCategories();
+        this.loadAllBaselinePostureCount();
         this.loadTopAlerts();
         this.loadTopBaselines();
         this.loadBaselines();
@@ -89,16 +89,17 @@ export class NgOctReportComponent implements OnInit {
 
     }
 
-    loadTopBaselines() {
-        this.reportService.number_of_baselines$
-            .pipe(
-                distinct()
-            )
-            .subscribe(count => {
-                console.log(count);
-                this.baselinesCount$.next(count);
-            })
+    loadAllBaselinePostureCount() {
+        this.reportService.allBaselines_posture_count$
+        .pipe(
+            distinct()
+        )
+        .subscribe(counts => {
+            this.allBaselinesPostureCount$.next(counts);
+        })
+    }
 
+    loadTopBaselines() {
         this.reportService.topBaselines$
             .pipe(
                 distinct()
@@ -108,17 +109,6 @@ export class NgOctReportComponent implements OnInit {
                     baselines = baselines.map(b => ({ ...b, timestamp: new Date(b.timestamp).toString() }))
                 }
                 this.topBaselines$.next(baselines)
-            })
-
-        this.reportService.currentBaselines$
-            .pipe(
-                distinct()
-            )
-            .subscribe(baselines => {
-                if (!!baselines) {
-                    baselines = baselines.map(b => ({ ...b, timestamp: new Date(b.timestamp).toString() }))
-                }
-                this.currentBaselines$.next(baselines)
             })
     }
 
@@ -143,7 +133,7 @@ export class NgOctReportComponent implements OnInit {
                 this.categories$.next(categories!);
                 const categories_set = [... new Set(categories?.map(c => c.category))];
                 // categories_set.push('Group Baselines');
-                this.tenant_catagories = categories_set;
+                this.tenant_catagories = categories_set.filter(c => !!c);
             })
     }
 
@@ -171,6 +161,8 @@ export class NgOctReportComponent implements OnInit {
                 return baselinesByCategory
             } else {
                 let groupByBaselineName = formatGroupBaselinesObj(found_baselines);
+                console.log('groupByBaselineName', groupByBaselineName);
+                if (Object.keys(groupByBaselineName).length === 0) return null;
                 return groupByBaselineName
             }
 
