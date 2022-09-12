@@ -1,9 +1,9 @@
 <div class="box">
+    <b>{{category}}</b>
+
     <ng-container *ngIf="!hasDeviation(baselines);else showDetail">
         <mat-icon class="safe">done</mat-icon>
     </ng-container>
-
-    <b>{{category}}</b>
 
     <ng-template #showDetail>
         <mat-list class="baseline-container">
