@@ -6,7 +6,7 @@ import { NgOctReportService } from './ng-oct-report.service';
 import { groupBy } from './utils';
 
 function dateFormat(a: string) {
-    return DateTime.fromISO(a).toFormat('ccc, LLL dd yyyy');
+    return DateTime.fromISO(a, {zone: 'utc'}).toFormat('ccc, LLL dd yyyy');
 }
 
 @Component({
