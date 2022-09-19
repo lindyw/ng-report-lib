@@ -529,7 +529,7 @@ export class AppComponent implements OnInit {
     ngOnInit(): void {
         this.reportService.createHeader(this.header);
         this.reportService.createTopAlerts(this.topAlerts);
-        this.reportService.allBaselinePostureCount({ has_deviated: 7, not_deviated: 23 });
+        this.reportService.allBaselinePostureCount({ tenant_count: { has_deviated: 7, not_deviated: 23 }, group_count: { has_deviated: 5, not_deviated: 11 } });
         this.reportService.createTopBaselineDeviations(this.topBaselines);
         this.reportService.createBaselineDeviations(this.baselines);
         this.reportService.allCategories(this.categories);

@@ -9,7 +9,7 @@ export class NgOctReportService {
 
     public header$ = new BehaviorSubject<Header | null>(null);
     public topAlerts$ = new BehaviorSubject<TopAlert[] | null>(null);
-    public allBaselines_posture_count$ = new BehaviorSubject<CurrentPostureCount | null>(null);
+    public allBaselines_posture_count$ = new BehaviorSubject<{ tenant_count: CurrentPostureCount, group_count: CurrentPostureCount } | null>(null);
     public topBaselines$ = new BehaviorSubject<TopBaselineDeviation[] | null>(null);
     // Security Control
     public Baselines$ = new BehaviorSubject<BaselineDeviation[] | null>(null);
@@ -22,9 +22,9 @@ export class NgOctReportService {
     public createHeader(header: Header): void {
         this.header$.next(header);
     }
-    
+
     // All time
-    public allBaselinePostureCount(counts: CurrentPostureCount) {
+    public allBaselinePostureCount(counts: { tenant_count: CurrentPostureCount, group_count: CurrentPostureCount }) {
         this.allBaselines_posture_count$.next(counts);
     }
     // In this poeriod

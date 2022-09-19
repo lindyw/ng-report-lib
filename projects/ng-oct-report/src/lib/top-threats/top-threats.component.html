@@ -5,7 +5,7 @@
 </lib-box-list>
 
 <lib-box-list *ngIf="baselines !== null && all_posture_count !== null" [title]="'Baselines'"
-    [arrayList]="baselines" [has_deviated]="all_posture_count.has_deviated" [not_deviated]="all_posture_count.not_deviated"
+    [arrayList]="baselines" [tenant_posture_counts]="all_posture_count.tenant_count" [group_posture_counts]="all_posture_count.group_count"
     [keys]="['timestamp', 'category','name']" [type]="'baseline deviation'">
 </lib-box-list>
 

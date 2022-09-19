@@ -17,7 +17,7 @@ function dateFormat(a: string) {
 export class NgOctReportComponent implements OnInit {
 
     header$ = new BehaviorSubject<Header | null>(null);
-    allBaselinesPostureCount$ = new BehaviorSubject<CurrentPostureCount| null>(null);
+    allBaselinesPostureCount$ = new BehaviorSubject<{ tenant_count: CurrentPostureCount, group_count: CurrentPostureCount }| null>(null);
     alerts$ = new BehaviorSubject<TopAlert[] | null>(null);
     alertsByUsers$ = new BehaviorSubject<TopUser[] | null>(null);
     topBaselines$ = new BehaviorSubject<TopBaselineDeviation[] | null>(null);

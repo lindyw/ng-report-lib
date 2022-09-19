@@ -1,4 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
+import { CurrentPostureCount } from '../../ng-oct-report.interface';
 
 @Component({
     selector: 'lib-box-list',
@@ -10,8 +11,8 @@ export class BoxListComponent implements OnInit {
     @Input() title: string = '';
     @Input() arrayList: Array<any> = [];
     @Input() currentList: Array<any> | null = [];
-    @Input() has_deviated: number | null = 0;
-    @Input() not_deviated: number | null = 0;
+    @Input() tenant_posture_counts: CurrentPostureCount | null = { has_deviated: 0, not_deviated: 0 };
+    @Input() group_posture_counts: CurrentPostureCount | null = { has_deviated: 0, not_deviated: 0 };
     @Input() keys: string[] = ['timestamp', 'actor', 'description'];
     @Input() type: string = 'events'; // event, baseline deviation, rule
 

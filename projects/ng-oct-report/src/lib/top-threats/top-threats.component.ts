@@ -12,7 +12,7 @@ export class TopThreatsComponent implements OnInit {
   @Input() alerts: TopAlert[] | null = null;
   @Input() alertsByUsers: TopUser[] | null = null;
   @Input() baselines: TopBaselineDeviation[] | null = null;
-  @Input() all_posture_count: CurrentPostureCount | null = null;
+  @Input() all_posture_count: { tenant_count: CurrentPostureCount, group_count: CurrentPostureCount } | null = null;
 
   constructor() { }
 

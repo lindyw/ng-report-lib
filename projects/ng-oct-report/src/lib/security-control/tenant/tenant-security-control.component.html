@@ -1,10 +1,10 @@
-<div class="box">
+<div class="box pagebreak">
     <!-- <mat-icon class="info" svgIcon="info-square"></mat-icon> -->
     <b>{{category}}</b>
 
-    <mat-list class="baseline-container">
+    <mat-list class="baseline-container pagebreak">
         <ng-container *ngFor="let baseline of baselines">
-            <div *ngIf="hasDeviation(baseline); else safe" class="baseline-content">
+            <div *ngIf="hasDeviation(baseline); else safe" class="baseline-content pagebreak">
                 <span class="icon">
                     <mat-icon
                         [ngClass]="baseline.timelineElements[baseline.timelineElements.length-1].status === 'deviation'? 'critical' : 'warning'"
