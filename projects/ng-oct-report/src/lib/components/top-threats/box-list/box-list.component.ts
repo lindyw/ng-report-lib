@@ -1,5 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { CurrentPostureCount } from '../../ng-oct-report.interface';
+import { CurrentPostureCount } from '../../../interfaces/ng-oct-report.interface';
 
 @Component({
     selector: 'lib-box-list',

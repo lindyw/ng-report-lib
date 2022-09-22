@@ -1,5 +1,5 @@
-import { Component, Input, OnInit } from '@angular/core';
-import { BaselineDeviation } from '../../ng-oct-report.interface';
+import { Component, Input } from '@angular/core';
+import { BaselineDeviation } from '../../../interfaces/ng-oct-report.interface';
 
 @Component({
     selector: 'lib-tenant-security-control',

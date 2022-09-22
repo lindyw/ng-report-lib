@@ -1,3 +1,19 @@
+// incoming raw data interface
+export interface CombinedDeviation {
+    id: string,
+    tenant_id: string,
+    category: string | null,
+    type: 'group' | 'tenant' | null,
+    baseline_id: string,
+    name: string,
+    group_name: string | null,
+    user_id: string | null,
+    deviation_detect_time: string,
+    deviation_resolve_time: string | null,
+    baseline_created: string,
+}
+
+// formatted data interface
 export interface Header {
     date: {
         start: string
@@ -38,6 +54,7 @@ export interface TopUser {
 
 export interface BaselineDeviation {
     category: string | null
+    type: 'group' | 'tenant' | null
     name: string
     baseline_id?: string
     group_name?: string,
@@ -46,8 +63,17 @@ export interface BaselineDeviation {
     timelineElements: TimelineElement[]
 }
 
+export interface GroupBaselineDeviation {
+    [b_name: string]: {
+        [g_name: string]: {
+            [user_name: string]: BaselineDeviation[];
+        };
+    };
+}
+
 export interface Category {
     category: string
+    type: 'group' | 'tenant'
     name: string
 }
 

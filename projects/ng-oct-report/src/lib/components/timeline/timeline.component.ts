@@ -1,5 +1,5 @@
 import { AfterViewInit, ChangeDetectorRef, Component, ElementRef, Input, OnInit, QueryList, ViewChild, ViewChildren } from '@angular/core';
-import { TimelineElement } from '../ng-oct-report.interface';
+import { TimelineElement } from '../../interfaces/ng-oct-report.interface';
 
 function scaleBetween(unscaledNum: number, minAllowed: number, maxAllowed: number, min: number, max: number) {
     return (maxAllowed - minAllowed) * (unscaledNum - min) / (max - min) + minAllowed;

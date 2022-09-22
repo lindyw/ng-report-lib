@@ -1,5 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { CurrentPostureCount, TopAlert, TopBaselineDeviation, TopUser } from '../ng-oct-report.interface';
+import { CurrentPostureCount, TopAlert, TopBaselineDeviation, TopUser } from '../../interfaces/ng-oct-report.interface';
 
 @Component({
   selector: 'lib-top-threats',
