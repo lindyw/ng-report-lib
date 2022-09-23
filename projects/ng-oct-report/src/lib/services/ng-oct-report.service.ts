@@ -79,8 +79,20 @@ export class NgOctReportService {
     * @output topBaselines$ - baselines that are still deviating in the end of the selected period
     * @output baselines$ - (Security Control) an array of baselines, contains a timeline of changes (created, deviation, remediation) on each baseline
     * @param {CombinedDeviation[]} baseline_deviations - the array of combined baseline deviations within the selected period
+    * @todo need to add category for tenant baseline : External (Guest) Users Resharing, we hardcode its category and type here for now
     */
     public getBaselineDeviations(baseline_deviations: CombinedDeviation[]) {
+        baseline_deviations = baseline_deviations.map(bd => {
+            if (bd.name === "External (Guest) Users Resharing") {
+                return {
+                    ...bd,
+                    category: 'Sharing',
+                    type: 'tenant'
+                }
+            } else {
+                return bd;
+            }
+        })
         let top_baselines = filterTopBaselines(baseline_deviations);
         this.topBaselines$.next(top_baselines);
         this.graphUsers$

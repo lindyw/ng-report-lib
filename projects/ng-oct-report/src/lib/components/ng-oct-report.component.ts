@@ -138,9 +138,6 @@ export class NgOctReportComponent implements OnInit {
                 take(1)
             )
             .subscribe(baselines => {
-                if (!!baselines) {
-                    baselines = baselines.map(b => ({ ...b, timestamp: new Date(b.timestamp).toString() }))
-                }
                 this.topBaselines$.next(baselines);
                 this.loaded$['top_baselines'].next(true);
             })
