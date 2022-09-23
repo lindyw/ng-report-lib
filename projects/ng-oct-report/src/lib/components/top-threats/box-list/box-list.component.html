@@ -6,7 +6,7 @@
   </div>
   <ng-container *ngIf="arrayList.length > 0; else empty">
     <mat-list>
-      <div *ngFor="let item of groupedArrayListBySeverity | keyvalue">
+      <div style="width:90%" *ngFor="let item of groupedArrayListBySeverity | keyvalue">
         <div class="summary" *ngIf="type !== 'baseline deviation'; else baseline">
           <span class="icon" [ngSwitch]="item.key">
             <mat-icon *ngSwitchCase="'critical'" class="critical" mat-list-icon>error</mat-icon>

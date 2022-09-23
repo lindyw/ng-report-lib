@@ -13,7 +13,6 @@ export function groupBy(arr: Array<any>, key: string) {
     }, {});
 }
 
-
 export function filterTopBaselines(baselines: any[]): TopBaselineDeviation[] {
     return baselines
         .filter(b => !!b['deviation_resolve_time'] ? b['deviation_resolve_time'] < b['deviation_detect_time'] : true)
@@ -27,13 +26,66 @@ export function filterTopBaselines(baselines: any[]): TopBaselineDeviation[] {
         }));
 }
 
-function getFoundKeyIndex(hash: BaselineDeviation[], curr: CombinedDeviation) {
-    let foundKeyIndex = hash.findIndex((transformed_item: any) => transformed_item.baseline_id === curr.baseline_id);
-    if (!!curr.group_name && !!curr.user_id) {
-        foundKeyIndex = hash.findIndex((transformed_item: any) => transformed_item.baseline_id === curr.baseline_id &&
-            transformed_item.group_name === curr.group_name && transformed_item.user_id === curr.user_id);
+export function GroupCompliancePostureByDayInThisPeriod(baseline_deviations: CombinedDeviation[], start: string, end: string) {
+    let formatted: { [date: string]: { has_deviated: number, not_deviated: number } } = {};
+    const dateArray = getDates(start, end);
+    console.log('dateArray', dateArray);
+    for (var date of dateArray) {
+        const deviations_controls_of_the_date = getBaselineDeviationsCountOfTheDate(baseline_deviations, date);
+
+        console.log(`baseline_deviations of ${date}`, deviations_controls_of_the_date);
+
+        // TODO: get list of baselines with created timestamp
+        const compliant_controls_of_the_date = {};
+        const monitored_control_of_the_date = {};
+        // const baseline_remediations_of_the_date = baseline_deviations
+        //     .filter(bd =>
+        //         !!bd.deviation_resolve_time &&
+        //         bd.deviation_resolve_time?.split('T')[0] === date &&
+        //         bd.deviation_resolve_time > bd.deviation_detect_time)
+
+        formatted[date] = { has_deviated: deviations_controls_of_the_date.length, not_deviated: 0 };
+
+        // for (var bd of baseline_deviations) {
+        //     if (bd.deviation_detect_time.split('T')[0] === date) {
+        //         if (bd.deviation_resolve_time === null) {
+        //             formatted[date].has_deviated++;
+        //         }
+        //     }
+        //     if (!!bd.deviation_resolve_time && bd.deviation_resolve_time.split('T')[0] === date) {
+
+        //     }
+        // }
+
     }
-    return foundKeyIndex;
+    return formatted;
+}
+
+function getBaselineDeviationsCountOfTheDate(baseline_deviations: CombinedDeviation[], date: any) {
+    return baseline_deviations
+        .filter(bd => bd.deviation_detect_time.split('T')[0] === date &&
+            (bd.deviation_resolve_time === null || bd.deviation_resolve_time.split('T')[0] !== date)
+        )
+        .sort((a, b) => b.deviation_detect_time.localeCompare(a.deviation_detect_time))
+        .filter((b, i, arr) => arr.findIndex(el => el.name === b.name &&
+            el.category === b.category &&
+            el.type === 'tenant') === i);
+}
+
+function getDates(startDate: string, endDate: string) : string[] {
+    var dateArray = new Array();
+    var currentDate = startDate;
+    while (currentDate <= endDate) {
+        dateArray.push(currentDate);
+        currentDate = addDays(currentDate, 1);
+    }
+    return dateArray;
+}
+
+function addDays(currentDate: string, days: number) {
+    var date = new Date(currentDate.valueOf());
+    date.setDate(date.getDate() + days);
+    return date.toISOString().split('T')[0];
 }
 
 export function GroupBaselineDeviationWithTimelineElementsByBaseline(array: CombinedDeviation[], users: User[]) {
@@ -59,20 +111,27 @@ export function GroupBaselineDeviationWithTimelineElementsByBaseline(array: Comb
                     .sort((a: any, b: any) => a.date.toISOString().localeCompare(b.date.toISOString()))
             } else {
                 let transformed_item: BaselineDeviation = setTransformedItem(curr, foundKeyTimeElements, timelineElements, users);
-
                 transformed_array.push(transformed_item)
             }
             return transformed_array
         }, [])
 }
 
+function getFoundKeyIndex(hash: BaselineDeviation[], curr: CombinedDeviation) {
+    let foundKeyIndex = hash.findIndex((transformed_item: any) => transformed_item.baseline_id === curr.baseline_id);
+    if (!!curr.group_name && !!curr.user_id) {
+        foundKeyIndex = hash.findIndex((transformed_item: any) => transformed_item.baseline_id === curr.baseline_id &&
+            transformed_item.group_name === curr.group_name && transformed_item.user_id === curr.user_id);
+    }
+    return foundKeyIndex;
+}
 
 /**
  * @param  {number} foundKeyIndex the target index of the grouped transformed_array array
  * @param  {any} tansformed the grouped tansformed array
  * @param  {any} curr the current element in the original array
  */
- function getBaselineCreatedTimestamp(foundKeyIndex: number, transformed_array: BaselineDeviation[], curr: CombinedDeviation) {
+function getBaselineCreatedTimestamp(foundKeyIndex: number, transformed_array: BaselineDeviation[], curr: CombinedDeviation) {
     let created = undefined;
     if (foundKeyIndex === -1 || (foundKeyIndex !== -1 && !transformed_array[foundKeyIndex].timelineElements.find((el: TimelineElement) => el.status === 'created'))) {
         if (curr['baseline_created'] > curr['deviation_detect_time']) {

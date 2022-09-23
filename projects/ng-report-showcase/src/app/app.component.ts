@@ -17,7 +17,7 @@ export class AppComponent implements OnInit {
     private header = {
         date: {
             start: '2022-08-01',
-            end: '2022-08-16'
+            end: '2022-09-16'
         },
         tenant: 'Contoso'
     }

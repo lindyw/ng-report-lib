@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { User } from '@microsoft/microsoft-graph-types-beta';
 import { BehaviorSubject, filter, take } from 'rxjs';
 import { BaselineDeviation, Category, CombinedDeviation, CurrentPostureCount, Header, TopAlert, TopBaselineDeviation } from '../interfaces/ng-oct-report.interface';
-import { filterTopBaselines, GroupBaselineDeviationWithTimelineElementsByBaseline } from '../utils';
+import { filterTopBaselines, GroupBaselineDeviationWithTimelineElementsByBaseline, GroupCompliancePostureByDayInThisPeriod } from '../utils';
 
 @Injectable({
     providedIn: 'root'
@@ -102,6 +102,11 @@ export class NgOctReportService {
             ).subscribe((users) => {
                 let formatted_baseline_deviations = GroupBaselineDeviationWithTimelineElementsByBaseline(baseline_deviations, users as User[]);
                 this.Baselines$.next(formatted_baseline_deviations);
+                // TODO: tenant baseline posture variation per day in this period
+                // const header = this.header$.getValue()!;
+                // let tenant_baseline_posture_in_this_period = GroupCompliancePostureByDayInThisPeriod(baseline_deviations, header?.date.start, header?.date.end);
+                // console.log('tenant_baseline_posture_in_this_period',tenant_baseline_posture_in_this_period);
+                
             })
     }
 
