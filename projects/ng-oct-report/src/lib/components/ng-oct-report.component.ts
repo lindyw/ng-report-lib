@@ -65,8 +65,7 @@ export class NgOctReportComponent implements OnInit {
     loadHeader() {
         this.reportService.header$
             .pipe(
-                distinct(),
-                take(1)
+                distinct()
             )
             .subscribe(header => {
                 if (header != null) {
@@ -85,8 +84,7 @@ export class NgOctReportComponent implements OnInit {
     loadTopAlerts() {
         this.reportService.topAlerts$
             .pipe(
-                distinct(),
-                take(1)
+                distinct()
             )
             .subscribe(alerts => {
                 let alertsByUsers: any[] | null = [];
@@ -122,8 +120,7 @@ export class NgOctReportComponent implements OnInit {
     loadAllBaselinePostureCount() {
         this.reportService.allBaselines_posture_count$
             .pipe(
-                distinct(),
-                take(1)
+                distinct()
             )
             .subscribe(counts => {
                 this.allBaselinesPostureCount$.next(counts);
@@ -134,8 +131,7 @@ export class NgOctReportComponent implements OnInit {
     loadTopBaselines() {
         this.reportService.topBaselines$
             .pipe(
-                distinct(),
-                take(1)
+                distinct()
             )
             .subscribe(baselines => {
                 this.topBaselines$.next(baselines);
@@ -146,8 +142,7 @@ export class NgOctReportComponent implements OnInit {
     loadBaselines() {
         this.reportService.Baselines$
             .pipe(
-                distinct(),
-                take(1)
+                distinct()
             )
             .subscribe(baselines => {
                 this.baselines$.next(baselines);
@@ -164,8 +159,7 @@ export class NgOctReportComponent implements OnInit {
     loadCategories() {
         this.reportService.categories$
             .pipe(
-                distinct(),
-                take(1)
+                distinct()
             )
             .subscribe(categories => {
                 this.categories$.next(categories!);
