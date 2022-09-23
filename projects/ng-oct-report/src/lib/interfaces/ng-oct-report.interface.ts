@@ -28,7 +28,17 @@ export interface TopAlert {
     actor: string | null
     description: string
 }
-
+export interface Baseline {
+    id: string
+    spec_id: string
+    tenant_id: string
+    group_id?: string | null
+    user_id?: string | null
+    template_item_id?: string | null 
+    created: string
+    type: string
+    schema: any
+}
 export interface CurrentPostureCount {
     not_deviated: number | null
     has_deviated: number

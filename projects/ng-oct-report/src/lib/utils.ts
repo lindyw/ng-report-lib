@@ -1,4 +1,4 @@
-import { TopBaselineDeviation, TimelineElement, CombinedDeviation, BaselineDeviation } from "../public-api";
+import { TopBaselineDeviation, TimelineElement, CombinedDeviation, BaselineDeviation, Baseline } from "../public-api";
 import { User } from "@microsoft/microsoft-graph-types-beta";
 
 export function groupBy(arr: Array<any>, key: string) {
@@ -26,37 +26,24 @@ export function filterTopBaselines(baselines: any[]): TopBaselineDeviation[] {
         }));
 }
 
-export function GroupCompliancePostureByDayInThisPeriod(baseline_deviations: CombinedDeviation[], start: string, end: string) {
-    let formatted: { [date: string]: { has_deviated: number, not_deviated: number } } = {};
+export function GetPostureControlsInThisPeriod(baseline_deviations: CombinedDeviation[], baselines: Baseline[], start: string, end: string) {
+    let formatted: { [date: string]: { deviating: number, compliance: number, monitoring: number } } = {};
+
     const dateArray = getDates(start, end);
     console.log('dateArray', dateArray);
     for (var date of dateArray) {
-        const deviations_controls_of_the_date = getBaselineDeviationsCountOfTheDate(baseline_deviations, date);
+        const existing_baselines: Baseline[] = baselines.filter(b => b.type === 'tenant' && b.created.split('T')[0] <= date);
+        const deviations_controls_of_the_date: CombinedDeviation[] = getBaselineDeviationsCountOfTheDate(baseline_deviations, date);
+        const compliance_controls_of_the_date_count: number = getBaselineComplianceCountOfTheDate(deviations_controls_of_the_date, existing_baselines, date);
+        const monitored_control_of_the_date_count: number = existing_baselines.length;
 
         console.log(`baseline_deviations of ${date}`, deviations_controls_of_the_date);
 
-        // TODO: get list of baselines with created timestamp
-        const compliant_controls_of_the_date = {};
-        const monitored_control_of_the_date = {};
-        // const baseline_remediations_of_the_date = baseline_deviations
-        //     .filter(bd =>
-        //         !!bd.deviation_resolve_time &&
-        //         bd.deviation_resolve_time?.split('T')[0] === date &&
-        //         bd.deviation_resolve_time > bd.deviation_detect_time)
-
-        formatted[date] = { has_deviated: deviations_controls_of_the_date.length, not_deviated: 0 };
-
-        // for (var bd of baseline_deviations) {
-        //     if (bd.deviation_detect_time.split('T')[0] === date) {
-        //         if (bd.deviation_resolve_time === null) {
-        //             formatted[date].has_deviated++;
-        //         }
-        //     }
-        //     if (!!bd.deviation_resolve_time && bd.deviation_resolve_time.split('T')[0] === date) {
-
-        //     }
-        // }
-
+        formatted[date] = {
+            deviating: deviations_controls_of_the_date.length,
+            compliance: compliance_controls_of_the_date_count,
+            monitoring: monitored_control_of_the_date_count
+        };
     }
     return formatted;
 }
@@ -72,7 +59,23 @@ function getBaselineDeviationsCountOfTheDate(baseline_deviations: CombinedDeviat
             el.type === 'tenant') === i);
 }
 
-function getDates(startDate: string, endDate: string) : string[] {
+function getBaselineComplianceCountOfTheDate(deviations_controls_of_the_date: CombinedDeviation[], baselines: Baseline[], date: any) {
+    let compliance_count = 0;
+    const existing_baselines = baselines
+        .filter(b => b.type === 'tenant' && b.created.split('T')[0] <= date);
+
+    for (const existing_baseline of existing_baselines) {
+        const is_deviated = (deviations_controls_of_the_date.some(d => d.baseline_id === existing_baseline.id));
+        if (!is_deviated) {
+            compliance_count++;
+        }
+    }
+
+    return compliance_count;
+
+}
+
+function getDates(startDate: string, endDate: string): string[] {
     var dateArray = new Array();
     var currentDate = startDate;
     while (currentDate <= endDate) {

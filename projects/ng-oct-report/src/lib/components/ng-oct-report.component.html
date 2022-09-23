@@ -3,7 +3,7 @@
 
     <div class="section-wrapper">
         <div class="section pagebreak">
-            <lib-top-threats [title]="'Threats Summary'" [alerts]="alerts$ | async" [baselines]="topBaselines$ | async"
+            <lib-top-threats [title]="'Threats Summary'" [alerts]="alerts$ | async" [baselines]="topBaselineDeviations$ | async"
                 [all_posture_count]="allBaselinesPostureCount$ | async" >
             </lib-top-threats>
         </div>

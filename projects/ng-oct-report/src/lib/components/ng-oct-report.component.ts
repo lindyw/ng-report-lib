@@ -1,9 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { DateTime } from 'luxon';
-import { BehaviorSubject, filter, distinct, take, Subject, combineLatest, map } from 'rxjs';
+import { BehaviorSubject, filter, distinct, take, Subject, combineLatest, map, delay } from 'rxjs';
 import { NgOctReportService } from '../services/ng-oct-report.service';
 import { groupBy } from '../utils';
-import { BaselineDeviation, Category, CurrentPostureCount, GroupBaselineDeviation, Header, TopAlert, TopBaselineDeviation, TopUser } from '../interfaces/ng-oct-report.interface';
+import { Baseline, BaselineDeviation, Category, CurrentPostureCount, GroupBaselineDeviation, Header, TopAlert, TopBaselineDeviation, TopUser } from '../interfaces/ng-oct-report.interface';
+import { CategoryService } from '../services/category.service';
 
 function dateFormat(a: string) {
     return DateTime.fromISO(a, { zone: 'utc' }).toFormat('ccc, LLL dd yyyy');
@@ -20,17 +21,19 @@ export class NgOctReportComponent implements OnInit {
     allBaselinesPostureCount$ = new BehaviorSubject<{ tenant_count: CurrentPostureCount, group_count: CurrentPostureCount } | null>(null);
     alerts$ = new BehaviorSubject<TopAlert[] | null>(null);
     alertsByUsers$ = new BehaviorSubject<TopUser[] | null>(null);
-    topBaselines$ = new BehaviorSubject<TopBaselineDeviation[] | null>(null);
-    baselines$ = new BehaviorSubject<BaselineDeviation[] | null>(null);
+    baselines$ = new BehaviorSubject<Baseline[] | null>(null);
+    topBaselineDeviations$ = new BehaviorSubject<TopBaselineDeviation[] | null>(null);
+    baselineDeviations = new BehaviorSubject<BaselineDeviation[] | null>(null);
     categories$ = new BehaviorSubject<Category[]>([]);
 
     loaded$: { [key: string]: BehaviorSubject<any> } = {
         'header': new BehaviorSubject(false),
         'categories': new BehaviorSubject(false),
         'all_baselines_current_posture_count': new BehaviorSubject(false),
+        'baselines': new BehaviorSubject(false),
         'top_alerts': new BehaviorSubject(false),
-        'top_baselines': new BehaviorSubject(false),
-        'baselines': new BehaviorSubject(false)
+        'top_baseline_deviations': new BehaviorSubject(false),
+        'baseline_deviations': new BehaviorSubject(false)
     };
 
     public all_loaded$ = combineLatest([
@@ -38,10 +41,11 @@ export class NgOctReportComponent implements OnInit {
         this.loaded$['categories'],
         this.loaded$['all_baselines_current_posture_count'],
         this.loaded$['top_alerts'],
-        this.loaded$['top_baselines'],
-        this.loaded$['baselines']
+        this.loaded$['top_baseline_deviations'],
+        this.loaded$['baseline_deviations']
     ])
         .pipe(
+            delay(2000),
             map(all_loaded => all_loaded.every(loaded => loaded))
         )
 
@@ -51,15 +55,19 @@ export class NgOctReportComponent implements OnInit {
     baselines_by_tc: { [tenant_category: string]: BaselineDeviation[] } = {};
     baselines_by_gc: { [group_category: string]: GroupBaselineDeviation } = {};
 
-    constructor(private reportService: NgOctReportService) { }
+    constructor(
+        private reportService: NgOctReportService,
+        private categoryService: CategoryService
+        ) { }
 
     ngOnInit(): void {
         this.loadHeader();
         this.loadCategories();
         this.loadAllBaselinePostureCount();
         this.loadTopAlerts();
-        this.loadTopBaselines();
         this.loadBaselines();
+        this.loadTopBaselineDeviations();
+        this.loadBaselineDeviations();
     }
 
     loadHeader() {
@@ -79,6 +87,12 @@ export class NgOctReportComponent implements OnInit {
                 this.header$.next(header);
                 this.loaded$['header'].next(true);
             });
+    }
+
+    loadCategories() {
+        this.tenant_catagories = this.categoryService.tenant_categories;
+        this.group_categories = this.categoryService.group_categories;
+        this.loaded$['categories'].next(true);
     }
 
     loadTopAlerts() {
@@ -128,49 +142,59 @@ export class NgOctReportComponent implements OnInit {
             })
     }
 
-    loadTopBaselines() {
-        this.reportService.topBaselines$
-            .pipe(
-                distinct()
-            )
-            .subscribe(baselines => {
-                this.topBaselines$.next(baselines);
-                this.loaded$['top_baselines'].next(true);
-            })
-    }
-
     loadBaselines() {
-        this.reportService.Baselines$
+        this.reportService.baselines$
             .pipe(
                 distinct()
             )
             .subscribe(baselines => {
                 this.baselines$.next(baselines);
+            })
+    }
+
+    loadTopBaselineDeviations() {
+        this.reportService.top_baseline_deviations$
+            .pipe(
+                distinct()
+            )
+            .subscribe(top_baseline_deviations => {
+                this.topBaselineDeviations$.next(top_baseline_deviations);
+                this.loaded$['top_baseline_deviations'].next(true);
+            })
+    }
+
+    loadBaselineDeviations() {
+        this.reportService.baseline_deviations$
+            .pipe(
+                distinct()
+            )
+            .subscribe(baseline_deviations => {
+                this.baselineDeviations.next(baseline_deviations);
                 for (var tc of this.tenant_catagories) {
                     this.baselines_by_tc[tc] = this.groupBaselinesByCategory(tc, 'tenant');
                 }
                 for (var gc of this.group_categories) {
                     this.baselines_by_gc[gc] = this.groupBaselinesByCategory(gc, 'group');
                 }
-                this.loaded$['baselines'].next(true);
+                this.loaded$['baseline_deviations'].next(true);
             })
     }
 
-    loadCategories() {
-        this.reportService.categories$
-            .pipe(
-                distinct()
-            )
-            .subscribe(categories => {
-                this.categories$.next(categories!);
-                this.tenant_catagories = [...new Set(categories?.filter(c => c.type === 'tenant').map(item => item['category']))];
-                this.group_categories = [...new Set(categories?.filter(c => c.type === 'group').map(item => item['category']))];
-                this.loaded$['categories'].next(true);
-            })
-    }
+    // loadCategories() {
+    //     this.reportService.categories$
+    //         .pipe(
+    //             distinct()
+    //         )
+    //         .subscribe(categories => {
+    //             this.categories$.next(categories!);
+    //             this.tenant_catagories = [...new Set(categories?.filter(c => c.type === 'tenant').map(item => item['category']))];
+    //             this.group_categories = [...new Set(categories?.filter(c => c.type === 'group').map(item => item['category']))];
+    //             this.loaded$['categories'].next(true);
+    //         })
+    // }
 
     public groupBaselinesByCategory(category: string, type: 'group' | 'tenant'): any {
-        let baselines = this.baselines$.getValue();
+        let baselines = this.baselineDeviations.getValue();
         if (!baselines) {
             return [];
         }
