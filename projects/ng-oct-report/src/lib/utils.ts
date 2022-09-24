@@ -30,14 +30,11 @@ export function GetPostureControlsInThisPeriod(baseline_deviations: CombinedDevi
     let formatted: { [date: string]: { deviating: number, compliant: number, monitored: number } } = {};
 
     const dateArray = getDates(start, end);
-    console.log('dateArray', dateArray);
     for (var date of dateArray) {
         const existing_baselines: Baseline[] = baselines.filter(b => b.type === type && b.created.split('T')[0] <= date);
         const deviations_controls_of_the_date: CombinedDeviation[] = getBaselineDeviationsCountOfTheDate(baseline_deviations, type, date);
         const compliance_controls_of_the_date_count: number = getBaselineComplianceCountOfTheDate(deviations_controls_of_the_date, existing_baselines, type, date);
         const monitored_control_of_the_date_count: number = existing_baselines.length;
-
-        console.log(`baseline_deviations of ${date}`, deviations_controls_of_the_date);
 
         formatted[date] = {
             deviating: deviations_controls_of_the_date.length,
