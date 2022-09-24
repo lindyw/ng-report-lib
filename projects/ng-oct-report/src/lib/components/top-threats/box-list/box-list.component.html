@@ -44,7 +44,7 @@
   <ng-container *ngIf="type === 'baseline deviation'">
     <mat-list>
       <div class="flex-col">
-        <h4 style="margin-block: 0">Current Compliance Posture (Today)</h4>
+        <h4 style="margin-block: 0">Current Posture Summary (Today)</h4>
         <div class="flex-row">
           <div class="row-item">
             <div class="row-item">
@@ -84,7 +84,7 @@
       </div>
     </mat-list>
     <div class="summary">
-      <h4 style="margin-block-end: 0.5rem">In this period <span style="color: red"> *</span></h4>
+      <h4 style="margin-block-end: 0.5rem">Posture Summary (In this period) <span style="color: red"> *</span></h4>
       <div *ngIf="tenant_baselines_posture_controls_in_this_period !== null; else empty">
         <lib-posture-line-chart [postureData]="tenant_baselines_posture_controls_in_this_period"></lib-posture-line-chart>
         <!-- <div style="width: 90%" *ngFor="let item of groupedArrayListBySeverity | keyvalue">

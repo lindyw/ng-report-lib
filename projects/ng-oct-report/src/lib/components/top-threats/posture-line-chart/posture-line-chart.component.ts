@@ -47,14 +47,20 @@ export class PostureLineChartComponent implements OnInit {
                         backgroundColor: 'limegreen'
                     },
                     {
-                        label: "monitored Controls",
+                        label: "Monitored Controls",
                         data: this.monitored_controls,
                         backgroundColor: 'blue'
                     }
                 ]
             },
             options: {
-                aspectRatio: 2.5
+                aspectRatio: 2.5,
+                plugins: {
+                    title: {
+                        display: true,
+                        text: 'Tenant Baselines Posture Summary Chart'
+                    }
+                }
             }
 
         });
