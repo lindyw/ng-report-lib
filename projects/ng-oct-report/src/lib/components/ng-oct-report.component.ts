@@ -22,6 +22,7 @@ export class NgOctReportComponent implements OnInit {
     alerts$ = new BehaviorSubject<TopAlert[] | null>(null);
     alertsByUsers$ = new BehaviorSubject<TopUser[] | null>(null);
     tenant_baselines_posture_controls_in_this_period$ = new BehaviorSubject<BaselinePostureCountsByDate | null>(null);
+    group_baselines_posture_controls_in_this_period$ = new BehaviorSubject<BaselinePostureCountsByDate | null>(null);
     topBaselineDeviations$ = new BehaviorSubject<TopBaselineDeviation[] | null>(null);
     baselineDeviations = new BehaviorSubject<BaselineDeviation[] | null>(null);
     categories$ = new BehaviorSubject<Category[]>([]);
@@ -31,6 +32,7 @@ export class NgOctReportComponent implements OnInit {
         'categories': new BehaviorSubject(false),
         'all_baselines_current_posture_count': new BehaviorSubject(false),
         'tenant_baselines_posture_controls_in_this_period': new BehaviorSubject(false),
+        'group_baselines_posture_controls_in_this_period': new BehaviorSubject(false),
         'top_alerts': new BehaviorSubject(false),
         'top_baseline_deviations': new BehaviorSubject(false),
         'baseline_deviations': new BehaviorSubject(false)
@@ -40,6 +42,7 @@ export class NgOctReportComponent implements OnInit {
         this.loaded$['header'],
         this.loaded$['categories'],
         this.loaded$['tenant_baselines_posture_controls_in_this_period'],
+        this.loaded$['group_baselines_posture_controls_in_this_period'],
         this.loaded$['all_baselines_current_posture_count'],
         this.loaded$['top_alerts'],
         this.loaded$['top_baseline_deviations'],
@@ -59,14 +62,14 @@ export class NgOctReportComponent implements OnInit {
     constructor(
         private reportService: NgOctReportService,
         private categoryService: CategoryService
-        ) { }
+    ) { }
 
     ngOnInit(): void {
         this.loadHeader();
         this.loadCategories();
         this.loadAllBaselinePostureCount();
         this.loadTopAlerts();
-        this.loadTenantPostureControlsInThisPeriod();
+        this.loadBaselinesPostureControlsInThisPeriod();
         this.loadTopBaselineDeviations();
         this.loadBaselineDeviations();
     }
@@ -143,7 +146,7 @@ export class NgOctReportComponent implements OnInit {
             })
     }
 
-    loadTenantPostureControlsInThisPeriod() {
+    loadBaselinesPostureControlsInThisPeriod() {
         this.reportService.tenant_baselines_posture_controls_in_this_period$
             .pipe(
                 distinct()
@@ -151,6 +154,14 @@ export class NgOctReportComponent implements OnInit {
             .subscribe(posture_controls_count => {
                 this.tenant_baselines_posture_controls_in_this_period$.next(posture_controls_count);
                 this.loaded$['tenant_baselines_posture_controls_in_this_period'].next(true)
+            })
+        this.reportService.group_baselines_posture_controls_in_this_period$
+            .pipe(
+                distinct()
+            )
+            .subscribe(posture_controls_count => {
+                this.group_baselines_posture_controls_in_this_period$.next(posture_controls_count);
+                this.loaded$['group_baselines_posture_controls_in_this_period'].next(true)
             })
     }
 

@@ -17,7 +17,8 @@ export class BoxListComponent implements OnInit {
     @Input() type: string = 'events'; // event, baseline deviation, rule
 
     @Input() tenant_baselines_posture_controls_in_this_period: BaselinePostureCountsByDate | null  = {};
-
+    @Input() group_baselines_posture_controls_in_this_period: BaselinePostureCountsByDate | null  = {};
+    
     groupedArrayListBySeverity: { [key: string]: Array<any> } = {};
 
     constructor(

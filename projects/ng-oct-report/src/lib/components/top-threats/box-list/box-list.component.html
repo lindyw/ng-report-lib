@@ -85,8 +85,23 @@
     </mat-list>
     <div class="summary">
       <h4 style="margin-block-end: 0.5rem">Posture Summary (In this period) <span style="color: red"> *</span></h4>
-      <div *ngIf="tenant_baselines_posture_controls_in_this_period !== null; else empty">
-        <lib-posture-line-chart [postureData]="tenant_baselines_posture_controls_in_this_period"></lib-posture-line-chart>
+      <div
+        *ngIf="
+          tenant_baselines_posture_controls_in_this_period !== null ||
+            group_baselines_posture_controls_in_this_period !== null;
+          else empty
+        "
+      >
+        <lib-posture-line-chart
+          *ngIf="!!tenant_baselines_posture_controls_in_this_period"
+          [title]="'Tenant Baselines Posture Summary Chart'"
+          [postureData]="tenant_baselines_posture_controls_in_this_period"
+        ></lib-posture-line-chart>
+        <lib-posture-line-chart
+          *ngIf="!!group_baselines_posture_controls_in_this_period"
+          [title]="'Group Baselines Posture Summary Chart'"
+          [postureData]="group_baselines_posture_controls_in_this_period"
+        ></lib-posture-line-chart>
         <!-- <div style="width: 90%" *ngFor="let item of groupedArrayListBySeverity | keyvalue">
           <div class="flex-row">
             <span class="icon">

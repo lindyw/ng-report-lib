@@ -14,6 +14,7 @@ export class TopThreatsComponent implements OnInit {
   @Input() baselines: TopBaselineDeviation[] | null = null;
   @Input() all_posture_count: { tenant_count: CurrentPostureCount, group_count: CurrentPostureCount } | null = null;
   @Input() tenant_posture_controls_in_this_period: BaselinePostureCountsByDate | null = null;
+  @Input() group_posture_controls_in_this_period: BaselinePostureCountsByDate | null = null;
   constructor() { }
 
   ngOnInit(): void {

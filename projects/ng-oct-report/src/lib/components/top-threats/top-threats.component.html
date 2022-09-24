@@ -1,28 +1,49 @@
-<h1>{{title}}</h1>
+<h1>{{ title }}</h1>
 
-<lib-box-list *ngIf="alerts !== null" [title]="'Alerts'" [arrayList]="alerts"
-    [keys]="['timestamp', 'actor', 'description']" [type]="'event'">
+<lib-box-list
+  *ngIf="alerts !== null"
+  [title]="'Alerts'"
+  [arrayList]="alerts"
+  [keys]="['timestamp', 'actor', 'description']"
+  [type]="'event'"
+>
 </lib-box-list>
 
-<lib-box-list *ngIf="baselines !== null && all_posture_count !== null && tenant_posture_controls_in_this_period !== null" [title]="'Baselines'"
-    [arrayList]="baselines" [tenant_posture_counts]="all_posture_count.tenant_count" [group_posture_counts]="all_posture_count.group_count"
-    [tenant_baselines_posture_controls_in_this_period]="tenant_posture_controls_in_this_period"
-    [keys]="['timestamp', 'category','name']" [type]="'baseline deviation'">
+<lib-box-list
+  *ngIf="
+    baselines !== null &&
+    all_posture_count !== null &&
+    tenant_posture_controls_in_this_period !== null &&
+    group_posture_controls_in_this_period !== null
+  "
+  [title]="'Baselines'"
+  [arrayList]="baselines"
+  [tenant_posture_counts]="all_posture_count.tenant_count"
+  [group_posture_counts]="all_posture_count.group_count"
+  [tenant_baselines_posture_controls_in_this_period]="tenant_posture_controls_in_this_period"
+  [group_baselines_posture_controls_in_this_period]="group_posture_controls_in_this_period"
+  [keys]="['timestamp', 'category', 'name']"
+  [type]="'baseline deviation'"
+>
 </lib-box-list>
 
 <div *ngIf="alertsByUsers !== null">
-    <ng-container *ngIf="alertsByUsers.length > 0; else empty">
-        <div *ngFor="let user of alertsByUsers">
-            <lib-box-list [title]="user.actor" [arrayList]="userAlerts(user.alerts)"
-                [keys]="['timestamp', 'actor', 'description']" [type]="'event'">
-            </lib-box-list>
-        </div>
-    </ng-container>
+  <ng-container *ngIf="alertsByUsers.length > 0; else empty">
+    <div *ngFor="let user of alertsByUsers">
+      <lib-box-list
+        [title]="user.actor"
+        [arrayList]="userAlerts(user.alerts)"
+        [keys]="['timestamp', 'actor', 'description']"
+        [type]="'event'"
+      >
+      </lib-box-list>
+    </div>
+  </ng-container>
 </div>
 
 <ng-template #empty>
-    <p class="empty">
-        <mat-icon class="safe" mat-list-icon>task_alt</mat-icon>
-        No users under threats were found
-    </p>
+  <p class="empty">
+    <mat-icon class="safe" mat-list-icon>task_alt</mat-icon>
+    No users under threats were found
+  </p>
 </ng-template>
