@@ -38,18 +38,33 @@ export class PostureLineChartComponent implements OnInit {
                 datasets: [
                     {
                         label: "Deviating Controls",
+                        fill: false,
                         data: this.deviating_controls,
-                        backgroundColor: 'red'
+                        borderWidth:1,
+                        borderColor: 'red',
+                        backgroundColor: 'red',
+                        tension: 0.1,
+                        pointRadius: 2
                     },
                     {
                         label: "Compliant Controls",
+                        fill: false,
                         data: this.compliant_controls,
-                        backgroundColor: 'limegreen'
+                        borderWidth:1,
+                        borderColor: 'limegreen',
+                        backgroundColor: 'limegreen',
+                        tension: 0.1,
+                        pointRadius: 2
                     },
                     {
                         label: "Monitored Controls",
+                        fill: false,
                         data: this.monitored_controls,
-                        backgroundColor: 'blue'
+                        borderWidth:1,
+                        borderColor: 'blue',
+                        backgroundColor: 'blue',
+                        tension: 0.1,
+                        pointRadius: 2
                     }
                 ]
             },
