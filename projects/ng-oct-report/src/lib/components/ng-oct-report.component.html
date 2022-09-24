@@ -4,7 +4,7 @@
     <div class="section-wrapper">
         <div class="section pagebreak">
             <lib-top-threats [title]="'Threats Summary'" [alerts]="alerts$ | async" [baselines]="topBaselineDeviations$ | async"
-                [all_posture_count]="allBaselinesPostureCount$ | async" >
+                [all_posture_count]="allBaselinesPostureCount$ | async" [tenant_posture_controls_in_this_period]="tenant_baselines_posture_controls_in_this_period$ | async">
             </lib-top-threats>
         </div>
     </div>

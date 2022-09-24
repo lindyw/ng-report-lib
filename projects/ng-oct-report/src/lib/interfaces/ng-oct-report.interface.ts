@@ -34,11 +34,21 @@ export interface Baseline {
     tenant_id: string
     group_id?: string | null
     user_id?: string | null
-    template_item_id?: string | null 
+    template_item_id?: string | null
     created: string
     type: string
     schema: any
 }
+
+export interface BaselinePostureCountsByDate {
+    [date: string]: {
+        deviating: number;
+        compliant: number;
+        monitored: number;
+    }
+}
+
+
 export interface CurrentPostureCount {
     not_deviated: number | null
     has_deviated: number

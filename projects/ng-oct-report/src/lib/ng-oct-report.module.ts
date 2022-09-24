@@ -14,6 +14,7 @@ import { TimelineComponent  } from './components/timeline/timeline.component';
 
 import { TenantSecurityControlComponent } from './components/security-control/tenant/tenant-security-control.component';
 import { GroupSecurityControlComponent } from './components/security-control/group/group-security-control.component';
+import { PostureLineChartComponent } from './components/top-threats/posture-line-chart/posture-line-chart.component';
 
 
 @NgModule({
@@ -24,7 +25,8 @@ import { GroupSecurityControlComponent } from './components/security-control/gro
         BoxListComponent,
         TimelineComponent,
         TenantSecurityControlComponent,
-        GroupSecurityControlComponent
+        GroupSecurityControlComponent,
+        PostureLineChartComponent
     ],
     imports: [
         CommonModule,

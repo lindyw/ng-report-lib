@@ -3,7 +3,7 @@ import { DateTime } from 'luxon';
 import { BehaviorSubject, filter, distinct, take, Subject, combineLatest, map, delay } from 'rxjs';
 import { NgOctReportService } from '../services/ng-oct-report.service';
 import { groupBy } from '../utils';
-import { Baseline, BaselineDeviation, Category, CurrentPostureCount, GroupBaselineDeviation, Header, TopAlert, TopBaselineDeviation, TopUser } from '../interfaces/ng-oct-report.interface';
+import { Baseline, BaselineDeviation, BaselinePostureCountsByDate, Category, CurrentPostureCount, GroupBaselineDeviation, Header, TopAlert, TopBaselineDeviation, TopUser } from '../interfaces/ng-oct-report.interface';
 import { CategoryService } from '../services/category.service';
 
 function dateFormat(a: string) {
@@ -21,7 +21,7 @@ export class NgOctReportComponent implements OnInit {
     allBaselinesPostureCount$ = new BehaviorSubject<{ tenant_count: CurrentPostureCount, group_count: CurrentPostureCount } | null>(null);
     alerts$ = new BehaviorSubject<TopAlert[] | null>(null);
     alertsByUsers$ = new BehaviorSubject<TopUser[] | null>(null);
-    baselines$ = new BehaviorSubject<Baseline[] | null>(null);
+    tenant_baselines_posture_controls_in_this_period$ = new BehaviorSubject<BaselinePostureCountsByDate | null>(null);
     topBaselineDeviations$ = new BehaviorSubject<TopBaselineDeviation[] | null>(null);
     baselineDeviations = new BehaviorSubject<BaselineDeviation[] | null>(null);
     categories$ = new BehaviorSubject<Category[]>([]);
@@ -30,7 +30,7 @@ export class NgOctReportComponent implements OnInit {
         'header': new BehaviorSubject(false),
         'categories': new BehaviorSubject(false),
         'all_baselines_current_posture_count': new BehaviorSubject(false),
-        'baselines': new BehaviorSubject(false),
+        'tenant_baselines_posture_controls_in_this_period': new BehaviorSubject(false),
         'top_alerts': new BehaviorSubject(false),
         'top_baseline_deviations': new BehaviorSubject(false),
         'baseline_deviations': new BehaviorSubject(false)
@@ -39,6 +39,7 @@ export class NgOctReportComponent implements OnInit {
     public all_loaded$ = combineLatest([
         this.loaded$['header'],
         this.loaded$['categories'],
+        this.loaded$['tenant_baselines_posture_controls_in_this_period'],
         this.loaded$['all_baselines_current_posture_count'],
         this.loaded$['top_alerts'],
         this.loaded$['top_baseline_deviations'],
@@ -65,7 +66,7 @@ export class NgOctReportComponent implements OnInit {
         this.loadCategories();
         this.loadAllBaselinePostureCount();
         this.loadTopAlerts();
-        this.loadBaselines();
+        this.loadTenantPostureControlsInThisPeriod();
         this.loadTopBaselineDeviations();
         this.loadBaselineDeviations();
     }
@@ -142,13 +143,14 @@ export class NgOctReportComponent implements OnInit {
             })
     }
 
-    loadBaselines() {
-        this.reportService.baselines$
+    loadTenantPostureControlsInThisPeriod() {
+        this.reportService.tenant_baselines_posture_controls_in_this_period$
             .pipe(
                 distinct()
             )
-            .subscribe(baselines => {
-                this.baselines$.next(baselines);
+            .subscribe(posture_controls_count => {
+                this.tenant_baselines_posture_controls_in_this_period$.next(posture_controls_count);
+                this.loaded$['tenant_baselines_posture_controls_in_this_period'].next(true)
             })
     }
 

@@ -4,13 +4,14 @@
     [keys]="['timestamp', 'actor', 'description']" [type]="'event'">
 </lib-box-list>
 
-<lib-box-list *ngIf="baselines !== null && all_posture_count !== null" [title]="'Baselines'"
+<lib-box-list *ngIf="baselines !== null && all_posture_count !== null && tenant_posture_controls_in_this_period !== null" [title]="'Baselines'"
     [arrayList]="baselines" [tenant_posture_counts]="all_posture_count.tenant_count" [group_posture_counts]="all_posture_count.group_count"
+    [tenant_baselines_posture_controls_in_this_period]="tenant_posture_controls_in_this_period"
     [keys]="['timestamp', 'category','name']" [type]="'baseline deviation'">
 </lib-box-list>
 
 <div *ngIf="alertsByUsers !== null">
-    <ng-container *ngIf="alertsByUsers.length >0; else empty">
+    <ng-container *ngIf="alertsByUsers.length > 0; else empty">
         <div *ngFor="let user of alertsByUsers">
             <lib-box-list [title]="user.actor" [arrayList]="userAlerts(user.alerts)"
                 [keys]="['timestamp', 'actor', 'description']" [type]="'event'">

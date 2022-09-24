@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { User } from '@microsoft/microsoft-graph-types-beta';
 import { BehaviorSubject, combineLatest, filter, map, take } from 'rxjs';
-import { Baseline, BaselineDeviation, CombinedDeviation, CurrentPostureCount, Header, TopAlert, TopBaselineDeviation } from '../interfaces/ng-oct-report.interface';
+import { Baseline, BaselineDeviation, BaselinePostureCountsByDate, CombinedDeviation, CurrentPostureCount, Header, TopAlert, TopBaselineDeviation } from '../interfaces/ng-oct-report.interface';
 import { filterTopBaselines, GetPostureControlsInThisPeriod, GroupBaselineDeviationWithTimelineElementsByBaseline } from '../utils';
 
 @Injectable({
@@ -21,6 +21,10 @@ export class NgOctReportService {
     *  @param group_count -  @param has_deviated the number of group baselines that are currently deviating @param has_deviated the number of group baselines that are currently passing
     */
     public allBaselines_posture_count$ = new BehaviorSubject<{ tenant_count: CurrentPostureCount, group_count: CurrentPostureCount } | null>(null);
+    /**
+     * @param {BaselinePostureCountsByDate} tenant_baselines_posture_controls_in_this_period - an Object list with tenant baselines' posture control counts (deviating, compliance, monitoring) by date in the selected period
+     */
+    public tenant_baselines_posture_controls_in_this_period$ = new BehaviorSubject<BaselinePostureCountsByDate | null>(null);
     /**
      *  top_baseline_deviations$ - baselines that are deviating in the end of the selected period
      */
@@ -112,12 +116,13 @@ export class NgOctReportService {
             .subscribe(([header, users, baselines]) => {
                 const start = header.date.start;
                 const end = header.date.end;
+
                 let formatted_baseline_deviations = GroupBaselineDeviationWithTimelineElementsByBaseline(baseline_deviations, users as User[]);
                 this.baseline_deviations$.next(formatted_baseline_deviations);
-                // TODO: tenant baseline posture variation per day in this period
+           
                 const tenant_baselines_posture_controls_in_this_period = GetPostureControlsInThisPeriod(baseline_deviations, baselines, start, end);
                 console.log('tenant_baselines_posture_controls_in_this_period', tenant_baselines_posture_controls_in_this_period);
-
+                this.tenant_baselines_posture_controls_in_this_period$.next(tenant_baselines_posture_controls_in_this_period);
             })
 
     }

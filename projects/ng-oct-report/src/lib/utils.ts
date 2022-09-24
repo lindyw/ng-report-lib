@@ -1,4 +1,4 @@
-import { TopBaselineDeviation, TimelineElement, CombinedDeviation, BaselineDeviation, Baseline } from "../public-api";
+import { TopBaselineDeviation, TimelineElement, CombinedDeviation, BaselineDeviation, Baseline, BaselinePostureCountsByDate } from "../public-api";
 import { User } from "@microsoft/microsoft-graph-types-beta";
 
 export function groupBy(arr: Array<any>, key: string) {
@@ -26,8 +26,8 @@ export function filterTopBaselines(baselines: any[]): TopBaselineDeviation[] {
         }));
 }
 
-export function GetPostureControlsInThisPeriod(baseline_deviations: CombinedDeviation[], baselines: Baseline[], start: string, end: string) {
-    let formatted: { [date: string]: { deviating: number, compliance: number, monitoring: number } } = {};
+export function GetPostureControlsInThisPeriod(baseline_deviations: CombinedDeviation[], baselines: Baseline[], start: string, end: string) : BaselinePostureCountsByDate {
+    let formatted: { [date: string]: { deviating: number, compliant: number, monitored: number } } = {};
 
     const dateArray = getDates(start, end);
     console.log('dateArray', dateArray);
@@ -41,8 +41,8 @@ export function GetPostureControlsInThisPeriod(baseline_deviations: CombinedDevi
 
         formatted[date] = {
             deviating: deviations_controls_of_the_date.length,
-            compliance: compliance_controls_of_the_date_count,
-            monitoring: monitored_control_of_the_date_count
+            compliant: compliance_controls_of_the_date_count,
+            monitored: monitored_control_of_the_date_count
         };
     }
     return formatted;

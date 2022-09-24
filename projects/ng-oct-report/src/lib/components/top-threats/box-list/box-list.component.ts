@@ -1,5 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { CurrentPostureCount } from '../../../interfaces/ng-oct-report.interface';
+import { BaselinePostureCountsByDate, CurrentPostureCount } from '../../../interfaces/ng-oct-report.interface';
 
 @Component({
     selector: 'lib-box-list',
@@ -16,9 +16,12 @@ export class BoxListComponent implements OnInit {
     @Input() keys: string[] = ['timestamp', 'actor', 'description'];
     @Input() type: string = 'events'; // event, baseline deviation, rule
 
+    @Input() tenant_baselines_posture_controls_in_this_period: BaselinePostureCountsByDate | null  = {};
+
     groupedArrayListBySeverity: { [key: string]: Array<any> } = {};
 
-    constructor() { }
+    constructor(
+    ) { }
 
     ngOnInit(): void {
         this.summarizeBySeverity();
@@ -31,4 +34,5 @@ export class BoxListComponent implements OnInit {
         }
     }
 
+  
 }
