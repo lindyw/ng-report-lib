@@ -8,7 +8,6 @@ import { BaselinePostureCountsByDate, CurrentPostureCount, TopAlert, TopBaseline
 })
 export class TopThreatsComponent implements OnInit {
 
-  @Input() title = '';
   @Input() alerts: TopAlert[] | null = null;
   @Input() alertsByUsers: TopUser[] | null = null;
   @Input() baselines: TopBaselineDeviation[] | null = null;

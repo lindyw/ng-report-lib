@@ -25,7 +25,6 @@ export class NgOctReportComponent implements OnInit {
     group_baselines_posture_controls_in_this_period$ = new BehaviorSubject<BaselinePostureCountsByDate | null>(null);
     topBaselineDeviations$ = new BehaviorSubject<TopBaselineDeviation[] | null>(null);
     baselineDeviations = new BehaviorSubject<BaselineDeviation[] | null>(null);
-    categories$ = new BehaviorSubject<Category[]>([]);
 
     loaded$: { [key: string]: BehaviorSubject<any> } = {
         'header': new BehaviorSubject(false),
@@ -211,7 +210,7 @@ export class NgOctReportComponent implements OnInit {
     }
 
     private groupTenantBaselinesByCategory(category: string, found_baselines: BaselineDeviation[]) {
-        let categories = this.categories$.getValue();
+        let categories = this.categoryService.categories;
         let category_with_baseline_names = categories.filter(c => c.category === category && c.type === 'tenant');
         let empty_baselines_by_category = category_with_baseline_names.filter(function (c) {
             return found_baselines.find(b => b.name === c.name) === undefined;

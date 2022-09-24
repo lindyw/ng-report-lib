@@ -1,13 +1,3 @@
-<h1>{{ title }}</h1>
-
-<lib-box-list
-  *ngIf="alerts !== null"
-  [title]="'Alerts'"
-  [arrayList]="alerts"
-  [keys]="['timestamp', 'actor', 'description']"
-  [type]="'event'"
->
-</lib-box-list>
 
 <lib-box-list
   *ngIf="
@@ -24,6 +14,15 @@
   [group_baselines_posture_controls_in_this_period]="group_posture_controls_in_this_period"
   [keys]="['timestamp', 'category', 'name']"
   [type]="'baseline deviation'"
+>
+</lib-box-list>
+
+<lib-box-list
+  *ngIf="alerts !== null"
+  [title]="'Alerts'"
+  [arrayList]="alerts"
+  [keys]="['timestamp', 'actor', 'description']"
+  [type]="'event'"
 >
 </lib-box-list>
 
