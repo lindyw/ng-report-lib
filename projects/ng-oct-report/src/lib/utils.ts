@@ -74,7 +74,7 @@ function getBaselineComplianceCountOfTheDate(deviations_controls_of_the_date: Co
 
 function getDates(startDate: string, endDate: string): string[] {
     var dateArray = new Array();
-    var currentDate = startDate;
+    var currentDate = startDate.split('T')[0];
     while (currentDate <= endDate) {
         dateArray.push(currentDate);
         currentDate = addDays(currentDate, 1);
