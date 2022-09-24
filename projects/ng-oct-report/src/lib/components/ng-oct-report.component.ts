@@ -1,10 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { DateTime } from 'luxon';
-import { BehaviorSubject, filter, distinct, take, Subject, combineLatest, map, delay } from 'rxjs';
+import { BehaviorSubject, combineLatest, delay, distinct, map } from 'rxjs';
+import { BaselineDeviation, BaselinePostureCountsByDate, Category, CurrentPostureCount, GroupBaselineDeviation, Header, TopAlert, TopBaselineDeviation, TopUser } from '../interfaces/ng-oct-report.interface';
+import { CategoryService } from '../services/category.service';
 import { NgOctReportService } from '../services/ng-oct-report.service';
 import { groupBy } from '../utils';
-import { Baseline, BaselineDeviation, BaselinePostureCountsByDate, Category, CurrentPostureCount, GroupBaselineDeviation, Header, TopAlert, TopBaselineDeviation, TopUser } from '../interfaces/ng-oct-report.interface';
-import { CategoryService } from '../services/category.service';
 
 function dateFormat(a: string) {
     return DateTime.fromISO(a, { zone: 'utc' }).toFormat('ccc, LLL dd yyyy');
