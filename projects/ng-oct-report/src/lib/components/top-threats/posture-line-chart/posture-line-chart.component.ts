@@ -12,7 +12,6 @@ export class PostureLineChartComponent implements OnInit, AfterViewInit {
     public charts: any = [];    // Array to store all line charts
     @Input() title: string = '';
     @Input() set postureData(data: BaselinePostureCountsByDate) {
-        console.log(data)
         this.dates = Object.keys(data);
         this.deviating_controls = Object.values(data).map(data => data.deviating);
         this.compliant_controls = Object.values(data).map(data => data.compliant);
@@ -35,10 +34,12 @@ export class PostureLineChartComponent implements OnInit, AfterViewInit {
     }
 
     ngAfterViewInit(): void {
-        let canvasCharts = this.allMyCanvas._results;  // Get array with all canvas
-        canvasCharts.map((myCanvas: any, i: number) => {   // For each canvas, save the chart on the charts array 
-            this.charts[i].chart = this.createChart(myCanvas.nativeElement.getContext('2d'), this.title)
-        })
+        setTimeout(() => {
+            let canvasCharts = this.allMyCanvas._results;  // Get array with all canvas
+            canvasCharts.map((myCanvas: any, i: number) => {   // For each canvas, save the chart on the charts array 
+                this.charts[i].chart = this.createChart(myCanvas.nativeElement.getContext('2d'), this.title)
+            })
+        },0);
     }
 
     createChart(id: string, title: string) {
@@ -82,6 +83,9 @@ export class PostureLineChartComponent implements OnInit, AfterViewInit {
             },
             options: {
                 aspectRatio: 2.5,
+                animation: {
+                    duration: 0
+                },
                 plugins: {
                     title: {
                         display: true,

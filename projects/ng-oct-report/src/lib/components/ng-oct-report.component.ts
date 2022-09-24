@@ -193,18 +193,6 @@ export class NgOctReportComponent implements OnInit {
             })
     }
 
-    // loadCategories() {
-    //     this.reportService.categories$
-    //         .pipe(
-    //             distinct()
-    //         )
-    //         .subscribe(categories => {
-    //             this.categories$.next(categories!);
-    //             this.tenant_catagories = [...new Set(categories?.filter(c => c.type === 'tenant').map(item => item['category']))];
-    //             this.group_categories = [...new Set(categories?.filter(c => c.type === 'group').map(item => item['category']))];
-    //             this.loaded$['categories'].next(true);
-    //         })
-    // }
 
     public groupBaselinesByCategory(category: string, type: 'group' | 'tenant'): any {
         let baselines = this.baselineDeviations.getValue();

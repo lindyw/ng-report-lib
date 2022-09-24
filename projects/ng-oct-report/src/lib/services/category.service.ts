@@ -6,6 +6,7 @@ import { Category } from '../interfaces/ng-oct-report.interface';
 })
 export class CategoryService {
 
+    public categories: Category[] = [];
     public tenant_categories: string[] = [];
     public group_categories: string[] = [];
 
@@ -22,6 +23,7 @@ export class CategoryService {
                 name: "External (Guest) Users Resharing"
             })
         }
+        this.categories = categories;
         this.tenant_categories = [...new Set(categories?.filter(c => c.type === 'tenant').map(item => item['category']))];
         this.group_categories = [...new Set(categories?.filter(c => c.type === 'group').map(item => item['category']))];
     }
