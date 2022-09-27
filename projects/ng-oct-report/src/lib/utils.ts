@@ -31,6 +31,7 @@ export function GetPostureControlsInThisPeriod(baseline_deviations: CombinedDevi
 
     const dateArray = getDates(start, end);
     console.log('dateArray', dateArray);
+    console.log('type', type);
     for (var date of dateArray) {
         console.log('date', date);
         const existing_baselines: Baseline[] = baselines.filter(b => b.type === type && b.created.split('T')[0] <= date);
@@ -49,28 +50,22 @@ export function GetPostureControlsInThisPeriod(baseline_deviations: CombinedDevi
 }
 
 function getBaselineDeviationsCountOfTheDate(baseline_deviations: CombinedDeviation[], type: 'tenant' | 'group', date: any) {
-    const deviating_baselines = baseline_deviations
-        .filter(bd => bd.type === type &&
+    let deviating_baselines = baseline_deviations
+        .filter(bd => bd.type === type && bd.deviation_detect_time.split('T')[0] <= date &&
             (bd.deviation_resolve_time === null || bd.deviation_resolve_time.split('T')[0] > date))
         .sort((a, b) => b.deviation_detect_time.localeCompare(a.deviation_detect_time))
-        .filter((value, index, self) => {
-            return self.findIndex(v => v.baseline_id === value.baseline_id) === index;
-        })
+    console.log('deviating_baselines', deviating_baselines);
+
+    deviating_baselines = deviating_baselines.filter((value, index, self) => {
+        return self.findIndex(v => v.baseline_id === value.baseline_id) === index;
+    })
     return deviating_baselines;
-    // let sorted_baseline_deviations_in_this_date = baseline_deviations
-    //     .filter(bd => bd.type === type && bd.deviation_detect_time.split('T')[0] === date &&
-    //         (bd.deviation_resolve_time === null || bd.deviation_resolve_time.split('T')[0] !== date)
-    //     )
-    //     .sort((a, b) => b.deviation_detect_time.localeCompare(a.deviation_detect_time))
-    // return sorted_baseline_deviations_in_this_date.filter((value, index, self) => {
-    //     return self.findIndex(v => v.baseline_id === value.baseline_id) === index;
-    // })
 }
 
 function getBaselineComplianceCountOfTheDate(deviating_baselines: CombinedDeviation[], baselines: Baseline[], type: 'tenant' | 'group', date: any) {
     let compliance_count = 0;
     if (baselines.length > 0) {
-        
+        console.log('baselines', baselines);
         for (const existing_baseline of baselines) {
             const is_deviated = (deviating_baselines.some(d => d.baseline_id === existing_baseline.id));
             if (!is_deviated) {
