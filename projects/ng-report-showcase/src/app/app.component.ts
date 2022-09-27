@@ -18,8 +18,8 @@ export class AppComponent implements OnInit {
 
     private header = {
         date: {
-            start: '2022-08-01',
-            end: '2022-09-16'
+            start: '2022-09-01',
+            end: '2022-09-27'
         },
         tenant: 'Contoso'
     }
@@ -53,7 +53,7 @@ export class AppComponent implements OnInit {
         this.categoryService.setCategories(categories);
         this.reportService.setBaselines(baselines);
         this.reportService.createTopAlerts(this.topAlerts);
-        this.reportService.setAllBaselineCurrentPostureCount({ tenant_count: { has_deviated: 7, not_deviated: 23 }, group_count: { has_deviated: 5, not_deviated: 11 } });
+        this.reportService.setAllBaselineCurrentPostureCount({ tenant_count: { has_deviated: 8, not_deviated: 9 }, group_count: { has_deviated: 4, not_deviated: 11 } });
         this.reportService.getBaselineDeviations(baseline_deviations);
 
     }

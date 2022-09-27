@@ -54,8 +54,10 @@ export class PostureLineChartComponent implements OnInit, AfterViewInit {
                         fill: false,
                         data: this.deviating_controls,
                         borderWidth: 1,
-                        borderColor: 'red',
-                        backgroundColor: 'red',
+                        borderColor: 'rgba(255,0,0,1)',
+                        backgroundColor: 'rgba(255,0,0,1)',
+                        pointBackgroundColor: 'rgba(255,0,0,1)',
+                        pointHoverBackgroundColor: 'rgba(255,0,0,1)',
                         tension: 0.1,
                         pointRadius: 2
                     },
@@ -66,6 +68,8 @@ export class PostureLineChartComponent implements OnInit, AfterViewInit {
                         borderWidth: 1,
                         borderColor: 'limegreen',
                         backgroundColor: 'limegreen',
+                        pointBackgroundColor: 'limegreen',
+                        pointHoverBackgroundColor: 'limegreen',
                         tension: 0.1,
                         pointRadius: 2
                     },
@@ -76,6 +80,8 @@ export class PostureLineChartComponent implements OnInit, AfterViewInit {
                         borderWidth: 1,
                         borderColor: 'blue',
                         backgroundColor: 'blue',
+                        pointBackgroundColor: 'blue',
+                        pointHoverBackgroundColor: 'blue',
                         tension: 0.1,
                         pointRadius: 2
                     }

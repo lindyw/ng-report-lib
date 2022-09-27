@@ -3,6 +3,11 @@ import { Category } from "projects/ng-oct-report/src/public-api";
 export const categories: Category[] =
 [
     {
+        "category": "Sharing",
+        "type": "tenant",
+        "name": "External (Guest) Users Resharing"
+    },
+    {
         "category": "Remote Access",
         "type": "group",
         "name": "EWS Access"
@@ -11,6 +16,11 @@ export const categories: Category[] =
         "category": "Remote Access",
         "type": "group",
         "name": "OWA Access"
+    },
+    {
+        "category": "Remote Access",
+        "type": "group",
+        "name": "POP3 Access"
     },
     {
         "category": "Remote Access",
@@ -36,11 +46,6 @@ export const categories: Category[] =
         "category": "Remote Access",
         "type": "group",
         "name": "SMTP Client Authentication"
-    },
-    {
-        "category": "Remote Access",
-        "type": "group",
-        "name": "POP3 Access"
     },
     {
         "category": "Email Security",
