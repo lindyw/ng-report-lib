@@ -1,4 +1,5 @@
 import { AfterViewInit, Component, Input, OnInit, ViewChildren } from '@angular/core';
+import { NullableOption } from '@microsoft/microsoft-graph-types-beta';
 import { Chart, registerables } from 'chart.js';
 import { BaselinePostureCountsByDate } from '../../../interfaces/ng-oct-report.interface';
 Chart.register(...registerables);
@@ -16,6 +17,9 @@ export class PostureLineChartComponent implements OnInit, AfterViewInit {
         this.deviating_controls = Object.values(data).map(data => data.deviating);
         this.compliant_controls = Object.values(data).map(data => data.compliant);
         this.monitored_controls = Object.values(data).map(data => data.monitored);
+        console.log('compliant controls', this.compliant_controls);
+        console.log('monitoring controls', this.monitored_controls);
+        
         this.charts.push({
             id: this.title,
             chart: []
@@ -24,8 +28,8 @@ export class PostureLineChartComponent implements OnInit, AfterViewInit {
     }
     private dates: string[] = [];
     private deviating_controls: number[] = [];
-    private compliant_controls: number[] = [];
-    private monitored_controls: number[] = [];
+    private compliant_controls: NullableOption<number>[] = [];
+    private monitored_controls: NullableOption<number>[] = [];
 
     constructor() { }
 
@@ -39,7 +43,7 @@ export class PostureLineChartComponent implements OnInit, AfterViewInit {
             canvasCharts.map((myCanvas: any, i: number) => {   // For each canvas, save the chart on the charts array 
                 this.charts[i].chart = this.createChart(myCanvas.nativeElement.getContext('2d'), this.title)
             })
-        },0);
+        }, 0);
     }
 
     createChart(id: string, title: string) {

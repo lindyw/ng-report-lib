@@ -27,7 +27,8 @@ export function filterTopBaselines(baselines: any[]): TopBaselineDeviation[] {
 }
 
 export function GetPostureControlsInThisPeriod(baseline_deviations: CombinedDeviation[], baselines: Baseline[], type: 'tenant' | 'group', start: string, end: string): BaselinePostureCountsByDate {
-    let formatted: { [date: string]: { deviating: number, compliant: number, monitored: number } } = {};
+    const init_created_timestamp = '2022-09-27';
+    let formatted: { [date: string]: { deviating: number, compliant: number | null, monitored: number | null } } = {};
 
     const dateArray = getDates(start, end);
     console.log('dateArray', dateArray);
@@ -36,9 +37,12 @@ export function GetPostureControlsInThisPeriod(baseline_deviations: CombinedDevi
         console.log('date', date);
         const existing_baselines: Baseline[] = baselines.filter(b => b.type === type && b.created.split('T')[0] <= date);
         const deviations_controls_of_the_date: CombinedDeviation[] = getBaselineDeviationsCountOfTheDate(baseline_deviations, type, date);
-        const compliance_controls_of_the_date_count: number = getBaselineComplianceCountOfTheDate(deviations_controls_of_the_date, existing_baselines, type, date);
-
-        const monitored_control_of_the_date_count: number = existing_baselines.length;
+        const compliance_controls_of_the_date_count: number | null =
+            date >= init_created_timestamp ?
+                getBaselineComplianceCountOfTheDate(deviations_controls_of_the_date, existing_baselines, type, date) : null;
+        const monitored_control_of_the_date_count: number | null =
+            date >= init_created_timestamp ?
+                existing_baselines.length : null;
 
         formatted[date] = {
             deviating: deviations_controls_of_the_date.length,

@@ -43,8 +43,8 @@ export interface Baseline {
 export interface BaselinePostureCountsByDate {
     [date: string]: {
         deviating: number;
-        compliant: number;
-        monitored: number;
+        compliant: number | null;
+        monitored: number | null;
     }
 }
 
