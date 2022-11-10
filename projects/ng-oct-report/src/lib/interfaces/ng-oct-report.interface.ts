@@ -20,6 +20,7 @@ export interface Header {
         end: string
     },
     tenant: string
+    icon?: string
 }
 
 export interface TopAlert {

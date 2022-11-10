@@ -78,12 +78,19 @@ export class NgOctReportComponent implements OnInit {
             .pipe(
                 distinct()
             )
-            .subscribe(header => {
-                if (header != null) {
+            .subscribe(_header => {
+                let header = _header;
+                if (_header != null) {
                     header = {
-                        ...header, date: {
-                            start: dateFormat(header?.date.start),
-                            end: dateFormat(header?.date.end)
+                        ..._header, date: {
+                            start: dateFormat(_header?.date.start),
+                            end: dateFormat(_header?.date.end)
+                        }
+                    }
+                    if (!!_header.icon) {
+                        header = {
+                            ...header,
+                            icon: _header.icon
                         }
                     }
                 }

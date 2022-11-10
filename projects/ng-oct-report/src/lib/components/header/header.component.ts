@@ -7,7 +7,7 @@ import { Component, Input, OnInit } from '@angular/core';
 })
 export class HeaderComponent implements OnInit {
 
-  @Input() data: { date: { start: string, end: string }, tenant: string } | null = null;
+  @Input() data: { date: { start: string, end: string }, tenant: string, icon?: string } | null = null;
 
   constructor() { }
 
