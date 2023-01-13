@@ -179,6 +179,10 @@ function setTransformedItem(curr: CombinedDeviation, existing_timeline_elements:
 
     if (curr.group_name && curr.user_id) {
         let user = users.find((u => u.id === curr.user_id))!;
+        if (!user || !user.userPrincipalName) {
+            console.log('ng-oct-report:: curr', curr);
+            console.log('ng-oct-report:: users', users);
+        }
         transformed_item = updateTransformedItemForGroupUserBaseline(transformed_item, curr.group_name, curr.user_id, user.userPrincipalName!);
     }
     return transformed_item;
