@@ -182,7 +182,7 @@ function setTransformedItem(curr: CombinedDeviation, existing_timeline_elements:
         if (!user || !user.userPrincipalName) {
             console.log('ng-oct-report:: curr', curr);
             console.log('ng-oct-report:: users', users);
-            transformed_item = updateTransformedItemForGroupUserBaseline(transformed_item, curr.group_name, curr.user_id, "User no longer existed");
+            transformed_item = updateTransformedItemForGroupUserBaseline(transformed_item, curr.group_name, curr.user_id, "User no longer exists");
         } else {
             transformed_item = updateTransformedItemForGroupUserBaseline(transformed_item, curr.group_name, curr.user_id, user.userPrincipalName!);
         }
