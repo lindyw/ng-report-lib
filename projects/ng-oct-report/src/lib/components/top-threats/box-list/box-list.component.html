@@ -117,14 +117,12 @@
     <div class="summary">
       <h4 style="margin-block-end: 0.5rem">Summary (In this period) <span style="color: red"> *</span></h4>
       <div class="row-item">
-        <span>Total Ticket Created: </span>
-        <span style="float: right; color: green"> {{ getTotalTicketCount() }}</span>
-      </div>
-      <div class="row-item">
-        <span>{{ open_ticket_count }} Ticket remain opening</span>
-      </div>
-      <div class="row-item">
-        <span>{{ resolved_ticket_count }} Ticket resolved/closed </span>
+        <mat-progress-bar mode="determinate" [value]="getResolvedTicketPercentage(resolved_ticket_count, getTotalTicketCount())" mode="determinate" color="primary">
+        </mat-progress-bar>
+        <!-- <mat-icon style="color: limegreen">check_circle</mat-icon> -->
+        <span style="font-size: 24px; font-weight: bold; margin: 0">{{ resolved_ticket_count }} </span> ticket resolved
+        - vs. <span style="font-size: 24px; font-weight: bold; margin: 0">{{ getTotalTicketCount() }} </span> ticket
+        created
       </div>
     </div>
   </ng-container>

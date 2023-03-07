@@ -1,6 +1,7 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { BaselinePostureCountsByDate, CurrentPostureCount } from '../../../interfaces/ng-oct-report.interface';
 
+
 @Component({
     selector: 'lib-box-list',
     templateUrl: './box-list.component.html',
@@ -43,5 +44,9 @@ export class BoxListComponent implements OnInit {
         return open + resolved;
     }
 
+    getResolvedTicketPercentage(resolved_count: number | null, total: number) {
+        const resolved = resolved_count !== null ? resolved_count : 0;
+        return (resolved / total) * 100;
+    }
 
 }

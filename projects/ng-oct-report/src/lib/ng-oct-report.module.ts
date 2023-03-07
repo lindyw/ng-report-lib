@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { HeaderComponent } from './components/header/header.component';
-
+import { MatProgressBarModule } from '@angular/material/progress-bar';
 import { MatIconModule, MatIconRegistry } from '@angular/material/icon';
 import { MatListModule } from '@angular/material/list';
 import { MatTableModule } from '@angular/material/table';
@@ -10,7 +10,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { NgOctReportComponent } from './components/ng-oct-report.component';
 import { TopThreatsComponent } from './components/top-threats/top-threats.component';
 import { BoxListComponent } from './components/top-threats/box-list/box-list.component';
-import { TimelineComponent  } from './components/timeline/timeline.component';
+import { TimelineComponent } from './components/timeline/timeline.component';
 
 import { TenantSecurityControlComponent } from './components/security-control/tenant/tenant-security-control.component';
 import { GroupSecurityControlComponent } from './components/security-control/group/group-security-control.component';
@@ -33,6 +33,7 @@ import { PostureLineChartComponent } from './components/top-threats/posture-line
         MatIconModule,
         MatListModule,
         MatTableModule,
+        MatProgressBarModule,
         HttpClientModule
     ],
     exports: [
