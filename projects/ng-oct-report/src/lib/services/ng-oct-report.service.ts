@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { User } from '@microsoft/microsoft-graph-types-beta';
 import { BehaviorSubject, combineLatest, filter, map, take } from 'rxjs';
-import { Baseline, BaselineDeviation, BaselinePostureCountsByDate, CombinedDeviation, CurrentPostureCount, Header, TopAlert, TopBaselineDeviation } from '../interfaces/ng-oct-report.interface';
+import { Baseline, BaselineDeviation, BaselinePostureCountsByDate, CombinedDeviation, CurrentPostureCount, Header, TicketCount, TopAlert, TopBaselineDeviation } from '../interfaces/ng-oct-report.interface';
 import { filterTopBaselines, GetPostureControlsInThisPeriod, GroupBaselineDeviationWithTimelineElementsByBaseline } from '../utils';
 
 @Injectable({
@@ -12,6 +12,7 @@ export class NgOctReportService {
     public header$ = new BehaviorSubject<Header | null>(null);
     public graphUsers$ = new BehaviorSubject<User[] | null>(null);
     public topAlerts$ = new BehaviorSubject<TopAlert[] | null>(null);
+    public ticketCount$ = new BehaviorSubject<TicketCount[] | null>(null);
     /**
      * @param  {Baseline[]} baselines$ Obserservable of an array of baselines from the client tenant
      */
@@ -73,6 +74,10 @@ export class NgOctReportService {
      */
     public createTopAlerts(alerts: TopAlert[]) {
         this.topAlerts$.next(alerts);
+    }
+
+    public getTicketCount(ticket_counts: TicketCount[]) {
+        this.ticketCount$.next(ticket_counts);
     }
 
     /**

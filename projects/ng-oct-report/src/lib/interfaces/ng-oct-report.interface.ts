@@ -62,6 +62,19 @@ export interface TopBaselineDeviation {
     name: string
 }
 
+export type PSA = 'cwm' | 'datto' | 'halo';
+
+export enum PSA_Name {
+    cwm = 'ConnectWise',
+    datto = 'Datto',
+    halo = 'Halo'
+}
+export interface TicketCount {
+    psa: PSA,
+    opened: number
+    resolved: number
+}
+
 export interface TopUser {
     actor: string,
     alerts: TopAlert[]

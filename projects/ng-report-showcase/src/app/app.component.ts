@@ -7,6 +7,7 @@ import { baseline_deviations } from './test-data/baseline-deviations.data';
 import { baselines } from './test-data/baselines.data';
 import { categories } from './test-data/categories.data';
 import { graphUsers } from './test-data/graph-users.data';
+import { ticket_counts } from './test-data/ticket.data';
 
 @Component({
     selector: 'app-root',
@@ -55,6 +56,7 @@ export class AppComponent implements OnInit {
         this.reportService.createTopAlerts(this.topAlerts);
         this.reportService.setAllBaselineCurrentPostureCount({ tenant_count: { has_deviated: 5, not_deviated: 11 }, group_count: { has_deviated: 3, not_deviated: 4 } });
         this.reportService.getBaselineDeviations(baseline_deviations);
+        this.reportService.getTicketCount(ticket_counts)
 
     }
 

@@ -26,14 +26,14 @@
 >
 </lib-box-list>
 
-<div *ngIf="alertsByUsers !== null">
-  <ng-container *ngIf="alertsByUsers.length > 0; else empty">
-    <div *ngFor="let user of alertsByUsers">
+<div *ngIf="psaTicketCount !== null">
+  <ng-container *ngIf="psaTicketCount.length > 0; else NoPSA">
+    <div *ngFor="let count of psaTicketCount">
       <lib-box-list
-        [title]="user.actor"
-        [arrayList]="userAlerts(user.alerts)"
-        [keys]="['timestamp', 'actor', 'description']"
-        [type]="'event'"
+        [title]="GetPSAName(count.psa)"
+        [open_ticket_count]="count.opened"
+        [resolved_ticket_count]="count.resolved"
+        [type]="'ticket'"
       >
       </lib-box-list>
     </div>
@@ -44,5 +44,12 @@
   <p class="empty">
     <mat-icon class="safe" mat-list-icon>task_alt</mat-icon>
     No users under threats were found
+  </p>
+</ng-template>
+
+<ng-template #NoPSA>
+  <p style="font-style: italic; font-size: smaller" >
+    <mat-icon style="color: grey; font-size: 1rem">info</mat-icon>No PSA Alert Ticket Integration has configured
+    yet.
   </p>
 </ng-template>

@@ -13,12 +13,14 @@ export class BoxListComponent implements OnInit {
     @Input() currentList: Array<any> | null = [];
     @Input() tenant_posture_counts: CurrentPostureCount | null = { has_deviated: 0, not_deviated: 0 };
     @Input() group_posture_counts: CurrentPostureCount | null = { has_deviated: 0, not_deviated: 0 };
+    @Input() open_ticket_count: number | null = 0;
+    @Input() resolved_ticket_count: number | null = 0;
     @Input() keys: string[] = ['timestamp', 'actor', 'description'];
-    @Input() type: string = 'events'; // event, baseline deviation, rule
+    @Input() type: string = 'events'; // event, ticket, baseline deviation, rule
 
-    @Input() tenant_baselines_posture_controls_in_this_period: BaselinePostureCountsByDate | null  = {};
-    @Input() group_baselines_posture_controls_in_this_period: BaselinePostureCountsByDate | null  = {};
-    
+    @Input() tenant_baselines_posture_controls_in_this_period: BaselinePostureCountsByDate | null = {};
+    @Input() group_baselines_posture_controls_in_this_period: BaselinePostureCountsByDate | null = {};
+
     groupedArrayListBySeverity: { [key: string]: Array<any> } = {};
 
     constructor(
@@ -35,5 +37,11 @@ export class BoxListComponent implements OnInit {
         }
     }
 
-  
+    getTotalTicketCount() {
+        const open = this.open_ticket_count !== null ? this.open_ticket_count : 0;
+        const resolved = this.resolved_ticket_count !== null ? this.resolved_ticket_count : 0;
+        return open + resolved;
+    }
+
+
 }

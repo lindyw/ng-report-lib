@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { DateTime } from 'luxon';
 import { BehaviorSubject, combineLatest, delay, distinct, map } from 'rxjs';
-import { BaselineDeviation, BaselinePostureCountsByDate, Category, CurrentPostureCount, GroupBaselineDeviation, Header, TopAlert, TopBaselineDeviation, TopUser } from '../interfaces/ng-oct-report.interface';
+import { BaselineDeviation, BaselinePostureCountsByDate, Category, CurrentPostureCount, GroupBaselineDeviation, Header, TicketCount, TopAlert, TopBaselineDeviation, TopUser } from '../interfaces/ng-oct-report.interface';
 import { CategoryService } from '../services/category.service';
 import { NgOctReportService } from '../services/ng-oct-report.service';
 import { groupBy } from '../utils';
@@ -20,7 +20,8 @@ export class NgOctReportComponent implements OnInit {
     header$ = new BehaviorSubject<Header | null>(null);
     allBaselinesPostureCount$ = new BehaviorSubject<{ tenant_count: CurrentPostureCount, group_count: CurrentPostureCount } | null>(null);
     alerts$ = new BehaviorSubject<TopAlert[] | null>(null);
-    alertsByUsers$ = new BehaviorSubject<TopUser[] | null>(null);
+    ticketCount$ = new BehaviorSubject<TicketCount[] | null>(null);
+    // alertsByUsers$ = new BehaviorSubject<TopUser[] | null>(null);
     tenant_baselines_posture_controls_in_this_period$ = new BehaviorSubject<BaselinePostureCountsByDate | null>(null);
     group_baselines_posture_controls_in_this_period$ = new BehaviorSubject<BaselinePostureCountsByDate | null>(null);
     topBaselineDeviations$ = new BehaviorSubject<TopBaselineDeviation[] | null>(null);
@@ -33,6 +34,7 @@ export class NgOctReportComponent implements OnInit {
         'tenant_baselines_posture_controls_in_this_period': new BehaviorSubject(false),
         'group_baselines_posture_controls_in_this_period': new BehaviorSubject(false),
         'top_alerts': new BehaviorSubject(false),
+        'ticket_count': new BehaviorSubject(false),
         'top_baseline_deviations': new BehaviorSubject(false),
         'baseline_deviations': new BehaviorSubject(false)
     };
@@ -44,6 +46,7 @@ export class NgOctReportComponent implements OnInit {
         this.loaded$['group_baselines_posture_controls_in_this_period'],
         this.loaded$['all_baselines_current_posture_count'],
         this.loaded$['top_alerts'],
+        this.loaded$['ticket_count'],
         this.loaded$['top_baseline_deviations'],
         this.loaded$['baseline_deviations']
     ])
@@ -68,6 +71,7 @@ export class NgOctReportComponent implements OnInit {
         this.loadCategories();
         this.loadAllBaselinePostureCount();
         this.loadTopAlerts();
+        this.loadTicketCount();
         this.loadBaselinesPostureControlsInThisPeriod();
         this.loadTopBaselineDeviations();
         this.loadBaselineDeviations();
@@ -111,34 +115,25 @@ export class NgOctReportComponent implements OnInit {
                 distinct()
             )
             .subscribe(alerts => {
-                let alertsByUsers: any[] | null = [];
                 if (!!alerts) {
                     alerts = alerts.map(a => ({ ...a, timestamp: new Date(a.timestamp).toString() }))
-                    const groupedObjByUser = groupBy(alerts.filter(a => !!a.actor), 'actor');
-                    alertsByUsers = Object.keys(groupedObjByUser)
-                        .map(k => ({
-                            actor: k, alerts: groupedObjByUser[k], counts: {
-                                critical: groupedObjByUser[k].filter((a: TopAlert) => a.severity === 'critical').length,
-                                danger: groupedObjByUser[k].filter((a: TopAlert) => a.severity === 'danger').length,
-                                warning: groupedObjByUser[k].filter((a: TopAlert) => a.severity === 'warning').length
-                            }
-                        }))
-                        .sort((a, b) => (a.counts.critical > b.counts.critical) ?
-                            -1 : (a.counts.critical === b.counts.critical) ?
-                                ((a.counts.danger > b.counts.danger) ?
-                                    -1 : (a.counts.danger === b.counts.danger) ?
-                                        ((a.counts.warning > b.counts.warning) ?
-                                            -1 : (a.counts.warning === b.counts.warning) ?
-                                                -1 : 1)
-                                        : 1) : 1)
-                        .splice(0, 5)
-
                 }
                 this.alerts$.next(alerts);
-                this.alertsByUsers$.next(alertsByUsers);
                 this.loaded$['top_alerts'].next(true);
             })
+    }
 
+    loadTicketCount() {
+        this.reportService.ticketCount$
+            .pipe(
+                distinct()
+            )
+            .subscribe(ticket_counts => {
+                if (!!ticket_counts || ticket_counts!.length > 0) {
+                    this.ticketCount$.next(ticket_counts);
+                    this.loaded$['ticket_count'].next(true);
+                }
+            })
     }
 
     loadAllBaselinePostureCount() {

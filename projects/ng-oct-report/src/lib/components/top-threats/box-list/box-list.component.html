@@ -1,7 +1,7 @@
 <div class="box">
   <div class="title">
     <h3>
-      <b>{{ title }}</b> <span *ngIf="title !== 'Baselines'" style="color: red"> *</span>
+      <b>{{ title }}</b> <span *ngIf="title !== 'Baselines' && type !== 'ticket'" style="color: red"> *</span>
     </h3>
   </div>
   <!-- Alert Content -->
@@ -106,8 +106,25 @@
         <p style="font-style: italic; font-size: smaller">
           <mat-icon style="color: grey; font-size: 1rem">info</mat-icon>Please noted that baseline created/passing were
           not recorded before 27/09/2022.<br />
-          <span style="margin-left: 1.25rem">Only Deviations before this date will be accurate.</span>
+          <span style="margin-left: 1.25rem">Only Deviations after this date will be accurate.</span>
         </p>
+      </div>
+    </div>
+  </ng-container>
+
+  <!-- Ticket Content -->
+  <ng-container *ngIf="type === 'ticket'">
+    <div class="summary">
+      <h4 style="margin-block-end: 0.5rem">Summary (In this period) <span style="color: red"> *</span></h4>
+      <div class="row-item">
+        <span>Total Ticket Created: </span>
+        <span style="float: right; color: green"> {{ getTotalTicketCount() }}</span>
+      </div>
+      <div class="row-item">
+        <span>{{ open_ticket_count }} Ticket remain opening</span>
+      </div>
+      <div class="row-item">
+        <span>{{ resolved_ticket_count }} Ticket resolved/closed </span>
       </div>
     </div>
   </ng-container>
