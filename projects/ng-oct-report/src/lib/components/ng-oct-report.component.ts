@@ -153,7 +153,7 @@ export class NgOctReportComponent implements OnInit {
                 distinct()
             )
             .subscribe(ticket_counts => {
-                console.log('ticket_counts',ticket_counts);
+                console.log('ticket_counts', ticket_counts);
                 if (!!ticket_counts && ticket_counts!.length > 0) {
                     this.ticketCount$.next(ticket_counts);
                     this.hasPSA = true;
@@ -208,30 +208,38 @@ export class NgOctReportComponent implements OnInit {
     }
 
     loadBaselineDeviations() {
-        this.reportService.baseline_deviations$
+        combineLatest([
+            this.header$,
+            this.reportService.baseline_deviations$
+        ])
             .pipe(
                 distinct()
             )
-            .subscribe(baseline_deviations => {
+            .subscribe(([header, baseline_deviations]) => {
                 this.baselineDeviations.next(baseline_deviations);
                 for (var tc of this.tenant_catagories) {
-                    this.baselines_by_tc[tc] = this.groupBaselinesByCategory(tc, 'tenant');
+                    this.baselines_by_tc[tc] = this.groupBaselinesByCategory(tc, 'tenant', header?.date.start!, header?.date.end!);
                 }
                 for (var gc of this.group_categories) {
-                    this.baselines_by_gc[gc] = this.groupBaselinesByCategory(gc, 'group');
+                    this.baselines_by_gc[gc] = this.groupBaselinesByCategory(gc, 'group', header?.date.start!, header?.date.end!);
                 }
                 this.loaded$['baseline_deviations'].next(true);
             })
     }
 
 
-    public groupBaselinesByCategory(category: string, type: 'group' | 'tenant'): any {
+    public groupBaselinesByCategory(category: string, type: 'group' | 'tenant', start: string, end: string): any {
         let baselines = this.baselineDeviations.getValue();
         if (!baselines) {
             return [];
         }
         else {
-            let found_baselines = baselines.filter(b => b.category === category && b.type === type);
+            let found_baselines = baselines
+                .filter(b => b.category === category && b.type === type)
+                .map(b => ({
+                    ...b,
+                    timelineElements: b.timelineElements.filter(el => el.date >= new Date(start) && el.date <= new Date(end) || el.status === 'created')
+                }));
             if (type === 'tenant') {
                 return this.groupTenantBaselinesByCategory(category, found_baselines);
             } else if (type === 'group') {
