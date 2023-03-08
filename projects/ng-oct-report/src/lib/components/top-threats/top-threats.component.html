@@ -1,4 +1,3 @@
-
 <lib-box-list
   *ngIf="
     baselines !== null &&
@@ -26,6 +25,20 @@
 >
 </lib-box-list>
 
+<div *ngIf="alertsByUsers !== null">
+  <ng-container *ngIf="alertsByUsers.length > 0; else empty">
+    <div *ngFor="let user of alertsByUsers">
+      <lib-box-list
+        [title]="user.actor"
+        [arrayList]="userAlerts(user.alerts)"
+        [keys]="['timestamp', 'actor', 'description']"
+        [type]="'event'"
+      >
+      </lib-box-list>
+    </div>
+  </ng-container>
+</div>
+
 <div *ngIf="psaTicketCount !== null">
   <ng-container *ngIf="psaTicketCount.length > 0; else NoPSA">
     <div *ngFor="let count of psaTicketCount">
@@ -48,8 +61,7 @@
 </ng-template>
 
 <ng-template #NoPSA>
-  <p style="font-style: italic; font-size: smaller" >
-    <mat-icon style="color: grey; font-size: 1rem">info</mat-icon>No PSA Alert Ticket Integration has configured
-    yet.
+  <p style="font-style: italic; font-size: smaller">
+    <mat-icon style="color: grey; font-size: 1rem">info</mat-icon>No PSA Alert Ticket Integration has configured yet.
   </p>
 </ng-template>

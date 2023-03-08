@@ -21,7 +21,7 @@ export class NgOctReportComponent implements OnInit {
     allBaselinesPostureCount$ = new BehaviorSubject<{ tenant_count: CurrentPostureCount, group_count: CurrentPostureCount } | null>(null);
     alerts$ = new BehaviorSubject<TopAlert[] | null>(null);
     ticketCount$ = new BehaviorSubject<TicketCount[] | null>(null);
-    // alertsByUsers$ = new BehaviorSubject<TopUser[] | null>(null);
+    alertsByUsers$ = new BehaviorSubject<TopUser[] | null>(null);
     tenant_baselines_posture_controls_in_this_period$ = new BehaviorSubject<BaselinePostureCountsByDate | null>(null);
     group_baselines_posture_controls_in_this_period$ = new BehaviorSubject<BaselinePostureCountsByDate | null>(null);
     topBaselineDeviations$ = new BehaviorSubject<TopBaselineDeviation[] | null>(null);
@@ -60,6 +60,8 @@ export class NgOctReportComponent implements OnInit {
 
     baselines_by_tc: { [tenant_category: string]: BaselineDeviation[] } = {};
     baselines_by_gc: { [group_category: string]: GroupBaselineDeviation } = {};
+
+    hasPSA: boolean = false;
 
     constructor(
         private reportService: NgOctReportService,
@@ -115,10 +117,32 @@ export class NgOctReportComponent implements OnInit {
                 distinct()
             )
             .subscribe(alerts => {
+                let alertsByUsers: any[] | null = [];
                 if (!!alerts) {
                     alerts = alerts.map(a => ({ ...a, timestamp: new Date(a.timestamp).toString() }))
+                    const groupedObjByUser = groupBy(alerts.filter(a => !!a.actor), 'actor');
+                    alertsByUsers = Object.keys(groupedObjByUser)
+                        .map(k => ({
+                            actor: k, alerts: groupedObjByUser[k], counts: {
+                                critical: groupedObjByUser[k].filter((a: TopAlert) => a.severity === 'critical').length,
+                                danger: groupedObjByUser[k].filter((a: TopAlert) => a.severity === 'danger').length,
+                                warning: groupedObjByUser[k].filter((a: TopAlert) => a.severity === 'warning').length
+                            }
+                        }))
+                        .sort((a, b) => (a.counts.critical > b.counts.critical) ?
+                            -1 : (a.counts.critical === b.counts.critical) ?
+                                ((a.counts.danger > b.counts.danger) ?
+                                    -1 : (a.counts.danger === b.counts.danger) ?
+                                        ((a.counts.warning > b.counts.warning) ?
+                                            -1 : (a.counts.warning === b.counts.warning) ?
+                                                -1 : 1)
+                                        : 1) : 1)
+                        .splice(0, 5)
+
+
                 }
                 this.alerts$.next(alerts);
+                this.alertsByUsers$.next(alertsByUsers);
                 this.loaded$['top_alerts'].next(true);
             })
     }
@@ -129,10 +153,16 @@ export class NgOctReportComponent implements OnInit {
                 distinct()
             )
             .subscribe(ticket_counts => {
-                if (!!ticket_counts || ticket_counts!.length > 0) {
+                console.log('ticket_counts',ticket_counts);
+                if (!!ticket_counts && ticket_counts!.length > 0) {
                     this.ticketCount$.next(ticket_counts);
-                    this.loaded$['ticket_count'].next(true);
+                    this.hasPSA = true;
+                } else {
+                    this.hasPSA = false;
                 }
+                this.loaded$['ticket_count'].next(true);
+                console.log('hasPSA', this.hasPSA);
+
             })
     }
 

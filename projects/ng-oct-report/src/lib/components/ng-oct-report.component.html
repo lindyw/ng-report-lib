@@ -1,3 +1,4 @@
+<!-- 1. Compliance Posture Summary for Baselines -->
 <div class="A4" *ngIf="all_loaded$ | async">
   <lib-header class="flex-row" [data]="header$ | async"></lib-header>
 
@@ -13,15 +14,24 @@
     </div>
   </div>
 
-  <div class="section-wrapper">
+  <!-- 2. If it has PSA, then show Security Investigations with Ticket Status Changes -->
+  <div class="section-wrapper" *ngIf="hasPSA; else top_5_user_under_threats">
     <div class="section">
       <h1>Security Investigations</h1>
       <lib-top-threats [alerts]="alerts$ | async"> </lib-top-threats>
-
-      <!-- <div *ngFor="let count of ticketCount$ | async">{{ count.psa }} {{ count.opened }} {{ count.resolved }}</div> -->
       <lib-top-threats [psaTicketCount]="ticketCount$ | async"></lib-top-threats>
     </div>
   </div>
+
+  <!-- 2. If it doesn't have PSA, show Top 5 Users under Threats with Alerts  -->
+  <ng-template #top_5_user_under_threats>
+    <div class="section-wrapper">
+      <div class="section">
+        <h1>Top 5 Users under Threats</h1>
+        <lib-top-threats [alertsByUsers]="alertsByUsers$ | async"> </lib-top-threats>
+      </div>
+    </div>
+  </ng-template>
 
   <!-- TODO: Posture Deviation Summary -->
   <!-- <p style="page-break-after: always;">&nbsp;</p> -->
