@@ -15,6 +15,7 @@ export class BoxListComponent implements OnInit {
     @Input() tenant_posture_counts: CurrentPostureCount | null = { has_deviated: 0, not_deviated: 0 };
     @Input() group_posture_counts: CurrentPostureCount | null = { has_deviated: 0, not_deviated: 0 };
     @Input() open_ticket_count: number | null = 0;
+    @Input() created_ticket_count: number | null = 0;
     @Input() resolved_ticket_count: number | null = 0;
     @Input() keys: string[] = ['timestamp', 'actor', 'description'];
     @Input() type: string = 'events'; // event, ticket, baseline deviation, rule
@@ -36,17 +37,6 @@ export class BoxListComponent implements OnInit {
         for (var severity of severities) {
             this.groupedArrayListBySeverity[severity] = this.arrayList.filter(a => a.severity === severity);
         }
-    }
-
-    getTotalTicketCount() {
-        const open = this.open_ticket_count !== null ? this.open_ticket_count : 0;
-        const resolved = this.resolved_ticket_count !== null ? this.resolved_ticket_count : 0;
-        return open + resolved;
-    }
-
-    getResolvedTicketPercentage(resolved_count: number | null, total: number) {
-        const resolved = resolved_count !== null ? resolved_count : 0;
-        return (resolved / total) * 100;
     }
 
 }

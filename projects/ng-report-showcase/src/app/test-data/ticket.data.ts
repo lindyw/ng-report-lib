@@ -3,10 +3,10 @@ type PSA = 'cwm' | 'datto' | 'halo';
 
 interface TicketCount {
     psa: PSA,
-    opened: number
+    created: number
     resolved: number
+    all_time_opening: number
 }
 export const ticket_counts: TicketCount[] = [
-    { psa: 'cwm', opened: 3, resolved: 2 },
-    { psa: 'datto', opened: 0, resolved: 4 }
+    { psa: 'cwm', created: 3, resolved: 2, all_time_opening: 24 }
 ]

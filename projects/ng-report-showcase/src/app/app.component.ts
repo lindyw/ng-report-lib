@@ -56,7 +56,7 @@ export class AppComponent implements OnInit {
         this.reportService.createTopAlerts(this.topAlerts);
         this.reportService.setAllBaselineCurrentPostureCount({ tenant_count: { has_deviated: 5, not_deviated: 11 }, group_count: { has_deviated: 3, not_deviated: 4 } });
         this.reportService.getBaselineDeviations(baseline_deviations);
-        this.reportService.getTicketCount([])
+        this.reportService.getTicketCount(ticket_counts)
 
     }
 

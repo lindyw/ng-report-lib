@@ -51,6 +51,9 @@ mat-list-item {
         margin-right: 1rem;
         mat-icon {
             vertical-align: sub;
+            &.top {
+                vertical-align: text-top;
+            }
         }
 
         mat-list-item:nth-child(even) {

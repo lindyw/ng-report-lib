@@ -1,10 +1,11 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { HeaderComponent } from './components/header/header.component';
-import { MatProgressBarModule } from '@angular/material/progress-bar';
+import { MatCardModule } from '@angular/material/card';
 import { MatIconModule, MatIconRegistry } from '@angular/material/icon';
 import { MatListModule } from '@angular/material/list';
 import { MatTableModule } from '@angular/material/table';
+import { MatGridListModule } from '@angular/material/grid-list';
 import { DomSanitizer } from '@angular/platform-browser';
 import { HttpClientModule } from '@angular/common/http';
 import { NgOctReportComponent } from './components/ng-oct-report.component';
@@ -33,7 +34,8 @@ import { PostureLineChartComponent } from './components/top-threats/posture-line
         MatIconModule,
         MatListModule,
         MatTableModule,
-        MatProgressBarModule,
+        MatCardModule,
+        MatGridListModule,
         HttpClientModule
     ],
     exports: [

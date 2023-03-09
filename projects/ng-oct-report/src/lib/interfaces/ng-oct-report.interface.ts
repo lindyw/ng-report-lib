@@ -71,8 +71,9 @@ export enum PSA_Name {
 }
 export interface TicketCount {
     psa: PSA,
-    opened: number
+    created: number
     resolved: number
+    all_time_opening: number
 }
 
 export interface TopUser {

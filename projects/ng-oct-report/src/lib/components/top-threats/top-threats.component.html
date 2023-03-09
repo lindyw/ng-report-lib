@@ -43,8 +43,9 @@
   <ng-container *ngIf="psaTicketCount.length > 0; else NoPSA">
     <div *ngFor="let count of psaTicketCount">
       <lib-box-list
-        [title]="GetPSAName(count.psa)"
-        [open_ticket_count]="count.opened"
+        [title]="'Tickets'"
+        [open_ticket_count]="count.all_time_opening"
+        [created_ticket_count]="count.created"
         [resolved_ticket_count]="count.resolved"
         [type]="'ticket'"
       >

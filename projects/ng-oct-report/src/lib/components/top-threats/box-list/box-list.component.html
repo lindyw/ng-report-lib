@@ -115,15 +115,33 @@
   <!-- Ticket Content -->
   <ng-container *ngIf="type === 'ticket'">
     <div class="summary">
-      <h4 style="margin-block-end: 0.5rem">Summary (In this period) <span style="color: red"> *</span></h4>
-      <div class="row-item">
-        <mat-progress-bar mode="determinate" [value]="getResolvedTicketPercentage(resolved_ticket_count, getTotalTicketCount())" mode="determinate" color="primary">
-        </mat-progress-bar>
-        <!-- <mat-icon style="color: limegreen">check_circle</mat-icon> -->
-        <span style="font-size: 24px; font-weight: bold; margin: 0">{{ resolved_ticket_count }} </span> ticket resolved
-        - vs. <span style="font-size: 24px; font-weight: bold; margin: 0">{{ getTotalTicketCount() }} </span> ticket
-        created
-      </div>
+      <!-- <h4 style="margin-block-end: 0.5rem">Summary (In this period) <span style="color: red"> *</span></h4> -->
+      <mat-grid-list cols="3" rowHeight="2:1">
+        <mat-grid-tile>
+          <mat-card mat-elevation-z5>
+            <mat-card-content>
+              <h1 style="color: red">{{ created_ticket_count }} Created <mat-icon class="top">add_circle_outline</mat-icon></h1>
+              <span>During this period</span>
+            </mat-card-content>
+          </mat-card>
+        </mat-grid-tile>
+        <mat-grid-tile>
+          <mat-card mat-elevation-z5>
+            <mat-card-content>
+              <h1 style="color: green">{{ resolved_ticket_count }} Resolved <mat-icon class="top">check_circle_outline</mat-icon></h1>
+              <span>During this period</span>
+            </mat-card-content>
+          </mat-card>
+        </mat-grid-tile>
+        <mat-grid-tile>
+          <mat-card mat-elevation-z5>
+            <mat-card-content>
+              <h1 style="color: orange">{{ open_ticket_count }} Open</h1>
+              <span>All end of period</span>
+            </mat-card-content>
+          </mat-card>
+        </mat-grid-tile>
+      </mat-grid-list>
     </div>
   </ng-container>
 
