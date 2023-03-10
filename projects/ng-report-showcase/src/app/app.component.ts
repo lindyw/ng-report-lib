@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { User } from '@microsoft/microsoft-graph-types-beta';
-import { TopAlert } from 'projects/ng-oct-report/src/lib/interfaces/ng-oct-report.interface';
 import { CategoryService } from 'projects/ng-oct-report/src/lib/services/category.service';
 import { NgOctReportService } from 'projects/ng-oct-report/src/public-api';
+import { alerts } from './test-data/alerts.data';
 import { baseline_deviations } from './test-data/baseline-deviations.data';
 import { baselines } from './test-data/baselines.data';
 import { categories } from './test-data/categories.data';
@@ -26,21 +26,6 @@ export class AppComponent implements OnInit {
     }
 
 
-    private topAlerts: TopAlert[] =
-        [
-            { severity: 'critical', timestamp: '2022-08-02T22:28:35.999Z', actor: 'bob.husky@octiga.com', 'source_type': 'microsoft-event', 'country': 'Indonesia', 'description': 'Login from Country not in Allowed List' },
-            { severity: 'danger', timestamp: '2022-08-02T22:28:59.999Z', actor: 'cobby.husky@octiga.com', 'source_type': 'microsoft-event', 'country': 'The United State of America', 'description': 'Login from Country not in Allowed List' },
-            { severity: 'danger', timestamp: '2022-08-02T22:28:59.999Z', actor: 'cobby.husky@octiga.com', 'source_type': 'microsoft-event', 'description': 'Login from Country not in Allowed List' },
-            { severity: 'danger', timestamp: '2022-08-02T22:28:59.999Z', actor: null, 'source_type': 'microsoft-event', 'description': 'Login from Country not in Allowed List' },
-            { severity: 'danger', timestamp: '2022-08-02T22:28:59.999Z', actor: 'bob.husky@octiga.com', 'source_type': 'microsoft-event','country': 'The United State of America', 'description': 'Login from Country not in Allowed List' },
-            { severity: 'danger', timestamp: '2022-08-02T22:28:59.999Z', actor: 'mia.lobster@octiga.com', 'source_type': 'microsoft-event', 'description': 'Login from Country not in Allowed List' },
-            { severity: 'danger', timestamp: '2022-08-02T22:28:59.999Z', actor: 'cobby.husky@octiga.com', 'source_type': 'microsoft-event', 'description': 'Login from Country not in Allowed List' },
-            { severity: 'danger', timestamp: '2022-08-02T22:28:59.999Z', actor: 'test.user@octiga.com', 'source_type': 'microsoft-event', 'country': 'Netherland','description': 'Login from Country not in Allowed List' },
-            { severity: 'danger', timestamp: '2022-08-02T22:28:59.999Z', actor: 'test.user2@octiga.com', 'source_type': 'microsoft-event','country': 'Netherland', 'description': 'Login from Country not in Allowed List' },
-            { severity: 'danger', timestamp: '2022-08-02T22:28:59.999Z', actor: 'test.user3@octiga.com', 'source_type': 'sway-deviation', 'description': 'Login from Country not in Allowed List' },
-            { severity: 'danger', timestamp: '2022-08-02T22:28:59.999Z', actor: 'test.user2@octiga.com', 'source_type': 'microsoft-event', 'country': 'Spain', 'description': 'Login from Country not in Allowed List' }
-        ]
-
     constructor(
         private reportService: NgOctReportService,
         private categoryService: CategoryService
@@ -53,10 +38,10 @@ export class AppComponent implements OnInit {
         this.reportService.setHeader(this.header);
         this.categoryService.setCategories(categories);
         this.reportService.setBaselines(baselines);
-        this.reportService.createTopAlerts(this.topAlerts);
+        this.reportService.createTopAlerts(alerts);
         this.reportService.setAllBaselineCurrentPostureCount({ tenant_count: { has_deviated: 5, not_deviated: 11 }, group_count: { has_deviated: 3, not_deviated: 4 } });
         this.reportService.getBaselineDeviations(baseline_deviations);
-        this.reportService.getTicketCount(ticket_counts)
+        this.reportService.getTicketCount([])
 
     }
 

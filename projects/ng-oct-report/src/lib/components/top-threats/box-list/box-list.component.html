@@ -14,7 +14,7 @@
             <mat-card mat-elevation-z5>
               <mat-card-content>
                 <h1 style="color: dodgerblue">
-                  {{ arrayList.length }} Events <mat-icon class="top">trending_up</mat-icon>
+                  {{ arrayList.length }}<br />Events <mat-icon class="top">trending_up</mat-icon>
                 </h1>
               </mat-card-content>
             </mat-card>
@@ -26,13 +26,13 @@
               <mat-card mat-elevation-z5>
                 <mat-card-content [ngSwitch]="item.key">
                   <h1 *ngSwitchCase="'critical'" class="critical">
-                    {{ item.value.length }} Critical <mat-icon class="top critical">error</mat-icon>
+                    {{ item.value.length }}<br /> Critical <mat-icon class="top critical">error</mat-icon>
                   </h1>
                   <h1 *ngSwitchCase="'danger'" class="danger">
-                    {{ item.value.length }} Danger <mat-icon class="top danger">warning</mat-icon>
+                    {{ item.value.length }}<br /> Danger <mat-icon class="top danger">warning</mat-icon>
                   </h1>
                   <h1 *ngSwitchCase="'warning'" class="warning">
-                    {{ item.value.length }} Warning <mat-icon class="top warning">warning_outlined</mat-icon>
+                    {{ item.value.length }}<br /> Warning <mat-icon class="top warning">warning_outlined</mat-icon>
                   </h1>
                 </mat-card-content>
               </mat-card>

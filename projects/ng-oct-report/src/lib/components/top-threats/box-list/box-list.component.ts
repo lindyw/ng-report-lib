@@ -47,7 +47,7 @@ export class BoxListComponent implements OnInit {
     GetGeoFromAlerts() {
         const unique_countries = this.arrayList
             .map(a => a.country)
-            .filter((c, i, arr) => arr.indexOf(c) === i && !!c);
+            .filter((c, i, arr) => arr.indexOf(c) === i && !!c && c !== 'N/A');
         return unique_countries;
     }
     
