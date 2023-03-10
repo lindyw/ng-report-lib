@@ -37,7 +37,7 @@ export class AppComponent implements OnInit {
             { severity: 'danger', timestamp: '2022-08-02T22:28:59.999Z', actor: 'cobby.husky@octiga.com', 'source_type': 'microsoft-event', 'description': 'Login from Country not in Allowed List' },
             { severity: 'danger', timestamp: '2022-08-02T22:28:59.999Z', actor: 'test.user@octiga.com', 'source_type': 'microsoft-event', 'country': 'Netherland','description': 'Login from Country not in Allowed List' },
             { severity: 'danger', timestamp: '2022-08-02T22:28:59.999Z', actor: 'test.user2@octiga.com', 'source_type': 'microsoft-event','country': 'Netherland', 'description': 'Login from Country not in Allowed List' },
-            { severity: 'danger', timestamp: '2022-08-02T22:28:59.999Z', actor: 'test.user3@octiga.com', 'source_type': 'microsoft-event', 'description': 'Login from Country not in Allowed List' },
+            { severity: 'danger', timestamp: '2022-08-02T22:28:59.999Z', actor: 'test.user3@octiga.com', 'source_type': 'sway-deviation', 'description': 'Login from Country not in Allowed List' },
             { severity: 'danger', timestamp: '2022-08-02T22:28:59.999Z', actor: 'test.user2@octiga.com', 'source_type': 'microsoft-event', 'country': 'Spain', 'description': 'Login from Country not in Allowed List' }
         ]
 
