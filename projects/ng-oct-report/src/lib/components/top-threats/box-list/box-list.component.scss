@@ -70,6 +70,10 @@ mat-list-item {
                 margin-right: 1rem;
             }
         }
+
+        ::ng-deep .mat-grid-tile-content {
+            justify-content: flex-start !important;
+        }
     }
 }
 

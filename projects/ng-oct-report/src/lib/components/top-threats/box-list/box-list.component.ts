@@ -18,18 +18,23 @@ export class BoxListComponent implements OnInit {
     @Input() created_ticket_count: number | null = 0;
     @Input() resolved_ticket_count: number | null = 0;
     @Input() keys: string[] = ['timestamp', 'actor', 'description'];
-    @Input() type: string = 'events'; // event, ticket, baseline deviation, rule
+    @Input() type: string = 'event'; // event, ticket, baseline deviation, rule
 
     @Input() tenant_baselines_posture_controls_in_this_period: BaselinePostureCountsByDate | null = {};
     @Input() group_baselines_posture_controls_in_this_period: BaselinePostureCountsByDate | null = {};
 
     groupedArrayListBySeverity: { [key: string]: Array<any> } = {};
+    geos: string[] = [];
 
     constructor(
     ) { }
 
     ngOnInit(): void {
         this.summarizeBySeverity();
+        if (this.type === 'event') {
+            this.geos = this.GetGeoFromAlerts();
+            console.log('geos', this.geos);
+        }
     }
 
     summarizeBySeverity() {
@@ -39,4 +44,14 @@ export class BoxListComponent implements OnInit {
         }
     }
 
+    GetGeoFromAlerts() {
+        const unique_countries = this.arrayList
+            .map(a => a.country)
+            .filter((c, i, arr) => arr.indexOf(c) === i && !!c);
+        return unique_countries;
+    }
+    
+    public checkRows() {
+        return this.geos.length > 0 ? 2 : 1;
+    }
 }

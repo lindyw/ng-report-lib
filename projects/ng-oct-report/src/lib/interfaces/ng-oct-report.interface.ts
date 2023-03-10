@@ -23,11 +23,14 @@ export interface Header {
     icon?: string
 }
 
+export type SourceType = 'microsoft-event' | 'sway-deviation';
 export interface TopAlert {
+    source_type: SourceType
     severity: Severity
     timestamp: string
     actor: string | null
     description: string
+    country?: string
 }
 export interface Baseline {
     id: string

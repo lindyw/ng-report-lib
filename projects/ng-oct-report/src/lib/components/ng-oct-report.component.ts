@@ -119,7 +119,10 @@ export class NgOctReportComponent implements OnInit {
             .subscribe(alerts => {
                 let alertsByUsers: any[] | null = [];
                 if (!!alerts) {
-                    alerts = alerts.map(a => ({ ...a, timestamp: new Date(a.timestamp).toString() }))
+                    alerts = alerts
+                        .filter(a => a.source_type === 'microsoft-event')
+                        .map(a => ({ ...a, timestamp: new Date(a.timestamp).toString() }))
+
                     const groupedObjByUser = groupBy(alerts.filter(a => !!a.actor), 'actor');
                     alertsByUsers = Object.keys(groupedObjByUser)
                         .map(k => ({
