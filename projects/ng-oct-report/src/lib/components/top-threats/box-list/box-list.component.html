@@ -44,7 +44,7 @@
         <mat-card mat-elevation-z5 *ngIf="geos.length > 0">
           <mat-card-content style="justify-content: flex-start !important">
             <span
-              ><b>From {{ geos.length }} Gelocations:</b></span
+              ><b>{{ geos.length }} Recognised Gelocations:</b></span
             >
             <mat-list *ngFor="let geo of geos">
               <mat-list-item role="listitem">{{ geo }}</mat-list-item>
