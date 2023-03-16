@@ -11,7 +11,7 @@
         <mat-grid-list cols="3" rowHeight="2:1">
           <mat-grid-tile>
             <!-- No. of Alert Events -->
-            <mat-card mat-elevation-z5>
+            <mat-card mat-elevation-z5 class="severity">
               <mat-card-content>
                 <h1 style="color: dodgerblue">
                   {{ arrayList.length }}<br />Events <mat-icon class="top">trending_up</mat-icon>
@@ -23,16 +23,19 @@
           <div style="width: 90%" *ngFor="let item of groupedArrayListBySeverity | keyvalue">
             <mat-grid-tile>
               <!-- No. of Alert Events by Severity -->
-              <mat-card mat-elevation-z5>
+              <mat-card mat-elevation-z5 class="severity">
                 <mat-card-content [ngSwitch]="item.key">
                   <h1 *ngSwitchCase="'critical'" class="critical">
-                    {{ item.value.length }}<br /> Critical <mat-icon class="top critical">error</mat-icon>
+                    {{ item.value.length }}<br />
+                    Critical <mat-icon class="top critical">error</mat-icon>
                   </h1>
                   <h1 *ngSwitchCase="'danger'" class="danger">
-                    {{ item.value.length }}<br /> Danger <mat-icon class="top danger">warning</mat-icon>
+                    {{ item.value.length }}<br />
+                    Danger <mat-icon class="top danger">warning</mat-icon>
                   </h1>
                   <h1 *ngSwitchCase="'warning'" class="warning">
-                    {{ item.value.length }}<br /> Warning <mat-icon class="top warning">warning_outlined</mat-icon>
+                    {{ item.value.length }}<br />
+                    Warning <mat-icon class="top warning">warning_outlined</mat-icon>
                   </h1>
                 </mat-card-content>
               </mat-card>
@@ -41,16 +44,23 @@
         </mat-grid-list>
 
         <!-- Geolocations list -->
-        <mat-card mat-elevation-z5 *ngIf="geos.length > 0">
-          <mat-card-content style="justify-content: flex-start !important">
-            <span
-              ><b>{{ geos.length }} Recognised Gelocations:</b></span
-            >
-            <mat-list *ngFor="let geo of geos">
-              <mat-list-item role="listitem">{{ geo }}</mat-list-item>
-            </mat-list>
-          </mat-card-content>
-        </mat-card>
+        <div class="flex-row">
+          <div class="row-item">
+            <mat-card mat-elevation-z5 *ngIf="geos.length > 0">
+              <mat-card-content style="justify-content: flex-start !important">
+                <span
+                  ><b>{{ geos.length }} Recognised<br> Gelocation(s):</b></span
+                >
+                <mat-list *ngFor="let geo of geos">
+                  <mat-list-item role="listitem">{{ geo }}</mat-list-item>
+                </mat-list>
+              </mat-card-content>
+            </mat-card>
+          </div>
+          <div class="row-item google-map-container">
+            <lib-geolocation-map></lib-geolocation-map>
+          </div>
+        </div>
       </div>
     </div>
   </ng-container>

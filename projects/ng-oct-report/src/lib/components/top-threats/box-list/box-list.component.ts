@@ -33,7 +33,6 @@ export class BoxListComponent implements OnInit {
         this.summarizeBySeverity();
         if (this.type === 'event') {
             this.geos = this.GetGeoFromAlerts();
-            console.log('geos', this.geos);
         }
     }
 

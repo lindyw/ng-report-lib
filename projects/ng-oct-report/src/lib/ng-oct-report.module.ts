@@ -7,6 +7,7 @@ import { MatListModule } from '@angular/material/list';
 import { MatTableModule } from '@angular/material/table';
 import { MatGridListModule } from '@angular/material/grid-list';
 import { DomSanitizer } from '@angular/platform-browser';
+import { GoogleMapsModule } from '@angular/google-maps';
 import { HttpClientModule } from '@angular/common/http';
 import { NgOctReportComponent } from './components/ng-oct-report.component';
 import { TopThreatsComponent } from './components/top-threats/top-threats.component';
@@ -16,6 +17,7 @@ import { TimelineComponent } from './components/timeline/timeline.component';
 import { TenantSecurityControlComponent } from './components/security-control/tenant/tenant-security-control.component';
 import { GroupSecurityControlComponent } from './components/security-control/group/group-security-control.component';
 import { PostureLineChartComponent } from './components/top-threats/posture-line-chart/posture-line-chart.component';
+import { GeolocationMapComponent } from './components/top-threats/geolocation-map/geolocation-map.component';
 
 
 @NgModule({
@@ -27,10 +29,12 @@ import { PostureLineChartComponent } from './components/top-threats/posture-line
         TimelineComponent,
         TenantSecurityControlComponent,
         GroupSecurityControlComponent,
-        PostureLineChartComponent
+        PostureLineChartComponent,
+        GeolocationMapComponent
     ],
     imports: [
         CommonModule,
+        GoogleMapsModule,
         MatIconModule,
         MatListModule,
         MatTableModule,

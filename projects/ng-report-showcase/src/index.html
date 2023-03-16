@@ -1,36 +1,35 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
-
-<head>
-  <meta charset="utf-8">
-  <title>NgReportShowcase</title>
-  <base href="/">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <link rel="icon" type="image/x-icon" href="favicon.ico">
-  <!-- Load paper.css for happy printing -->
-  <!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/paper-css/0.4.1/paper.css"> -->
-  <!-- Set page size here: A5, A4 or A3 -->
-  <!-- Set also "landscape" if you need -->
-  <style>
-    body {
-      width: 210mm;
-      height: 297mm;
-    }
-
-    @media all {
-      .page-break {
-        display: none;
+  <head>
+    <meta charset="utf-8" />
+    <title>NgReportShowcase</title>
+    <base href="/" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="icon" type="image/x-icon" href="favicon.ico" />
+    <!-- Load paper.css for happy printing -->
+    <!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/paper-css/0.4.1/paper.css"> -->
+    <!-- Set page size here: A5, A4 or A3 -->
+    <!-- Set also "landscape" if you need -->
+    <style>
+      body {
+        width: 210mm;
+        height: 297mm;
       }
-    }
 
-    @media print {
-      .pagebreak {
-        display: block;
-        page-break-before: always;
+      @media all {
+        .page-break {
+          display: none;
+        }
       }
-    }
 
-    /* @media print {
+      @media print {
+        .pagebreak {
+          display: block;
+          page-break-before: always;
+        }
+      }
+
+      /* @media print {
       body {
         margin: 0;
         color: #000;
@@ -39,11 +38,11 @@
 
     
     } */
-  </style>
-</head>
+    </style>
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBMDmbfIHpcNKWUOb7LXGmw2XlHgDPcERY&libraries=drawing&&callback=Function.prototype"></script>
+  </head>
 
-<body>
-  <app-root></app-root>
-</body>
-
+  <body>
+    <app-root></app-root>
+  </body>
 </html>
