@@ -120,7 +120,7 @@ export class NgOctReportComponent implements OnInit {
                 let alertsByUsers: any[] | null = [];
                 if (!!alerts) {
                     alerts = alerts
-                        .filter(a => a.source_type === 'microsoft-event')
+                        .filter(a => a.source_type === 'microsoft-event' && (a.severity === 'critical' || a.severity === 'danger'))
                         .map(a => ({ ...a, timestamp: new Date(a.timestamp).toString() }))
 
                     const groupedObjByUser = groupBy(alerts.filter(a => !!a.actor), 'actor');

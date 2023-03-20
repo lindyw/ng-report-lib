@@ -8,20 +8,9 @@
   <ng-container *ngIf="type === 'event' && arrayList.length > 0">
     <div class="summary">
       <div class="flex-col">
-        <mat-grid-list cols="3" rowHeight="2:1">
-          <mat-grid-tile>
-            <!-- No. of Alert Events -->
-            <mat-card mat-elevation-z5 class="severity">
-              <mat-card-content>
-                <h1 style="color: dodgerblue">
-                  {{ arrayList.length }}<br />Events <mat-icon class="top">trending_up</mat-icon>
-                </h1>
-              </mat-card-content>
-            </mat-card>
-          </mat-grid-tile>
-
+        <mat-grid-list cols="2" rowHeight="2:1">
           <div style="width: 90%" *ngFor="let item of groupedArrayListBySeverity | keyvalue">
-            <mat-grid-tile>
+            <mat-grid-tile *ngIf="item.key === 'critical' || item.key === 'danger'">
               <!-- No. of Alert Events by Severity -->
               <mat-card mat-elevation-z5 class="severity">
                 <mat-card-content [ngSwitch]="item.key">
@@ -33,10 +22,6 @@
                     {{ item.value.length }}<br />
                     Danger <mat-icon class="top danger">warning</mat-icon>
                   </h1>
-                  <h1 *ngSwitchCase="'warning'" class="warning">
-                    {{ item.value.length }}<br />
-                    Warning <mat-icon class="top warning">warning_outlined</mat-icon>
-                  </h1>
                 </mat-card-content>
               </mat-card>
             </mat-grid-tile>
@@ -46,20 +31,23 @@
         <!-- Geolocations list -->
         <div class="flex-row">
           <div class="row-item">
-            <mat-card mat-elevation-z5 *ngIf="geos.length > 0">
+            <mat-card mat-elevation-z5 *ngIf="event_occurence_by_countries.length > 0">
               <mat-card-content style="justify-content: flex-start !important">
                 <span
-                  ><b>{{ geos.length }} Recognised<br> Gelocation(s):</b></span
+                  ><b
+                    >From {{ event_occurence_by_countries.length }} <br />
+                    Gelocation(s):</b
+                  ></span
                 >
-                <mat-list *ngFor="let geo of geos">
-                  <mat-list-item role="listitem">{{ geo }}</mat-list-item>
+                <mat-list *ngFor="let geo of event_occurence_by_countries">
+                  <mat-list-item role="listitem">{{ getEntries(geo)[0] }} x {{ getEntries(geo)[1] }} </mat-list-item>
                 </mat-list>
               </mat-card-content>
             </mat-card>
           </div>
-          <div class="row-item google-map-container">
+          <!-- <div class="row-item google-map-container">
             <lib-geolocation-map></lib-geolocation-map>
-          </div>
+          </div> -->
         </div>
       </div>
     </div>
@@ -165,7 +153,7 @@
           <mat-card mat-elevation-z5>
             <mat-card-content>
               <h1 style="color: orange">{{ open_ticket_count }} Open</h1>
-              <span>All end of period</span>
+              <span>Currently</span>
             </mat-card-content>
           </mat-card>
         </mat-grid-tile>

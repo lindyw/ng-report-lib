@@ -24,6 +24,7 @@ export class BoxListComponent implements OnInit {
     @Input() group_baselines_posture_controls_in_this_period: BaselinePostureCountsByDate | null = {};
 
     groupedArrayListBySeverity: { [key: string]: Array<any> } = {};
+    event_occurence_by_countries: any[] = [];
     geos: string[] = [];
 
     constructor(
@@ -39,7 +40,8 @@ export class BoxListComponent implements OnInit {
     summarizeBySeverity() {
         let severities = [... new Set(this.arrayList.map(x => x.severity))];
         for (var severity of severities) {
-            this.groupedArrayListBySeverity[severity] = this.arrayList.filter(a => a.severity === severity);
+            this.groupedArrayListBySeverity[severity] = this.arrayList
+                .filter(a => a.severity === severity);
         }
     }
 
@@ -47,9 +49,29 @@ export class BoxListComponent implements OnInit {
         const unique_countries = this.arrayList
             .map(a => a.country)
             .filter((c, i, arr) => arr.indexOf(c) === i && !!c && c !== 'N/A');
+
+        for (var country of unique_countries) {
+           const country_event_ocurrence = this.arrayList.reduce((arr, alert) => {
+                if (country === alert.country) {
+                    if (!arr.hasOwnProperty(country)) {
+                        arr[country] = 1;
+                    } else {
+                        arr[country]++;
+                    }
+                }
+                return arr;
+            }, {})
+          this.event_occurence_by_countries.push(country_event_ocurrence);
+        }
+        console.log('event_occurnence_by_countries', this.event_occurence_by_countries);
+      
         return unique_countries;
     }
-    
+
+    public getEntries(obj: any) {
+      return  Object.entries(obj)[0];
+    }
+
     public checkRows() {
         return this.geos.length > 0 ? 2 : 1;
     }
