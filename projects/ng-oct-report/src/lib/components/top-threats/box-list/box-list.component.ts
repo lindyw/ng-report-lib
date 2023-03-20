@@ -35,6 +35,9 @@ export class BoxListComponent implements OnInit {
         if (this.type === 'event') {
             this.geos = this.GetGeoFromAlerts();
         }
+        if (this.title === 'Alerts') {
+            this.GetGeoUsersFromAlerts();
+        }
     }
 
     summarizeBySeverity() {
@@ -51,7 +54,7 @@ export class BoxListComponent implements OnInit {
             .filter((c, i, arr) => arr.indexOf(c) === i && !!c && c !== 'N/A');
 
         for (var country of unique_countries) {
-           const country_event_ocurrence = this.arrayList.reduce((arr, alert) => {
+            const country_event_ocurrence = this.arrayList.reduce((arr, alert) => {
                 if (country === alert.country) {
                     if (!arr.hasOwnProperty(country)) {
                         arr[country] = 1;
@@ -61,15 +64,51 @@ export class BoxListComponent implements OnInit {
                 }
                 return arr;
             }, {})
-          this.event_occurence_by_countries.push(country_event_ocurrence);
+            this.event_occurence_by_countries.push(country_event_ocurrence);
+
         }
-        console.log('event_occurnence_by_countries', this.event_occurence_by_countries);
-      
+
         return unique_countries;
     }
 
-    public getEntries(obj: any) {
-      return  Object.entries(obj)[0];
+    GetGeoUsersFromAlerts() {
+        for (let geo of this.geos) {
+            const event_users_in_country = this.arrayList
+                .filter(a => a.country === geo)
+                .map(a =>
+                ({
+                    country: a.country,
+                    user: a.actor
+                }))
+                .reduce((arr: any, alert) => {
+                    if (arr.length === 0) {
+                        arr = [alert.user];
+                    } else if (!arr.includes(alert.user)) {
+                        arr.push(alert.user);
+                    }
+                    return arr;
+                }, [])
+            const found_index = this.event_occurence_by_countries.findIndex(el => Object.keys(el)[0] === geo);
+            this.event_occurence_by_countries[found_index].users = event_users_in_country;
+        }
+
+    }
+
+    public showUserOrCountByGeo(users: string[]) {
+        if (!users) {
+            return;
+        }
+        if (users.length > 1) {
+            return `from ${users.length} users`;
+        } else if (users.length === 1) {
+            return `from ${users[0]}`;
+        } else {
+            return ``;
+        }
+    }
+
+    public getEntries(obj: any): any {
+        return Object.entries(obj)[0];
     }
 
     public checkRows() {

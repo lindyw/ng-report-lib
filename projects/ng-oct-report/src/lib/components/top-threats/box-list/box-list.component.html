@@ -35,12 +35,15 @@
               <mat-card-content style="justify-content: flex-start !important">
                 <span
                   ><b
-                    >From {{ event_occurence_by_countries.length }} <br />
+                    >From {{ event_occurence_by_countries.length }} 
                     Gelocation(s):</b
                   ></span
                 >
                 <mat-list *ngFor="let geo of event_occurence_by_countries">
-                  <mat-list-item role="listitem">{{ getEntries(geo)[0] }} x {{ getEntries(geo)[1] }} </mat-list-item>
+                  <mat-list-item role="listitem">
+                    {{ getEntries(geo)[0] }} x {{ getEntries(geo)[1] }}
+                    {{ showUserOrCountByGeo(geo.users) }}
+                  </mat-list-item>
                 </mat-list>
               </mat-card-content>
             </mat-card>
