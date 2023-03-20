@@ -29,15 +29,12 @@
         </mat-grid-list>
 
         <!-- Geolocations list -->
-        <div class="flex-row">
+        <div class="flex-row" *ngIf="event_occurence_by_countries.length > 0">
           <div class="row-item">
-            <mat-card mat-elevation-z5 *ngIf="event_occurence_by_countries.length > 0">
+            <mat-card mat-elevation-z5>
               <mat-card-content style="justify-content: flex-start !important">
                 <span
-                  ><b
-                    >From {{ event_occurence_by_countries.length }} 
-                    Gelocation(s):</b
-                  ></span
+                  ><b>From {{ event_occurence_by_countries.length }} Gelocation(s):</b></span
                 >
                 <mat-list *ngFor="let geo of event_occurence_by_countries">
                   <mat-list-item role="listitem">
