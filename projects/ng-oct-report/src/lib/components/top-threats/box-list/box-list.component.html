@@ -132,6 +132,14 @@
         <mat-grid-tile>
           <mat-card mat-elevation-z5>
             <mat-card-content>
+              <h1 style="color: orange">{{ open_ticket_count }} Open</h1>
+              <span>Currently</span>
+            </mat-card-content>
+          </mat-card>
+        </mat-grid-tile>
+        <mat-grid-tile>
+          <mat-card mat-elevation-z5>
+            <mat-card-content>
               <h1 style="color: red">
                 {{ created_ticket_count }} Created <mat-icon class="top">add_circle_outline</mat-icon>
               </h1>
@@ -146,14 +154,6 @@
                 {{ resolved_ticket_count }} Resolved <mat-icon class="top">check_circle_outline</mat-icon>
               </h1>
               <span>During this period</span>
-            </mat-card-content>
-          </mat-card>
-        </mat-grid-tile>
-        <mat-grid-tile>
-          <mat-card mat-elevation-z5>
-            <mat-card-content>
-              <h1 style="color: orange">{{ open_ticket_count }} Open</h1>
-              <span>Currently</span>
             </mat-card-content>
           </mat-card>
         </mat-grid-tile>
