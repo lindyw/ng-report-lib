@@ -131,12 +131,18 @@ export class NgOctReportService {
                 console.log('baseline_deviations',baseline_deviations);
                 console.log('baselines',baselines)
                 
+                try {
+                    const tenant_baselines_posture_controls_in_this_period = GetPostureControlsInThisPeriod(baseline_deviations, baselines, 'tenant', start, end);
+                    this.tenant_baselines_posture_controls_in_this_period$.next(tenant_baselines_posture_controls_in_this_period);
+    
+                    const group_baselines_posture_control_in_this_period = GetPostureControlsInThisPeriod(baseline_deviations, baselines, 'group', start, end);
+                    this.group_baselines_posture_controls_in_this_period$.next(group_baselines_posture_control_in_this_period);
+                } catch (e: any) {
+                    console.log(header, users, baselines);
+                    console.log('error', e);
 
-                const tenant_baselines_posture_controls_in_this_period = GetPostureControlsInThisPeriod(baseline_deviations, baselines, 'tenant', start, end);
-                this.tenant_baselines_posture_controls_in_this_period$.next(tenant_baselines_posture_controls_in_this_period);
-
-                const group_baselines_posture_control_in_this_period = GetPostureControlsInThisPeriod(baseline_deviations, baselines, 'group', start, end);
-                this.group_baselines_posture_controls_in_this_period$.next(group_baselines_posture_control_in_this_period);
+                }
+             
             })
 
     }
