@@ -131,7 +131,7 @@ export class NgOctReportService {
                 console.log('baselines',baselines)
 
                 let formatted_baseline_deviations = GroupBaselineDeviationWithTimelineElementsByBaseline(baseline_deviations, users as User[]);
-
+                console.log('formatted_baseline_deviations', formatted_baseline_deviations);
       
                 try {
                     const tenant_baselines_posture_controls_in_this_period = GetPostureControlsInThisPeriod(baseline_deviations, baselines, 'tenant', start, end);
