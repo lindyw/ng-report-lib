@@ -7,7 +7,7 @@ import { MatListModule } from '@angular/material/list';
 import { MatTableModule } from '@angular/material/table';
 import { MatGridListModule } from '@angular/material/grid-list';
 import { DomSanitizer } from '@angular/platform-browser';
-import { GoogleMapsModule } from '@angular/google-maps';
+// import { GoogleMapsModule } from '@angular/google-maps';
 import { HttpClientModule } from '@angular/common/http';
 import { NgOctReportComponent } from './components/ng-oct-report.component';
 import { TopThreatsComponent } from './components/top-threats/top-threats.component';
@@ -34,7 +34,7 @@ import { GeolocationMapComponent } from './components/top-threats/geolocation-ma
     ],
     imports: [
         CommonModule,
-        GoogleMapsModule,
+        // GoogleMapsModule,
         MatIconModule,
         MatListModule,
         MatTableModule,

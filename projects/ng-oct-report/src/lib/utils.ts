@@ -29,7 +29,7 @@ export function filterTopBaselines(baselines: any[]): TopBaselineDeviation[] {
 export function GetPostureControlsInThisPeriod(baseline_deviations: CombinedDeviation[], baselines: Baseline[], type: 'tenant' | 'group', start: string, end: string): BaselinePostureCountsByDate {
     const init_created_timestamp = '2022-09-27';
     let formatted: { [date: string]: { deviating: number, compliant: number | null, monitored: number | null } } = {};
-
+    console.log('getting dates', start, end);
     const dateArray = getDates(start, end);
     console.log('dateArray', dateArray);
     console.log('type', type);
@@ -83,6 +83,8 @@ function getBaselineComplianceCountOfTheDate(deviating_baselines: CombinedDeviat
 function getDates(startDate: string, endDate: string): string[] {
     var dateArray = new Array();
     var currentDate = startDate.split('T')[0];
+    console.log('current date', currentDate);
+    console.log('endDate', endDate);
     while (currentDate <= endDate) {
         dateArray.push(currentDate);
         currentDate = addDays(currentDate, 1);
