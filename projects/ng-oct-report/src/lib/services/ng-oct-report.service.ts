@@ -83,7 +83,7 @@ export class NgOctReportService {
     /**
     * pass in the raw baseline deviations array within the selected period from sway, and transform data to topBaselines$ and Baselines$ 
     * @output top_baseline_deviations$ - baselines that are still deviating in the end of the selected period
-    * @output aseline_deviations$ - (Security Control) an array of baselines, contains a timeline of changes (created, deviation, remediation) on each baseline
+    * @output baseline_deviations$ - (Security Control) an array of baselines, contains a timeline of changes (created, deviation, remediation) on each baseline
     * @param {CombinedDeviation[]} baseline_deviations - the array of combined baseline deviations within the selected period
     * @todo need to add category for tenant baseline : External (Guest) Users Resharing, we hardcode its category and type here for now
     */
@@ -126,11 +126,13 @@ export class NgOctReportService {
                 const start = header.date.start;
                 const end = header.date.end;
 
-                let formatted_baseline_deviations = GroupBaselineDeviationWithTimelineElementsByBaseline(baseline_deviations, users as User[]);
-                this.baseline_deviations$.next(formatted_baseline_deviations);  
+                console.log(header, users, start, end);
                 console.log('baseline_deviations',baseline_deviations);
                 console.log('baselines',baselines)
-                
+
+                let formatted_baseline_deviations = GroupBaselineDeviationWithTimelineElementsByBaseline(baseline_deviations, users as User[]);
+
+      
                 try {
                     const tenant_baselines_posture_controls_in_this_period = GetPostureControlsInThisPeriod(baseline_deviations, baselines, 'tenant', start, end);
                     this.tenant_baselines_posture_controls_in_this_period$.next(tenant_baselines_posture_controls_in_this_period);
@@ -142,6 +144,7 @@ export class NgOctReportService {
                     console.log('error', e);
 
                 }
+                this.baseline_deviations$.next(formatted_baseline_deviations);  
              
             })
 
