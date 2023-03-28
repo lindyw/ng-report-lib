@@ -61,6 +61,10 @@ mat-list-item {
             }
         }
 
+        mat-card {
+            min-width: 10rem;
+        }
+
         mat-list-item:nth-child(even) {
             margin-block: 1rem;
         }

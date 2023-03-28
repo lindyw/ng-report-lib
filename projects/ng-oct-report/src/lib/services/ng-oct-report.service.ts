@@ -127,20 +127,15 @@ export class NgOctReportService {
                 const end = header.date.end;
 
                 console.log(header, users, start, end);
-                console.log('baseline_deviations', baseline_deviations);
-                console.log('baselines', baselines)
 
                 let formatted_baseline_deviations = GroupBaselineDeviationWithTimelineElementsByBaseline(baseline_deviations, users as User[]);
-                console.log('formatted_baseline_deviations', formatted_baseline_deviations);
                 this.baseline_deviations$.next(formatted_baseline_deviations);
-
 
                 const tenant_baselines_posture_controls_in_this_period = GetPostureControlsInThisPeriod(baseline_deviations, baselines, 'tenant', start, end);
                 this.tenant_baselines_posture_controls_in_this_period$.next(tenant_baselines_posture_controls_in_this_period);
 
                 const group_baselines_posture_control_in_this_period = GetPostureControlsInThisPeriod(baseline_deviations, baselines, 'group', start, end);
                 this.group_baselines_posture_controls_in_this_period$.next(group_baselines_posture_control_in_this_period);
-
 
             })
 
