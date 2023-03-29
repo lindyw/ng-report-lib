@@ -128,6 +128,7 @@ export class NgOctReportService {
 
                 console.log(header, users, start, end);
 
+            try {
                 let formatted_baseline_deviations = GroupBaselineDeviationWithTimelineElementsByBaseline(baseline_deviations, users as User[]);
                 this.baseline_deviations$.next(formatted_baseline_deviations);
 
@@ -137,6 +138,10 @@ export class NgOctReportService {
                 const group_baselines_posture_control_in_this_period = GetPostureControlsInThisPeriod(baseline_deviations, baselines, 'group', start, end);
                 this.group_baselines_posture_controls_in_this_period$.next(group_baselines_posture_control_in_this_period);
 
+            } catch(e: any) {
+                console.log('ng-oct-report-error:', e);
+            }
+             
             })
 
     }
