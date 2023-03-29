@@ -92,7 +92,7 @@ function getDates(startDate: string, endDate: string): string[] {
 
 function addDays(currentDate: string, days: number) {
     var date = new Date(currentDate.valueOf());
-    date.setDate(date.getDate() + days);
+    date.setTime(date.getTime() + days * 24 * 3600 * 1000);
     return date.toISOString().split('T')[0];
 }
 
