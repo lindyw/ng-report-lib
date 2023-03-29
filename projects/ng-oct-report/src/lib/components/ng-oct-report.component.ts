@@ -157,14 +157,14 @@ export class NgOctReportComponent implements OnInit {
             )
             .subscribe(ticket_counts => {
                 console.log('ticket_counts', ticket_counts);
-                if (!!ticket_counts && ticket_counts!.length > 0) {
+                // if (!!ticket_counts && ticket_counts!.length > 0) {
                     this.ticketCount$.next(ticket_counts);
-                    this.hasPSA = true;
-                } else {
-                    this.hasPSA = false;
-                }
+                //     this.hasPSA = true;
+                // } else {
+                //     this.hasPSA = false;
+                // }
                 this.loaded$['ticket_count'].next(true);
-                console.log('hasPSA', this.hasPSA);
+                // console.log('hasPSA', this.hasPSA);
 
             })
     }
