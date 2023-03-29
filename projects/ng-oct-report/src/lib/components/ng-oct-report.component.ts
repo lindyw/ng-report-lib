@@ -241,7 +241,7 @@ export class NgOctReportComponent implements OnInit {
                 .filter(b => b.category === category && b.type === type)
                 .map(b => ({
                     ...b,
-                    timelineElements: b.timelineElements.filter(el => el.date >= new Date(start) && el.date <= new Date(end) || el.status === 'created')
+                    timelineElements: b.timelineElements.filter(el => el.date.toISOString().split('T')[0] >= start.split('T')[0] && el.date.toISOString().split('T')[0] <= end.split('T')[0] || el.status === 'created')
                 }));
             if (type === 'tenant') {
                 return this.groupTenantBaselinesByCategory(category, found_baselines);
