@@ -1,4 +1,4 @@
-# NgOctReport
+# Oct-report-lib
 
 This library was generated with [Angular CLI](https://github.com/angular/angular-cli) version 14.1.0.
 
@@ -11,7 +11,7 @@ NgOctReportService
 - createHeader(this.header);
   createTopAlerts(this.topAlerts);
   createTopBaselines(this.topBaselines);
-  createBaselines(this.baselines);
+  allCategories(this.categories);
 
 Publish package (NEW):
 ng-publish-to-git
@@ -33,6 +33,9 @@ Detailed breakdown CMDs (old):
 3. npm pack <-- important to run npm pack cmd before and publish the tgz file instead of dist file (avoid missing imported modules on npmjs)
 4. npm publish ng-oct-report-{{version}}.tgz
 
+1. Some image/assets are missing on the report?
+- try to copy node_modules/ng-oct-report/assets/* to your assets folder in your application level
+  e.g. `"COPY -R node_modules/ng-oct-report/assets/* src/app/assets/"`
 
 Troubleshooting:
 
@@ -53,11 +56,7 @@ Run `npm run build` to build the project. The build artifacts will be stored in 
 
 ## Running unit tests
 
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
-
-## Running end-to-end tests
-
-Run `ng e2e` to execute the end-to-end tests via a platform of your choice. To use this command, you need to first add a package that implements end-to-end testing capabilities.
+Run `ng test ng-oct-report` to execute the unit tests via [Karma](https://karma-runner.github.io).
 
 ## Further help
 

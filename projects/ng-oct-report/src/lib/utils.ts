@@ -29,8 +29,12 @@ export function filterTopBaselines(baselines: any[]): TopBaselineDeviation[] {
 export function GetPostureControlsInThisPeriod(baseline_deviations: CombinedDeviation[], baselines: Baseline[], type: 'tenant' | 'group', start: string, end: string): BaselinePostureCountsByDate {
     const init_created_timestamp = '2022-09-27';
     let formatted: { [date: string]: { deviating: number, compliant: number | null, monitored: number | null } } = {};
+
     const dateArray = getDates(start, end);
+    console.log('dateArray', dateArray);
+    console.log('type', type);
     for (var date of dateArray) {
+        console.log('date', date);
         const existing_baselines: Baseline[] = baselines.filter(b => b.type === type && b.created.split('T')[0] <= date);
         const deviations_controls_of_the_date: CombinedDeviation[] = getBaselineDeviationsCountOfTheDate(baseline_deviations, type, date);
         const compliance_controls_of_the_date_count: number | null =
@@ -54,6 +58,7 @@ function getBaselineDeviationsCountOfTheDate(baseline_deviations: CombinedDeviat
         .filter(bd => bd.type === type && bd.deviation_detect_time.split('T')[0] <= date &&
             (bd.deviation_resolve_time === null || bd.deviation_resolve_time.split('T')[0] > date))
         .sort((a, b) => b.deviation_detect_time.localeCompare(a.deviation_detect_time))
+    console.log('deviating_baselines', deviating_baselines);
 
     deviating_baselines = deviating_baselines.filter((value, index, self) => {
         return self.findIndex(v => v.baseline_id === value.baseline_id) === index;
@@ -64,6 +69,7 @@ function getBaselineDeviationsCountOfTheDate(baseline_deviations: CombinedDeviat
 function getBaselineComplianceCountOfTheDate(deviating_baselines: CombinedDeviation[], baselines: Baseline[], type: 'tenant' | 'group', date: any) {
     let compliance_count = 0;
     if (baselines.length > 0) {
+        console.log('baselines', baselines);
         for (const existing_baseline of baselines) {
             const is_deviated = (deviating_baselines.some(d => d.baseline_id === existing_baseline.id));
             if (!is_deviated) {
@@ -174,6 +180,8 @@ function setTransformedItem(curr: CombinedDeviation, existing_timeline_elements:
     if (curr.group_name && curr.user_id) {
         let user = users.find((u => u.id === curr.user_id))!;
         if (!user || !user.userPrincipalName) {
+            console.log('ng-oct-report:: curr', curr);
+            console.log('ng-oct-report:: users', users);
             transformed_item = updateTransformedItemForGroupUserBaseline(transformed_item, curr.group_name, curr.user_id, "User no longer exists");
         } else {
             transformed_item = updateTransformedItemForGroupUserBaseline(transformed_item, curr.group_name, curr.user_id, user.userPrincipalName!);
