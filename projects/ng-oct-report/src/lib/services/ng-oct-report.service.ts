@@ -137,7 +137,7 @@ export class NgOctReportService {
 
                 const group_baselines_posture_control_in_this_period = GetPostureControlsInThisPeriod(baseline_deviations, baselines, 'group', start, end);
                 this.group_baselines_posture_controls_in_this_period$.next(group_baselines_posture_control_in_this_period);
-
+                console.log('finish posture control format');
             } catch(e: any) {
                 console.log('ng-oct-report-error:', e);
             }

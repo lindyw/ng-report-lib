@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { User } from '@microsoft/microsoft-graph-types-beta';
 import { CategoryService } from 'projects/ng-oct-report/src/lib/services/category.service';
+import { RenderService } from 'projects/ng-oct-report/src/lib/services/render.service';
 import { NgOctReportService } from 'projects/ng-oct-report/src/public-api';
 import { alerts } from './test-data/alerts.data';
 import { baseline_deviations } from './test-data/baseline-deviations.data';
@@ -28,7 +29,8 @@ export class AppComponent implements OnInit {
 
     constructor(
         private reportService: NgOctReportService,
-        private categoryService: CategoryService
+        private categoryService: CategoryService,
+        private renderService: RenderService
     ) {
 
     }
@@ -42,6 +44,8 @@ export class AppComponent implements OnInit {
         this.reportService.setAllBaselineCurrentPostureCount({ tenant_count: { has_deviated: 5, not_deviated: 11 }, group_count: { has_deviated: 3, not_deviated: 4 } });
         this.reportService.getBaselineDeviations(baseline_deviations);
         this.reportService.getTicketCount(ticket_counts);
+
+        this.renderService.isRendered$.subscribe(rendered => console.log('rendered? ', rendered));
 
     }
 

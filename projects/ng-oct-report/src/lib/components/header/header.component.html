@@ -1,11 +1,11 @@
 <div>
-    <img class="logo" src="{{data !== null && !!data.icon? data.icon: 'assets/img/logo/octiga-icon-192x192.png'}}">
+    <img class="logo" src="{{header !== null && !!header.icon? header.icon: 'assets/img/logo/octiga-icon-192x192.png'}}">
 </div>
 <div style="width:70%; margin-bottom: 1rem;">
     <h2 class="title">Octiga Office 365 Security Posture Report</h2>
-    <span *ngIf="data !== null">{{data.date.start}} - {{data.date.end}} <span style="color:red">*</span></span>
+    <span *ngIf="header !== null">{{header.date.start}} - {{header.date.end}} <span style="color:red">*</span></span>
 </div>
 <div>
     <h2>Client</h2>
-    <span style="min-width: 290px; min-height: 45px;" *ngIf="data !== null">{{data.tenant}}</span>
+    <span style="min-width: 290px; min-height: 45px;" *ngIf="header !== null">{{header.tenant}}</span>
 </div>

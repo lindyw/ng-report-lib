@@ -6,9 +6,6 @@ import { CategoryService } from '../services/category.service';
 import { NgOctReportService } from '../services/ng-oct-report.service';
 import { groupBy } from '../utils';
 
-function dateFormat(a: string) {
-    return DateTime.fromISO(a, { zone: 'utc' }).toFormat('ccc, LLL dd yyyy');
-}
 
 @Component({
     selector: 'ng-oct-report',
@@ -85,22 +82,7 @@ export class NgOctReportComponent implements OnInit {
                 distinct()
             )
             .subscribe(_header => {
-                let header = _header;
-                if (_header != null) {
-                    header = {
-                        ..._header, date: {
-                            start: dateFormat(_header?.date.start),
-                            end: dateFormat(_header?.date.end)
-                        }
-                    }
-                    if (!!_header.icon) {
-                        header = {
-                            ...header,
-                            icon: _header.icon
-                        }
-                    }
-                }
-                this.header$.next(header);
+                this.header$.next(_header);
                 this.loaded$['header'].next(true);
             });
     }
@@ -219,6 +201,7 @@ export class NgOctReportComponent implements OnInit {
                 distinct()
             )
             .subscribe(([header, baseline_deviations]) => {
+                console.log('header',header);
                 this.baselineDeviations.next(baseline_deviations);
                 for (var tc of this.tenant_catagories) {
                     this.baselines_by_tc[tc] = this.groupBaselinesByCategory(tc, 'tenant', header?.date.start!, header?.date.end!);

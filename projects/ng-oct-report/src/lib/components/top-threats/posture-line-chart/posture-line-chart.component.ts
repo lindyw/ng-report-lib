@@ -2,6 +2,7 @@ import { AfterViewInit, Component, Input, OnInit, ViewChildren } from '@angular/
 import { NullableOption } from '@microsoft/microsoft-graph-types-beta';
 import { Chart, registerables } from 'chart.js';
 import { BaselinePostureCountsByDate } from '../../../interfaces/ng-oct-report.interface';
+import { RenderService } from '../../../services/render.service';
 Chart.register(...registerables);
 @Component({
     selector: 'lib-posture-line-chart',
@@ -25,13 +26,17 @@ export class PostureLineChartComponent implements OnInit, AfterViewInit {
             chart: []
         })
 
+        this.renderService.set(true);
+
     }
     private dates: string[] = [];
     private deviating_controls: number[] = [];
     private compliant_controls: NullableOption<number>[] = [];
     private monitored_controls: NullableOption<number>[] = [];
 
-    constructor() { }
+    constructor(
+        private renderService: RenderService
+    ) { }
 
     ngOnInit(): void {
 

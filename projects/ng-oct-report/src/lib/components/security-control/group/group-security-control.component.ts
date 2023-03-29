@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { GroupBaselineDeviation } from '../../../interfaces/ng-oct-report.interface';
 
 @Component({
@@ -6,7 +6,7 @@ import { GroupBaselineDeviation } from '../../../interfaces/ng-oct-report.interf
     templateUrl: './group-security-control.component.html',
     styleUrls: ['./group-security-control.component.scss']
 })
-export class GroupSecurityControlComponent {
+export class GroupSecurityControlComponent implements OnInit {
 
     @Input() category = '';
     @Input() timelineElements = [];
@@ -14,6 +14,10 @@ export class GroupSecurityControlComponent {
     @Input() baselines: GroupBaselineDeviation = {}
 
     constructor() {
+    }
+
+    ngOnInit() {
+        console.log('timeline el', this.baselines)
     }
 
     public hasDeviation(value: any) {
